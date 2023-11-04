@@ -2,7 +2,8 @@
   <v-alert v-if="error" type="error">
     {{ error }}
   </v-alert>
-  <div v-else-if="instance">
+  <div v-else-if="instance" class="d-flex flex-column" style="gap: 1.5rem">
+    ;
     <v-card variant="outlined" class="d-flex align-center">
       <v-avatar size="100">
         <v-icon v-if="statusMapper[instance.instance.status].icon" size="70">
@@ -13,6 +14,16 @@
         <h2>{{ instance.instance.instanceName }}</h2>
       </div>
     </v-card>
+    <v-alert
+      icon="mdi-qrcode-scan"
+      v-if="instance.status != 'connected'"
+      type="warning"
+    >
+      <div class="d-flex justify-space-between align-center flex-wrap">
+        <span>Telefone não conectado</span>
+        <v-btn @click="connectPhone" size="small"> Conectar </v-btn>
+      </div>
+    </v-alert>
   </div>
 </template>
 
