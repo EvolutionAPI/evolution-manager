@@ -30,7 +30,7 @@
       <small>{{ instance.instance.profileStatus }}</small>
     </div>
     <v-spacer></v-spacer>
-    <v-btn
+    <!-- <v-btn
       @click="restartInstance"
       :disabled="disconnect.loading"
       :loading="restart.loading"
@@ -39,7 +39,7 @@
       size="small"
     >
       <v-icon start>mdi-cellphone-arrow-down</v-icon>
-    </v-btn>
+    </v-btn> -->
     <v-btn
       @click="disconnectInstance"
       :disabled="instance.instance.status === 'close' || restart.loading"
