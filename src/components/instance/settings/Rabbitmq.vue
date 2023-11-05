@@ -21,6 +21,11 @@
         {{ error }}
       </v-alert>
 
+      <v-alert type="info" class="mb-3">
+        O RabbitMQ é utilizado pela API para o enfileiramento das notificações.
+        Ele NÃO é utilizado para o envio de mensagens.
+      </v-alert>
+
       <v-form v-model="valid">
         <v-select
           :items="rabbitmqEventsType"

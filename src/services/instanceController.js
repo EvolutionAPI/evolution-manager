@@ -47,7 +47,7 @@ const logout = async (instanceName) => {
 
 const restart = async (instanceName) => {
   return await http
-    .post("/instance/restart/:instance", {
+    .put("/instance/restart/:instance", {}, {
       params: {
         instance: instanceName
       }
@@ -59,7 +59,7 @@ const restart = async (instanceName) => {
 }
 
 import settings from "./instanceSettingsController.js";
-
+import group from "./instanceGroupController.js";
 
 export default {
   fetchAll,
@@ -67,6 +67,7 @@ export default {
   connect,
   logout,
   restart,
-  ...settings
+  ...settings,
+  group
 
 };

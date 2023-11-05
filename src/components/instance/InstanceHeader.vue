@@ -1,7 +1,7 @@
 <template>
   <v-card
     variant="outlined"
-    class="d-flex align-center gap-4 pa-2"
+    class="d-flex align-center gap-4 pa-2 flex-wrap"
     rounded="xl"
   >
     <v-avatar size="100" rounded="xl">
@@ -30,27 +30,30 @@
       <small>{{ instance.instance.profileStatus }}</small>
     </div>
     <v-spacer></v-spacer>
-    <!-- <v-btn
-      @click="restartInstance"
-      :disabled="disconnect.loading"
-      :loading="restart.loading"
-      variant="tonal"
-      color="info"
-      size="small"
-    >
-      <v-icon start>mdi-cellphone-arrow-down</v-icon>
-    </v-btn> -->
-    <v-btn
-      @click="disconnectInstance"
-      :disabled="instance.instance.status === 'close' || restart.loading"
-      :loading="disconnect.loading"
-      variant="tonal"
-      color="error"
-      size="small"
-    >
-      <v-icon start>mdi-cellphone-nfc-off</v-icon>
-      {{ disconnect.confirm ? "Tem Certeza?" : "Desconectar" }}
-    </v-btn>
+    <div class="d-flex gap-2 flex-wrap justify-end">
+      <v-btn
+        @click="restartInstance"
+        :disabled="disconnect.loading || restart.success"
+        :loading="restart.loading"
+        variant="tonal"
+        color="info"
+        size="small"
+      >
+        <v-icon start>mdi-restart</v-icon>
+        {{ restart.success ? "Reiniciada!" : "Reiniciar" }}
+      </v-btn>
+      <v-btn
+        @click="disconnectInstance"
+        :disabled="instance.instance.status === 'close' || restart.loading"
+        :loading="disconnect.loading"
+        variant="tonal"
+        color="error"
+        size="small"
+      >
+        <v-icon start>mdi-cellphone-nfc-off</v-icon>
+        {{ disconnect.confirm ? "Tem Certeza?" : "Desconectar" }}
+      </v-btn>
+    </div>
   </v-card>
 </template>
 
@@ -63,7 +66,7 @@ export default {
   name: "InstanceHeader",
   data: () => ({
     disconnect: { confirm: false, loading: false },
-    restart: { loading: false },
+    restart: { loading: false, success: false },
     statusMapper: statusMapper,
     AppStore: useAppStore(),
   }),
@@ -72,7 +75,13 @@ export default {
       this.restart.loading = true;
       try {
         await instanceController.restart(this.instance.instance.instanceName);
-        await this.AppStore.reconnect();
+        this.restart.success = true;
+
+        setTimeout(() => {
+          this.restart.success = false;
+        }, 5000);
+
+        // await this.AppStore.reconnect();
       } catch (e) {
         console.log(e);
         alert(e.message || e.error || "Erro desconhecido");
