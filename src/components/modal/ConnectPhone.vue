@@ -67,7 +67,7 @@ export default {
           this.instance.instance.instanceName
         );
 
-        if (response.qrCode) this.qrCode = response.qrCode;
+        if (response.base64) this.qrCode = response.base64;
         else if (response.instance) {
           this.dialog = false;
           return;
