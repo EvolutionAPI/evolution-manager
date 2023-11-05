@@ -22,7 +22,7 @@
         >
           <v-card-text class="d-flex justify-center align-center h-100">
             <v-progress-circular v-if="loading" indeterminate color="primary" />
-            <v-icon v-else-if="error">mdi-alert-circle</v-icon>
+            <v-icon v-else-if="error" size="xl">mdi-qrcode-remove</v-icon>
           </v-card-text>
         </v-card>
 
