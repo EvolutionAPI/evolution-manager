@@ -66,11 +66,12 @@ export default {
           this.instance.instance.instanceName
         );
 
-        if (response.base64) this.qrCode = response.base64;
-        else {
+        if (response.qrCode) this.qrCode = response.qrCode;
+        else if (response.instance) {
           this.dialog = false;
           return;
-        }
+        } else throw new Error("Não foi possível carregar o QR Code, tente reiniciar o API");
+
         this.timeout = setTimeout(this.loadQr, 40000);
       } catch (e) {
         this.error = e.message?.message || e.message || e;
