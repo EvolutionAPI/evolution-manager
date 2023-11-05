@@ -31,8 +31,18 @@
     </div>
     <v-spacer></v-spacer>
     <v-btn
+      @click="restartInstance"
+      :disabled="disconnect.loading"
+      :loading="restart.loading"
+      variant="tonal"
+      color="info"
+      size="small"
+    >
+      <v-icon start>mdi-cellphone-arrow-down</v-icon>
+    </v-btn>
+    <v-btn
       @click="disconnectInstance"
-      :disabled="instance.instance.status === 'close'"
+      :disabled="instance.instance.status === 'close' || restart.loading"
       :loading="disconnect.loading"
       variant="tonal"
       color="error"
@@ -52,15 +62,24 @@ import instanceController from "@/services/instanceController";
 export default {
   name: "InstanceHeader",
   data: () => ({
-    disconnect: {
-      confirm: false,
-      loading: false,
-    },
+    disconnect: { confirm: false, loading: false },
+    restart: { loading: false },
     statusMapper: statusMapper,
     AppStore: useAppStore(),
-
   }),
   methods: {
+    async restartInstance() {
+      this.restart.loading = true;
+      try {
+        await instanceController.restart(this.instance.instance.instanceName);
+        await this.AppStore.reconnect();
+      } catch (e) {
+        console.log(e);
+        alert(e.message || e.error || "Erro desconhecido");
+      } finally {
+        this.restart.loading = false;
+      }
+    },
     async disconnectInstance() {
       if (!this.disconnect.confirm) return (this.disconnect.confirm = true);
 

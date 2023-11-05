@@ -45,6 +45,19 @@ const logout = async (instanceName) => {
     });
 }
 
+const restart = async (instanceName) => {
+  return await http
+    .post("/instance/restart/:instance", {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+}
+
 import settings from "./instanceSettingsController.js";
 
 
@@ -53,6 +66,7 @@ export default {
   create,
   connect,
   logout,
+  restart,
   ...settings
 
 };

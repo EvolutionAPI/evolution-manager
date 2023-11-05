@@ -24,22 +24,27 @@
       </v-btn>
     </div>
 
-    <v-card v-if="!loading && instances?.length === 0" variant="outlined">
-      <v-card-text>
-        <div class="text-center">
-          <v-icon size="70">mdi-server-network-off</v-icon>
-          <h3 class="mt-4">Nenhuma instância encontrada</h3>
-        </div>
-      </v-card-text>
-    </v-card>
 
     <v-data-table
-      v-if="!instances || instances?.length > 0"
       :headers="headers"
       :items="instances || []"
       :loading="loading"
       :items-per-page="10"
     >
+    <template v-slot:no-data>
+      <v-card v-if="!loading" variant="outlined">
+        <v-card-text>
+          <div class="text-center">
+            <v-icon size="70">mdi-server-network-off</v-icon>
+            <h3 class="mt-4">Nenhuma instância encontrada</h3>
+          </div>
+        </v-card-text>
+      </v-card>
+    </template>
+
+    <template v-slot:item.instance.instanceName="{ item }">
+      <b>{{ item.instance.instanceName }}</b>  
+    </template>
       <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.instance.status="{ item }">
         <v-chip
