@@ -25,7 +25,7 @@
           </v-card-text>
         </v-card>
 
-        <v-alert type="error" v-if="error">
+        <v-alert type="error" v-if="error" class="mt-2">
           {{ Array.isArray(error) ? error.join(", ") : error }}
         </v-alert>
       </v-card-text>
@@ -70,7 +70,7 @@ export default {
         else if (response.instance) {
           this.dialog = false;
           return;
-        } else throw new Error("Não foi possível carregar o QR Code, tente reiniciar o API");
+        } else throw new Error("Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente.");
 
         this.timeout = setTimeout(this.loadQr, 40000);
       } catch (e) {
