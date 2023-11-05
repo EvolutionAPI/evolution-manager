@@ -199,8 +199,8 @@ export default {
           this.instance.instance.instanceName
         );
 
-        this.chatwootData = Object.assign({}, chatwootData);
-        this.defaultChatwootData = Object.assign({}, chatwootData);
+        this.chatwootData = Object.assign({}, chatwootData || {});
+        this.defaultChatwootData = Object.assign({}, chatwootData || {});
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {

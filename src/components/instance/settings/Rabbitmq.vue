@@ -145,8 +145,10 @@ export default {
     },
   },
 
-  mounted() {
-    this.loadRabbitmq();
+  watch: {
+    expanded(val) {
+      if (val) this.loadRabbitmq();
+    },
   },
 };
 </script>
