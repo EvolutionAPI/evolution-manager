@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import Webhook from "./settings/webhook.vue";
+import Webhook from "./settings/Webhook.vue";
 import Websocket from "./settings/Websocket.vue";
 import Rabbitmq from "./settings/Rabbitmq.vue";
 import Chatwoot from "./settings/Chatwoot.vue";
