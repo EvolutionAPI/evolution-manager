@@ -70,6 +70,7 @@ export default {
         if (response.base64) this.qrCode = response.base64;
         else if (response.instance) {
           this.dialog = false;
+          this.AppStore.reconnect();
           return;
         } else throw new Error("Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente.");
 

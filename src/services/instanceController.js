@@ -58,8 +58,22 @@ const restart = async (instanceName) => {
     });
 }
 
+const deleteInstance = async (instanceName) => {
+  return await http
+    .delete("/instance/delete/:instance", {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+}
+
 import settings from "./instanceSettingsController.js";
 import group from "./instanceGroupController.js";
+import chat from "./instanceChatController.js";
 
 export default {
   fetchAll,
@@ -67,7 +81,9 @@ export default {
   connect,
   logout,
   restart,
+  delete: deleteInstance,
   ...settings,
-  group
+  group,
+  chat
 
 };

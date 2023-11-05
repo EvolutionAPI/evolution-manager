@@ -28,7 +28,8 @@ import Chatwoot from "./settings/Chatwoot.vue";
 import Typebot from "./settings/Typebot.vue";
 
 import MyGroups from "./message/MyGroups.vue";
-
+import MyChats from "./message/MyChats.vue";
+import HasWhatsapp from "./message/HasWhatsapp.vue";
 export default {
   components: {
     Webhook,
@@ -36,7 +37,9 @@ export default {
     Rabbitmq,
     Chatwoot,
     Typebot,
-    MyGroups
+    MyGroups,
+    MyChats,
+    HasWhatsapp,
   },
   data: () => ({
     tab: "settings",
@@ -51,7 +54,7 @@ export default {
         id: "message",
         icon: "mdi-message",
         title: "Mensagens",
-        components: ["MyGroups"],
+        components: ["HasWhatsapp","MyGroups", "MyChats"],
       },
     ],
   }),

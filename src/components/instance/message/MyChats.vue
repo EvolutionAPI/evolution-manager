@@ -1,8 +1,8 @@
 <template>
   <v-card variant="outlined" :loading="loading">
     <v-card-title class="d-flex align-center">
-      <v-icon start>mdi-account-group</v-icon>
-      Meus Grupos
+      <v-icon start>mdi-message</v-icon>
+      Minhas conversas
       <v-spacer></v-spacer>
       <v-btn
         size="small"
@@ -33,15 +33,15 @@
 
       <v-data-table
         :headers="[
-          { title: 'Nome', value: 'subject' },
-          { title: 'ID', value: 'id', align: 'center' },
+          { title: 'Número', value: 'id' },
           {
-            title: 'Criado em',
-            value: 'creation',
-            align: 'center',
+            title: 'Ultima mensagem',
+            value: 'lastMsgTimestamp',
+            options: { format: 'DD/MM/YYYY HH:mm' },
           },
         ]"
-        :items="groups"
+        :items="chats"
+        v-model:sort-by="sortBy"
         :no-data-text="loading ? '' : 'Nenhum grupo encontrado'"
         :search="search"
         :rows-per-page-items="[5, 10, 25, 50, 100]"
@@ -65,12 +65,11 @@
             </v-icon>
           </v-chip>
         </template>
-
         <!-- eslint-disable-next-line vue/valid-v-slot -->
-        <template v-slot:item.creation="{ item }">
-          {{ formatTimestamp(item.creation * 1000) }}
+        <template v-slot:item.lastMsgTimestamp="{ item }">
+          {{ item.lastMsgTimestamp }}
+          {{ formatTimestamp(item.lastMsgTimestamp * 1000) }}
         </template>
-
       </v-data-table>
     </v-card-text>
   </v-card>
@@ -80,7 +79,7 @@
 import instanceController from "@/services/instanceController";
 
 export default {
-  name: "MyGroups",
+  name: "MyChats",
   props: {
     instance: {
       type: Object,
@@ -91,7 +90,8 @@ export default {
     expanded: false,
     loading: false,
     error: false,
-    groups: [],
+    sortBy: [{ key: "lastMsgTimestamp", order: "desc" }],
+    chats: [],
     copied: [],
     search: "",
   }),
@@ -116,15 +116,15 @@ export default {
         this.copied = this.copied.filter((i) => i !== group.id);
       }, 2000);
     },
-    async loadGroups() {
+    async loadChats() {
       try {
         this.loading = true;
         this.error = false;
-        const groups = await instanceController.group.getAll(
+        const chats = await instanceController.chat.getAll(
           this.instance.instance.instanceName
         );
 
-        this.groups = groups;
+        this.chats = chats;
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
@@ -136,7 +136,7 @@ export default {
   watch: {
     expanded: {
       handler() {
-        if (this.expanded) this.loadGroups();
+        if (this.expanded) this.loadChats();
       },
     },
   },

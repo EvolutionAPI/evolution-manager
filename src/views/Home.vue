@@ -32,7 +32,7 @@
       :items-per-page="10"
     >
     <template v-slot:no-data>
-      <v-card v-if="!loading" variant="outlined">
+      <v-card v-if="!loading" variant="outlined" class="my-4">
         <v-card-text>
           <div class="text-center">
             <v-icon size="70">mdi-server-network-off</v-icon>
@@ -42,6 +42,7 @@
       </v-card>
     </template>
 
+    <!-- eslint-disable-next-line vue/valid-v-slot -->
     <template v-slot:item.instance.instanceName="{ item }">
       <b>{{ item.instance.instanceName }}</b>  
     </template>
@@ -63,26 +64,30 @@
           {{ statusMapper[item.instance.status].text }}
         </v-chip>
       </template>
+      <!-- eslint-disable-next-line vue/valid-v-slot -->
       <template v-slot:item.actions="{ item }">
         <v-btn
           :disabled="loading"
           :to="`/${item.instance.instanceName}`"
           icon
-          variant="text"
-          size="small"
-          class="mr-2"
+          size="x-small"
+          class="mr-1"
+          variant="tonal"
+          color="info"
         >
-          <v-icon>mdi-pencil</v-icon>
+          <v-icon>mdi-cog</v-icon>
         </v-btn>
-        <!-- <v-btn
-          :disabled="loading"
-          @click="AppStore.selectInstance(item.instance)"
+        <v-btn
+          :disabled="loading || !!loadingDelete"
+          :loading="loadingDelete === item.instance.instanceName"
+          @click="deleteInstance(item.instance.instanceName)"
           icon
-          variant="text"
-          size="small"
+          variant="tonal"
+          color="error"
+          size="x-small"
         >
           <v-icon>mdi-delete</v-icon>
-        </v-btn> -->
+        </v-btn>
       </template>
     </v-data-table>
 
@@ -97,6 +102,7 @@
 import { useAppStore } from "@/store/app";
 import CreateInstance from "@/components/modal/CreateInstance";
 import statusMapper from "@/helpers/mappers/status";
+import instanceController from "@/services/instanceController";
 
 export default {
   name: "HomeInstance",
@@ -106,6 +112,7 @@ export default {
   data: () => ({
     AppStore: useAppStore(),
     loading: false,
+    loadingDelete: false,
     error: false,
     statusMapper: statusMapper,
     headers: [
@@ -122,6 +129,24 @@ export default {
   methods: {
     addInstance() {
       this.$refs.createInstanceModal.open();
+    },
+    async deleteInstance(instanceName) {
+      try {
+        this.loadingDelete = instanceName;
+        const confirm = window.confirm(
+          `Tem certeza que deseja excluir a instância ${instanceName}?`
+        );
+        if (!confirm) return;
+
+
+        await instanceController.logout(instanceName).catch(() => {});
+        await instanceController.delete(instanceName);
+        await this.AppStore.reconnect();
+      } catch (e) {
+        this.error = e.message?.message || e.message || e;
+      } finally {
+        this.loadingDelete = false;
+      }
     },
     async getInstances() {
       try {
