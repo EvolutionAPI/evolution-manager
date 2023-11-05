@@ -3,33 +3,21 @@
     {{ error }}
   </v-alert>
   <div v-else-if="instance" class="d-flex flex-column" style="gap: 1.5rem">
-    ;
-    <v-card variant="outlined" class="d-flex align-center">
-      <v-avatar size="100">
-        <v-icon v-if="statusMapper[instance.instance.status].icon" size="70">
-          {{ statusMapper[instance.instance.status].icon }}
-        </v-icon>
-      </v-avatar>
-      <div>
-        <h2>{{ instance.instance.instanceName }}</h2>
-      </div>
-    </v-card>
-    <v-alert
-      icon="mdi-qrcode-scan"
-      v-if="instance.status != 'connected'"
-      type="warning"
-    >
-      <div class="d-flex justify-space-between align-center flex-wrap">
-        <span>Telefone não conectado</span>
-        <v-btn @click="connectPhone" size="small"> Conectar </v-btn>
-      </div>
-    </v-alert>
+    <InstanceHeader :instance="instance" />
+    <ConnectPhone :instance="instance" />
+
+    <InstanceBody :instance="instance" />
+
+    <InstanceApiKey :instance="instance" ref="apiKeyModal" />
   </div>
 </template>
 
 <script>
 import { useAppStore } from "@/store/app";
-import statusMapper from "@/helpers/mappers/status";
+import InstanceApiKey from "@/components/modal/InstanceApiKey.vue";
+import ConnectPhone from "@/components/modal/ConnectPhone.vue";
+import InstanceHeader from "@/components/instance/InstanceHeader.vue";
+import InstanceBody from "@/components/instance/InstanceBody.vue";
 
 export default {
   name: "HomeInstance",
@@ -37,27 +25,32 @@ export default {
     AppStore: useAppStore(),
     loading: true,
     error: false,
-    instance: null,
-    statusMapper: statusMapper,
   }),
   methods: {
     async loadInstance() {
-      if (!this.AppStore.instances) await this.AppStore.reconnect();
-      const instances = this.AppStore.instances;
-      const instance = instances.find(
-        (instance) => instance.instance.instanceName === this.$route.params.id
-      );
-      if (!instance) {
-        this.error = "Instância não encontrada";
-        return;
+      try {
+        this.loading = true;
+        this.error = false;
+        await this.AppStore.loadInstance(this.$route.params.id);
+      } catch (e) {
+        this.error = e.message?.message || e.message || e;
+      } finally {
+        this.loading = false;
       }
-      this.instance = instance;
     },
   },
   watch: {},
+  computed: {
+   
+    instance() {
+      return this.AppStore.getInstance(this.$route.params.id);
+    },
+  },
+
   async mounted() {
     if (this.AppStore.validConnection) this.loadInstance();
     else this.$router.push({ name: "instances" });
   },
+  components: { InstanceApiKey, ConnectPhone, InstanceHeader, InstanceBody },
 };
 </script>

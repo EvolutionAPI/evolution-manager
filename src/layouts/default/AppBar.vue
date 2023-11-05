@@ -1,8 +1,10 @@
 <template>
   <v-app-bar flat>
     <v-app-bar-title>
-      <v-icon icon="mdi-whatsapp" left />
-      Evolution Manager
+      <v-btn variant="text" @click="$router.push('/')">
+        <v-img src="@/assets/logo.png" height="24" width="24" class="mr-2" />
+        Evolution Manager
+      </v-btn>
     </v-app-bar-title>
 
     <v-icon v-if="AppStore.validConnection" color="success">
@@ -33,8 +35,9 @@ export default {
       this.$refs.settings.open();
     },
   },
-  mounted() {
-    if (!this.AppValidConnection) this.openSettings();
+  async mounted() {
+    await this.AppStore.loadConnection();
+    if (!this.AppStore.validConnection) this.openSettings();
   },
 };
 </script>

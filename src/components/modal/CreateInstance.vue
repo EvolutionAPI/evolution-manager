@@ -5,7 +5,7 @@
     :persistent="!AppStore.validConnection"
   >
     <v-card>
-      <v-card-text>
+      <v-card-text class="d-flex flex-column gap-4">
         <v-form v-model="valid">
           <h3 class="mb-4">Criar instancia</h3>
           <v-text-field
@@ -21,7 +21,7 @@
             ]"
           />
           <v-text-field
-            v-model="instance.apiKey"
+            v-model="instance.token"
             label="API Key"
             required
             outlined
@@ -41,7 +41,7 @@
           configurados após a criação da instância.
         </v-alert>
 
-        <v-alert type="error" v-if="error">
+        <v-alert type="error" v-if="error" >
           {{ Array.isArray(error) ? error.join(", ") : error }}
         </v-alert>
       </v-card-text>
@@ -62,7 +62,7 @@
           :disabled="!valid"
           :loading="loading"
         >
-          Conectar
+          Criar
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -80,7 +80,7 @@ export default {
     valid: false,
     instance: {
       instanceName: "",
-      apiKey: "",
+      token: "",
     },
     loading: false,
     error: false,
@@ -88,7 +88,7 @@ export default {
   }),
   methods: {
     generateApiKey() {
-      this.instance.apiKey =
+      this.instance.token =
         Math.random().toString(36).substring(2, 15) +
         Math.random().toString(36).substring(2, 15);
     },

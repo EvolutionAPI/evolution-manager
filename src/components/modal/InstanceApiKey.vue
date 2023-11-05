@@ -1,25 +1,28 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    max-width="500px"
-    :persistent="!AppStore.validConnection"
-  >
+  <v-dialog v-model="dialog" max-width="500px" :persistent="!AppStore.validConnection">
     <v-card>
       <v-card-text>
+        <v-form v-model="valid">
+          <h3 class="mb-4">Configurar conexão</h3>
+          
+          <v-text-field
+            v-model="apiKey"
+            label="Global API Key"
+            required
+            outlined
+            :type="revelPassword ? 'text' : 'password'"
+            :append-inner-icon="revelPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append-inner="revelPassword = !revelPassword"
+          />
+        </v-form>
+
         <v-alert type="error" v-if="error">
           {{ Array.isArray(error) ? error.join(", ") : error }}
         </v-alert>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          v-if="AppStore.validConnection"
-          text
-          @click="dialog = false"
-          :disabled="loading"
-        >
-          Cancel
-        </v-btn>
+        <v-btn text to="/" :disabled="loading">Cancel</v-btn>
         <v-btn
           color="success"
           variant="tonal"
@@ -35,13 +38,18 @@
 </template>
 
 <script>
-import instanceController from "@/services/instanceController";
 import { useAppStore } from "@/store/app";
 
 export default {
   name: "SettingsModal",
   data: () => ({
     dialog: false,
+    valid: false,
+    revelPassword: false,
+    connection: {
+      host: "",
+      globalApiKey: "",
+    },
     loading: false,
     error: false,
     AppStore: useAppStore(),
@@ -52,13 +60,8 @@ export default {
         this.loading = true;
         this.error = false;
 
-        const instance = await instanceController.create(this.instance);
-        await this.AppStore.reconnect();
-
-        this.$router.push({
-          name: "instance",
-          params: { id: instance.instance.instanceName },
-        });
+        await this.AppStore.setConnection(this.connection);
+        this.dialog = false;
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
@@ -67,9 +70,6 @@ export default {
     },
     open() {
       this.dialog = true;
-      this.error = false;
-      this.instance.instanceName = "";
-      this.generateApiKey();
     },
   },
 

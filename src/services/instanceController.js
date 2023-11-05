@@ -19,8 +19,40 @@ const create = async (data) => {
     });
 }
 
+const connect = async (instanceName) => {
+  return await http
+    .get("/instance/connect/:instance", {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+}
+
+const logout = async (instanceName) => {
+  return await http
+    .delete("/instance/logout/:instance", {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+}
+
+import settings from "./instanceSettingsController.js";
+
 
 export default {
   fetchAll,
-  create
+  create,
+  connect,
+  logout,
+  ...settings
+
 };
