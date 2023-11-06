@@ -23,6 +23,9 @@ export const useAppStore = defineStore('app', {
     },
     instancesKeys: {},
     instancesList: [],
+
+    // lista de "contatos" de conexoes
+    connectionsList: [],
   }),
 
   actions: {
@@ -51,16 +54,16 @@ export const useAppStore = defineStore('app', {
     async loadInstance(instanceName) {
       try {
         const { host, globalApiKey } = this.connection;
-
-        const response = await axios({
-          method: 'GET',
-          baseURL: host,
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': globalApiKey
-          },
-          url: `/instance/fetchInstances?instanceName=${instanceName}`
-        })
+        return this.reconnect()
+        // const response = await axios({
+        //   method: 'GET',
+        //   baseURL: host,
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'apikey': globalApiKey
+        //   },
+        //   url: `/instance/fetchInstances?instanceName=${instanceName}`
+        // })
 
       } catch (e) {
         this.connection.valid = false
@@ -71,6 +74,9 @@ export const useAppStore = defineStore('app', {
     async reconnect() {
       try {
         const { host, globalApiKey } = this.connection
+        if (!host || !globalApiKey) {
+          throw new Error('Invalid connection')
+        }
         const response = await axios({
           method: 'GET',
           baseURL: host,
@@ -101,28 +107,54 @@ export const useAppStore = defineStore('app', {
       this.instancesKeys[instance] = key
     },
 
+    removeConnection({ host }) {
+      const currentKey = this.connectionsList.findIndex(
+        (item) => item.host === host
+      )
 
+      if (currentKey !== -1)
+        this.connectionsList.splice(currentKey, 1)
+
+      this.saveLocalStorage()
+    },
     saveConnection({ host, globalApiKey }) {
       this.connection = {
         valid: true,
         host,
         globalApiKey,
       }
+
+      const currentKey = this.connectionsList.findIndex(
+        (item) => item.host === host
+      )
+      if (currentKey === -1) {
+        this.connectionsList.push({ host, globalApiKey })
+      } else {
+        this.connectionsList[currentKey] = { host, globalApiKey }
+      }
+
+      this.saveLocalStorage()
+    },
+
+    saveLocalStorage() {
       if (typeof window !== 'undefined') {
-        window.localStorage.setItem('connection', JSON.stringify({
-          host,
-          globalApiKey,
-        }))
+        window.localStorage.setItem('connection', JSON.stringify(this.connection))
+        window.localStorage.setItem('connectionsList', JSON.stringify(this.connectionsList))
       }
     },
     async loadConnection() {
       if (typeof window !== 'undefined') {
+        const connectionsList = window.localStorage.getItem('connectionsList')
+        if (connectionsList) {
+          this.connectionsList = JSON.parse(connectionsList || '[]')
+        }
+
         const connection = window.localStorage.getItem('connection')
         if (connection) {
-          this.connection = JSON.parse(connection)
+          this.connection = JSON.parse(connection || '{}')
           return this.reconnect()
         }
       }
-    }
+    },
   }
 })

@@ -39,7 +39,11 @@ export default {
       }
     },
   },
-  watch: {},
+  watch: {
+    instance(val, oldVal) {
+      if (!val && oldVal) this.$router.push("/");
+    },
+  },
   computed: {
    
     instance() {

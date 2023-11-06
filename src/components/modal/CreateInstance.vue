@@ -2,7 +2,6 @@
   <v-dialog
     v-model="dialog"
     max-width="500px"
-    :persistent="!AppStore.validConnection"
   >
     <v-card>
       <v-card-text class="d-flex flex-column gap-4">
@@ -48,7 +47,6 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          v-if="AppStore.validConnection"
           text
           @click="dialog = false"
           :disabled="loading"

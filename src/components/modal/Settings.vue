@@ -1,5 +1,9 @@
 <template>
-  <v-dialog v-model="dialog" max-width="500px" :persistent="!AppStore.validConnection">
+  <v-dialog
+    v-model="dialog"
+    max-width="500px"
+    :persistent="!AppStore.validConnection"
+  >
     <v-card>
       <v-card-text>
         <v-form v-model="valid">
@@ -31,18 +35,87 @@
         </v-alert>
       </v-card-text>
       <v-card-actions>
+        <v-btn
+          v-if="!AppStore.connection.host === connection.host"
+          text
+          @click="dialog = false"
+        >
+          Cancel
+        </v-btn>
+
         <v-spacer></v-spacer>
-        <v-btn v-if="AppStore.validConnection" text @click="dialog = false" :disabled="loading">Cancel</v-btn>
+        <v-btn
+          v-if="AppStore.validConnection"
+          text
+          @click="dialog = false"
+          :disabled="loading"
+        >
+          Cancel
+        </v-btn>
         <v-btn
           color="success"
           variant="tonal"
-          @click="save"
+          @click="save()"
           :disabled="!valid"
           :loading="loading"
         >
           Conectar
         </v-btn>
       </v-card-actions>
+    </v-card>
+
+    <v-card class="mt-2" v-if="connectionsList && connectionsList.length > 1">
+      <v-card-text>
+        <h3 class="mb-4">Conexões salvas</h3>
+        <v-list>
+          <v-list-item
+            v-for="conect in connectionsList"
+            :key="conect.host"
+            :disabled="
+              loading ||
+              (conect.host === AppStore.connection.host &&
+                AppStore.validConnection)
+            "
+            @click="save(conect)"
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{
+                conect.host.replace(/https?:\/\//, "")
+              }}</v-list-item-title>
+
+              <!-- <v-list-item-subtitle>
+                {{ connection.globalApiKey.slice(0, 10) }}...
+              </v-list-item-subtitle> -->
+            </v-list-item-content>
+            <template v-slot:append>
+              <v-btn
+                @click.stop="removeConnection(conect)"
+                icon
+                v-if="
+                  conect.host !== AppStore.connection.host ||
+                  !AppStore.validConnection
+                "
+                size="x-small"
+                variant="tonal"
+                color="error"
+                :disabled="loading"
+              >
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
+              <v-btn
+                icon
+                v-else
+                size="x-small"
+                variant="tonal"
+                color="success"
+                :disabled="loading"
+              >
+                <v-icon>mdi-check</v-icon>
+              </v-btn>
+            </template>
+          </v-list-item>
+        </v-list>
+      </v-card-text>
     </v-card>
   </v-dialog>
 </template>
@@ -65,12 +138,15 @@ export default {
     AppStore: useAppStore(),
   }),
   methods: {
-    async save() {
+    removeConnection(connection) {
+      this.AppStore.removeConnection(connection);
+    },
+    async save(connection) {
       try {
         this.loading = true;
         this.error = false;
 
-        await this.AppStore.setConnection(this.connection);
+        await this.AppStore.setConnection(connection || this.connection);
         this.dialog = false;
       } catch (e) {
         this.error = e.message?.message || e.message || e;
@@ -80,10 +156,15 @@ export default {
     },
     open() {
       this.dialog = true;
-      this.connection = this.AppStore.connection;
+      this.connection = Object.assign({}, this.AppStore.connection);
     },
   },
 
+  computed: {
+    connectionsList() {
+      return this.AppStore.connectionsList;
+    },
+  },
   emits: ["close"],
 };
 </script>

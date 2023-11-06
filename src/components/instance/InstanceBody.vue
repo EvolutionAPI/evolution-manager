@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import Options from "./settings/Options.vue";
 import Webhook from "./settings/Webhook.vue";
 import Websocket from "./settings/Websocket.vue";
 import Rabbitmq from "./settings/Rabbitmq.vue";
@@ -32,6 +33,7 @@ import MyChats from "./message/MyChats.vue";
 import HasWhatsapp from "./message/HasWhatsapp.vue";
 export default {
   components: {
+    Options,
     Webhook,
     Websocket,
     Rabbitmq,
@@ -48,7 +50,7 @@ export default {
         id: "settings",
         icon: "mdi-cog",
         title: "Configurações",
-        components: ["Webhook", "Websocket", "Rabbitmq", "Chatwoot", "Typebot"],
+        components: ["Options","Webhook", "Websocket", "Rabbitmq", "Chatwoot", "Typebot"],
       },
       {
         id: "message",

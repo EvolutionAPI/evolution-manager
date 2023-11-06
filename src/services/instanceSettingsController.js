@@ -1,6 +1,32 @@
 
 import http from "../http-common";
 
+const findOptions = async (instanceName) => {
+  return await http
+    .get("/settings/find/:instance", {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+}
+
+const setOptions = async (instanceName, data) => {
+  return await http
+    .post("/settings/set/:instance", data, {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+}
+
 const findWebhook = async (instanceName) => {
   return await http
     .get("/webhook/find/:instance", {
@@ -115,7 +141,14 @@ const setTypebot = async (instanceName, data) => {
     });
 }
 
+
+
 export default {
+  options: {
+    get: findOptions,
+    set: setOptions,
+  },
+
   webhook: {
     get: findWebhook,
     set: setWebhook,
