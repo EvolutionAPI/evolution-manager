@@ -26,14 +26,42 @@
       <span class="text-overline" style="line-height: 1em">
         {{ owner }}
       </span>
-      <h2 class="mb-0">{{ instance.instance.instanceName }}</h2>
+      <h2 class="mb-0">
+        {{ instance.instance.instanceName }}
+        <v-chip
+          v-if="instance?.instance?.apikey"
+          color="info"
+          class="ml-2"
+          size="x-small"
+          @click="copyApikey"
+        >
+          <v-icon start size="small">mdi-key</v-icon>
+          {{ instance.instance.apikey.slice(0, 10) }}...
+          <v-icon end size="small">
+            {{ copied ? "mdi-check" : "mdi-content-copy" }}
+          </v-icon>
+        </v-chip>
+      </h2>
       <small>{{ instance.instance.profileStatus }}</small>
     </div>
     <v-spacer></v-spacer>
     <div class="d-flex gap-2 flex-wrap justify-end">
       <v-btn
+        @click="refresh"
+        :disabled="
+          disconnect.loading || restart.loading || restart.success || reload
+        "
+        :loading="reload"
+        variant="tonal"
+        color="primary"
+        icon
+        size="x-small"
+      >
+        <v-icon>mdi-refresh</v-icon>
+      </v-btn>
+      <v-btn
         @click="restartInstance"
-        :disabled="disconnect.loading || restart.success"
+        :disabled="disconnect.loading || restart.success || reload"
         :loading="restart.loading"
         variant="tonal"
         color="info"
@@ -44,7 +72,9 @@
       </v-btn>
       <v-btn
         @click="disconnectInstance"
-        :disabled="instance.instance.status === 'close' || restart.loading"
+        :disabled="
+          instance.instance.status === 'close' || restart.loading || reload
+        "
         :loading="disconnect.loading"
         variant="tonal"
         color="error"
@@ -67,10 +97,31 @@ export default {
   data: () => ({
     disconnect: { confirm: false, loading: false },
     restart: { loading: false, success: false },
+    reload: false,
+    copied: false,
     statusMapper: statusMapper,
     AppStore: useAppStore(),
   }),
   methods: {
+    copyApikey() {
+      if (this.copied) return;
+      navigator.clipboard.writeText(this.instance.instance.apikey);
+      this.copied = true;
+      setTimeout(() => {
+        this.copied = false;
+      }, 5000);
+    },
+    async refresh() {
+      try {
+        this.reload = true;
+        await this.AppStore.reconnect();
+      } catch (e) {
+        console.log(e);
+        alert(e.message || e.error || "Erro desconhecido");
+      } finally {
+        this.reload = false;
+      }
+    },
     async restartInstance() {
       this.restart.loading = true;
       try {
