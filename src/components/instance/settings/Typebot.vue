@@ -140,6 +140,15 @@
             },
           ]"
         />
+
+        <div>
+          <v-checkbox
+            v-model="typebotData.listening_from_me"
+            label="Ouvir mensagens enviadas por mim"
+            :disabled="loading"
+            hide-details
+          ></v-checkbox>
+        </div>
       </v-form>
     </v-card-text>
     <v-card-actions v-if="expanded">
@@ -188,6 +197,7 @@ export default {
       expire: 0,
       delay_message: 0,
       sessions: [],
+      listening_from_me: false,
       typebot: "",
       url: "",
       keyword_finish: "",
@@ -197,6 +207,7 @@ export default {
       enabled: false,
       expire: 0,
       delay_message: 0,
+      listening_from_me: false,
       sessions: [],
       typebot: "",
       url: "",
