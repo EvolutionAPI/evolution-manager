@@ -186,6 +186,7 @@ export default {
     typebotData: {
       enabled: false,
       expire: 0,
+      delay_message: 0,
       sessions: [],
       typebot: "",
       url: "",
@@ -195,6 +196,7 @@ export default {
     defaultTypebotData: {
       enabled: false,
       expire: 0,
+      delay_message: 0,
       sessions: [],
       typebot: "",
       url: "",
@@ -213,6 +215,8 @@ export default {
           {
             ...this.typebotData,
             url: this.typebotData.url.trim().replace(/\/$/, ""),
+            delay_message: parseInt(this.typebotData.delay_message),
+            expire: parseInt(this.typebotData.expire),
           }
         );
         this.defaultTypebotData = Object.assign({}, this.typebotData);
