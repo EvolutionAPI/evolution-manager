@@ -1,69 +1,57 @@
-# essentials
+# Evolution Manager - README
 
-## Project setup
+## Introduction
+Evolution Manager is an open-source management tool for the Evolution API, designed to streamline the administration and monitoring of instances. It can be accessed online at [Evolution Manager](https://github.com/gabrielpastori1/evolution-manager).
 
-```
-# yarn
-yarn
+## Features
+- **Instance Management**: Create, manage, and delete instances.
+- **Instance Settings**: Customize behavior settings (e.g., disabling calls, always-online mode), webhook integration, RabbitMQ, WebSocket, Chatwoot, and Typebot configurations.
+- **User Utilities**: Check user numbers, search for conversations, and find groups.
 
-# npm
-npm install
+## Limitations
+- The version hosted on Vercel requires the server to have an SSL certificate.
 
-# pnpm
-pnpm install
+## Technology
+- The project is built using Vue.js v3 and Vuetify.
 
-# bun
-bun install
-```
+## Development Setup
+1. **Prerequisites**: Ensure you have `yarn` installed on your system.
+2. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/gabrielpastori1/evolution-manager.git
+   cd evolution-manager
+   ```
+3. **Install Dependencies**:
+   ```bash
+   yarn install
+   ```
+4. **Run Development Server**:
+   ```bash
+   yarn serve
+   ```
+   This will start a local development server. You can access the app at `localhost:8080`.
 
-### Compiles and hot-reloads for development
-
-```
-# yarn
-yarn dev
-
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# bun
-bun run dev
-```
-
-### Compiles and minifies for production
-
-```
-# yarn
+## Building the Project
+To build the project for production, run:
+```bash
 yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# bun
-bun run build
 ```
+This will create a `dist` folder with the compiled assets.
 
-### Lints and fixes files
+## Self-Hosted Instructions (Ubuntu Server)
+1. **Prepare the Environment**: Install Node.js, Yarn, and any other necessary dependencies on your Ubuntu server.
+2. **Clone and Build**:
+   - Clone the repository and build the project using the steps provided in the Development Setup section.
+3. **Deploy**:
+   - Host the contents of the `dist` folder on your web server.
+   - Ensure the server is configured with an SSL certificate for secure access.
 
-```
-# yarn
-yarn lint
+## Contributing
+Contributions are welcome! Please read our contributing guidelines to get started.
 
-# npm
-npm run lint
+## License
+This project is open-source and available under the [MIT License](LICENSE.md).
 
-# pnpm
-pnpm lint
+---
 
-# bun
-bun run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
+Note: Replace `[LICENSE.md]` with the actual link to the license file in the repository.
