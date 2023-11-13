@@ -27,7 +27,7 @@ Evolution Manager is an open-source management tool for the Evolution API, desig
    ```
 4. **Run Development Server**:
    ```bash
-   yarn serve
+   yarn dev
    ```
    This will start a local development server. You can access the app at `localhost:8080`.
 
