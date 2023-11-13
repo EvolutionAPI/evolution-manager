@@ -51,7 +51,3 @@ Contributions are welcome! Please read our contributing guidelines to get starte
 
 ## License
 This project is open-source and available under the [MIT License](LICENSE.md).
-
----
-
-Note: Replace `[LICENSE.md]` with the actual link to the license file in the repository.
