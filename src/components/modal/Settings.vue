@@ -13,11 +13,7 @@
             label="URL"
             required
             outlined
-            :rules="[
-              // regex to verify is has http or https
-              (v) =>
-                new RegExp('^(http|https)://', 'i').test(v) || 'URL inválida',
-            ]"
+            :rules="hostRules"
           />
           <v-text-field
             v-model="connection.globalApiKey"
@@ -35,13 +31,7 @@
         </v-alert>
       </v-card-text>
       <v-card-actions>
-        <v-btn
-          v-if="!AppStore.connection.host === connection.host"
-          text
-          @click="dialog = false"
-        >
-          Cancel
-        </v-btn>
+        <v-btn size="small" text @click="showAbout"> Sobre esse Manager </v-btn>
 
         <v-spacer></v-spacer>
         <v-btn
@@ -118,12 +108,14 @@
       </v-card-text>
     </v-card>
   </v-dialog>
+  <about-modal ref="about" />
 </template>
 
 <script>
 import { useAppStore } from "@/store/app";
-
+import AboutModal from "./About.vue";
 export default {
+  components: { AboutModal },
   name: "SettingsModal",
   data: () => ({
     dialog: false,
@@ -136,8 +128,12 @@ export default {
     loading: false,
     error: false,
     AppStore: useAppStore(),
+    isHttps: !window.location.protocol === "https:",
   }),
   methods: {
+    showAbout() {
+      this.$refs.about.open();
+    },
     removeConnection(connection) {
       this.AppStore.removeConnection(connection);
     },
@@ -159,12 +155,26 @@ export default {
       this.connection = Object.assign({}, this.AppStore.connection);
     },
   },
-
+  watch: {
+    "AppStore.validConnection"(val, oldVal) {
+      if (val === oldVal) return;
+      if (!val) this.dialog = true;
+    },
+  },
   computed: {
     connectionsList() {
       return this.AppStore.connectionsList;
     },
+    hostRules() {
+      return [
+        (v) =>
+          new RegExp(`^(${!this.isHttps ? "http|" : ""}https)://`, "i").test(
+            v
+          ) || (this.isHttps ? "URL inválida, use https" : "URL inválida"),
+      ];
+    },
   },
+
   emits: ["close"],
 };
 </script>

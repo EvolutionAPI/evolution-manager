@@ -16,6 +16,7 @@ export const useAppStore = defineStore('app', {
     },
   },
   state: () => ({
+    connecting: false,
     connection: {
       valid: false,
       host: null,
@@ -31,6 +32,7 @@ export const useAppStore = defineStore('app', {
   actions: {
     async setConnection({ host, globalApiKey }) {
       try {
+        this.connecting = true
         const responde = await axios({
           method: 'GET',
           baseURL: host,
@@ -47,13 +49,15 @@ export const useAppStore = defineStore('app', {
       } catch (e) {
         this.connection.valid = false
         throw e.response?.data?.response?.message || e.response || e
-
+      } finally {
+        this.connecting = false
       }
     },
 
     async loadInstance(instanceName) {
       try {
-        const { host, globalApiKey } = this.connection;
+        console.log('loadInstance', instanceName)
+        // const { host, globalApiKey } = this.connection;
         return this.reconnect()
         // const response = await axios({
         //   method: 'GET',
@@ -93,6 +97,8 @@ export const useAppStore = defineStore('app', {
       } catch (e) {
         this.connection.valid = false
         throw e.response?.data?.response?.message || e.response || e
+      } finally {
+        this.connecting = false
       }
     },
 
@@ -152,6 +158,7 @@ export const useAppStore = defineStore('app', {
         const connection = window.localStorage.getItem('connection')
         if (connection) {
           this.connection = JSON.parse(connection || '{}')
+          this.connecting = true
           return this.reconnect()
         }
       }
