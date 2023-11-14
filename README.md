@@ -39,8 +39,26 @@ yarn build
 This will create a `dist` folder with the compiled assets.
 
 ## Self-Hosted - Evolution Manager CLI and PM2
+### Straight to the Point: Quick Setup with PM2
+
+To quickly install Evolution Manager globally and set it up with PM2, follow these commands:
+
+1. **Install Evolution Manager Globally**:
+   ```bash
+   npm install -g evolution-manager
+   ```
+
+2. **Set Up PM2 for Evolution Manager**:
+   ```bash
+   evolution-manager pm2 setup
+   ```
+
+These two steps will install the Evolution Manager CLI globally on your system and configure it to run with PM2, a powerful process manager.
 
 ### Installation and Configuration
+
+These two steps will install the Evolution Manager CLI globally on your system and configure it to run with PM2, a powerful process manager.
+
 
 1. **Install Evolution Manager Globally**:
    - Ensure Node.js and NPM are installed on your system.
