@@ -35,6 +35,14 @@
 
         <v-spacer></v-spacer>
         <v-btn
+          v-if="!!AppStore.connection.host"
+          icon
+          @click="logout"
+          :disabled="loading"
+        >
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
+        <v-btn
           v-if="AppStore.validConnection"
           text
           @click="dialog = false"
@@ -131,6 +139,13 @@ export default {
     isHttps: !window.location.protocol === "https:",
   }),
   methods: {
+    logout() {
+      this.AppStore.logout();
+      this.connection = {
+        host: "",
+        globalApiKey: "",
+      };
+    },
     showAbout() {
       this.$refs.about.open();
     },

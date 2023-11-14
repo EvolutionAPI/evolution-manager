@@ -74,6 +74,17 @@ export const useAppStore = defineStore('app', {
         throw e.response?.data?.response?.message || e.response || e
       }
     },
+    async logout() {
+      this.connection = {
+        valid: false,
+        host: null,
+        globalApiKey: null,
+      }
+      this.instancesList = []
+      this.instancesKeys = {}
+      this.connectionsList = []
+      window.localStorage.clear();
+    },
 
     async reconnect() {
       try {

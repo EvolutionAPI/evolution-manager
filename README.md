@@ -3,6 +3,17 @@
 ## Introduction
 Evolution Manager is an open-source management tool for the Evolution API, designed to streamline the administration and monitoring of instances. It can be accessed online at [Evolution Manager](https://github.com/gabrielpastori1/evolution-manager).
 
+---
+
+🇧🇷 **Atenção, Comunidade Brasileira!** 🇧🇷
+
+Se você é um desenvolvedor ou usuário brasileiro interessado no Evolution Manager, temos boas notícias! Agora você pode acessar a documentação completa do projeto em português. Isso facilitará seu entendimento e uso desta ferramenta incrível. Clique no link abaixo para ler o README em português:
+
+🔗 [Leia o README em Português](README.pt_BR.md)
+
+---
+
+
 ## Features
 - **Instance Management**: Create, manage, and delete instances.
 - **Instance Settings**: Customize behavior settings (e.g., disabling calls, always-online mode), webhook integration, RabbitMQ, WebSocket, Chatwoot, and Typebot configurations.

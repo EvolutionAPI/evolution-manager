@@ -1,6 +1,6 @@
 {
   "name": "evolution-manager",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "main": "dist",
   "scripts": {
     "dev": "vite",
