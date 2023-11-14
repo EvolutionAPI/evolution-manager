@@ -37,6 +37,7 @@
         <v-btn
           v-if="!!AppStore.connection.host"
           icon
+          size="small"
           @click="logout"
           :disabled="loading"
         >
