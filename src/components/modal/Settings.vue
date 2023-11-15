@@ -137,7 +137,7 @@ export default {
     loading: false,
     error: false,
     AppStore: useAppStore(),
-    isHttps: !window.location.protocol === "https:",
+    isHttps: window.location.protocol === "https:",
   }),
   methods: {
     logout() {
@@ -186,7 +186,10 @@ export default {
         (v) =>
           new RegExp(`^(${!this.isHttps ? "http|" : ""}https)://`, "i").test(
             v
-          ) || (this.isHttps ? "URL inválida, use https" : "URL inválida"),
+          ) ||
+          (this.isHttps
+            ? "URL inválida, ela deve começar com https"
+            : "URL inválida, ela deve começar com http ou https"),
       ];
     },
   },

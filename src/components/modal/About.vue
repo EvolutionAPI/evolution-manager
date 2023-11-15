@@ -38,7 +38,7 @@
             segurança e privacidade, mantendo suas informações confidenciais e
             protegidas.
           </p>
-          <v-alert v-if="!isHttps" color="info" class="mt-2" variant="tonal">
+          <v-alert v-if="isHttps" color="info" class="mt-2" variant="tonal">
             Por conta de todo o processamento ser realizado no navegador, é
             necessário que o servidor da Evolution API seja acessado através de
             uma conexão segura (HTTPS).
@@ -67,7 +67,7 @@ export default {
   name: "SettingsModal",
   data: () => ({
     dialog: false,
-    isHttps: !window.location.protocol === "https:",
+    isHttps: window.location.protocol === "https:",
   }),
   methods: {
     open() {
