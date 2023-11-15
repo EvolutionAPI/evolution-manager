@@ -33,7 +33,7 @@ export const useAppStore = defineStore('app', {
     async setConnection({ host, globalApiKey }) {
       try {
         this.connecting = true
-        const responde = await axios({
+        const response = await axios({
           method: 'GET',
           baseURL: host,
           headers: {
@@ -43,9 +43,11 @@ export const useAppStore = defineStore('app', {
           url: '/instance/fetchInstances'
         })
 
-        this.saveConnection({ host, globalApiKey })
+        if (!response.data || !Array.isArray(response.data)) throw new Error('Essa conexão não é uma instância da evolution-api')
 
-        this.instancesList = responde.data
+
+        this.saveConnection({ host, globalApiKey })
+        this.instancesList = response.data
       } catch (e) {
         this.connection.valid = false
         throw e.response?.data?.response?.message || e.response || e
