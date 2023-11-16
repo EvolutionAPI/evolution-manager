@@ -1,6 +1,11 @@
 <template>
   <v-card variant="outlined" :loading="loading">
-    <v-card-title class="d-flex align-center">
+    <v-card-title
+      class="d-flex align-center"
+      @click="toggleExpanded"
+      style="cursor: pointer"
+      v-ripple
+    >
       <v-icon start>mdi-message</v-icon>
       Minhas conversas
       <v-spacer></v-spacer>
@@ -9,7 +14,7 @@
         icon
         :disabled="loading"
         variant="tonal"
-        @click="expanded = !expanded"
+        @click.stop="toggleExpanded"
         :style="{ transform: expanded ? 'rotate(180deg)' : '' }"
       >
         <v-icon>mdi-chevron-down</v-icon>
@@ -97,6 +102,10 @@ export default {
   }),
 
   methods: {
+    toggleExpanded() {
+      if (this.loading) return;
+      this.expanded = !this.expanded;
+    },
     formatTimestamp(timestamp) {
       if (!timestamp) return "";
       return new Date(timestamp).toLocaleString();

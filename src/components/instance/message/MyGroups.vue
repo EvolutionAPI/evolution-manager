@@ -1,6 +1,11 @@
 <template>
   <v-card variant="outlined" :loading="loading">
-    <v-card-title class="d-flex align-center">
+    <v-card-title
+      class="d-flex align-center"
+      @click="toggleExpanded"
+      style="cursor: pointer"
+      v-ripple
+    >
       <v-icon start>mdi-account-group</v-icon>
       Meus Grupos
       <v-spacer></v-spacer>
@@ -9,7 +14,7 @@
         icon
         :disabled="loading"
         variant="tonal"
-        @click="expanded = !expanded"
+        @click.stop="toggleExpanded"
         :style="{ transform: expanded ? 'rotate(180deg)' : '' }"
       >
         <v-icon>mdi-chevron-down</v-icon>
@@ -70,7 +75,6 @@
         <template v-slot:item.creation="{ item }">
           {{ formatTimestamp(item.creation * 1000) }}
         </template>
-
       </v-data-table>
     </v-card-text>
   </v-card>
@@ -97,6 +101,10 @@ export default {
   }),
 
   methods: {
+    toggleExpanded() {
+      if (this.loading) return;
+      this.expanded = !this.expanded;
+    },
     formatTimestamp(timestamp) {
       if (!timestamp) return "";
       return new Date(timestamp).toLocaleString();

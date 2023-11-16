@@ -1,6 +1,11 @@
 <template>
   <v-card variant="outlined" :loading="loading">
-    <v-card-title class="d-flex align-center">
+    <v-card-title
+      class="d-flex align-center"
+      @click="toggleExpanded"
+      style="cursor: pointer"
+      v-ripple
+    >
       <v-icon start>mdi-account-question</v-icon>
       Tem Whatsapp?
       <v-spacer></v-spacer>
@@ -9,7 +14,7 @@
         icon
         :disabled="loading"
         variant="tonal"
-        @click="expanded = !expanded"
+        @click.stop="toggleExpanded"
         :style="{ transform: expanded ? 'rotate(180deg)' : '' }"
       >
         <v-icon>mdi-chevron-down</v-icon>
@@ -39,7 +44,7 @@
 
         <v-chip v-if="response.exists" text-color="white" class="ml-2">
           <b>{{ (response.jid || "").split("@")[0] }}</b>
-        </v-chip> 
+        </v-chip>
       </v-alert>
     </v-card-text>
     <v-card-actions v-if="expanded">
@@ -76,6 +81,10 @@ export default {
   }),
 
   methods: {
+    toggleExpanded() {
+      if (this.loading) return;
+      this.expanded = !this.expanded;
+    },
     formatPhone(phone) {
       return phone.replace(/[^0-9]/g, "");
     },
@@ -93,7 +102,7 @@ export default {
           [phone]
         );
 
-        this.response = response[0]
+        this.response = response[0];
       } catch (err) {
         this.error = err.message;
       } finally {

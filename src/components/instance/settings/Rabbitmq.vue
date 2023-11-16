@@ -1,6 +1,6 @@
 <template>
   <v-card variant="outlined" :loading="loading">
-    <v-card-title class="d-flex align-center">
+    <v-card-title class="d-flex align-center" @click="toggleExpanded" style="cursor: pointer" v-ripple>
       <v-icon start>mdi-rabbit</v-icon>
       RabbitMQ
 
@@ -10,7 +10,7 @@
         icon
         :disabled="loading"
         variant="tonal"
-        @click="expanded = !expanded"
+        @click.stop="toggleExpanded"
         :style="{ transform: expanded ? 'rotate(180deg)' : '' }"
       >
         <v-icon>mdi-chevron-down</v-icon>
@@ -116,6 +116,10 @@ export default {
   }),
 
   methods: {
+    toggleExpanded() {
+      if (this.loading) return;
+      this.expanded = !this.expanded;
+    },
     async saveRabbitmq() {
       try {
         this.loading = true;
