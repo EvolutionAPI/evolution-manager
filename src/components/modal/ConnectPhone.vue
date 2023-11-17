@@ -25,6 +25,19 @@
             <v-icon v-else-if="error" size="x-large">mdi-qrcode-remove</v-icon>
           </v-card-text>
         </v-card>
+        <v-btn
+          text
+          size="small"
+          block
+          @click="loadQr"
+          :loading="loading"
+          :disabled="disabledRefresh"
+          variant="tonal"
+          class="mt-2"
+        >
+          <v-icon start size="small">mdi-refresh</v-icon>
+          Atualizar
+        </v-btn>
 
         <v-alert type="error" v-if="error" class="mt-2">
           {{ Array.isArray(error) ? error.join(", ") : error }}
@@ -54,6 +67,7 @@ export default {
     success: false,
 
     timeout: null,
+    disabledRefresh: false,
 
     AppStore: useAppStore(),
   }),
@@ -62,6 +76,7 @@ export default {
       try {
         this.loading = true;
         this.error = false;
+        clearTimeout(this.timeout);
 
         const response = await instanceController.connect(
           this.instance.instance.instanceName
@@ -72,9 +87,14 @@ export default {
           this.dialog = false;
           this.AppStore.reconnect();
           return;
-        } else throw new Error("Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente.");
+        } else
+          throw new Error(
+            "Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente."
+          );
 
         this.timeout = setTimeout(this.loadQr, 40000);
+        this.disabledRefresh = true;
+        setTimeout(() => (this.disabledRefresh = false), 5000);
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {

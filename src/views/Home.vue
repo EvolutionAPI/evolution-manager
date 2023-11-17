@@ -171,7 +171,6 @@ export default {
   watch: {},
   computed: {
     loading() {
-      debugger;
       return this.loadingInner || this.AppStore.connecting;
     },
 

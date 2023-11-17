@@ -45,6 +45,12 @@
             value: 'creation',
             align: 'center',
           },
+          {
+            title: '',
+            value: 'action',
+            align: 'center',
+            sortable: false,
+          },
         ]"
         :items="groups"
         :no-data-text="loading ? '' : 'Nenhum grupo encontrado'"
@@ -75,13 +81,22 @@
         <template v-slot:item.creation="{ item }">
           {{ formatTimestamp(item.creation * 1000) }}
         </template>
-      </v-data-table>
+        <!-- eslint-disable-next-line vue/valid-v-slot -->
+        <template v-slot:item.action="{ item }">
+          <v-btn icon size="x-small" @click="openModal(item)">
+            <v-icon>mdi-eye</v-icon>
+          </v-btn>
+        </template>
+          </v-data-table>
     </v-card-text>
   </v-card>
+  <group-modal ref="group" :instance="instance" />
 </template>
 
 <script>
 import instanceController from "@/services/instanceController";
+import GroupModal from "../../modal/GroupModal.vue";
+
 
 export default {
   name: "MyGroups",
@@ -139,6 +154,9 @@ export default {
         this.loading = false;
       }
     },
+    openModal(group) {
+      this.$refs.group.open(group);
+    },
   },
 
   watch: {
@@ -148,6 +166,7 @@ export default {
       },
     },
   },
+  components: { GroupModal },
 };
 </script>
 
