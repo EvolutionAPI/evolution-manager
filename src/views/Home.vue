@@ -26,11 +26,7 @@
 
     <v-row dense>
       <v-col cols="12" v-if="instances.length === 0 || loading">
-        <v-progress-linear
-          v-if="loading"
-          indeterminate
-        color="info"
-        ></v-progress-linear>
+        <v-progress-linear v-if="loading" indeterminate color="info" />
         <v-alert type="info" class="mb-4" v-else :loading="loading" outlined>
           {{ loading ? "Carregando..." : "Nenhuma instância encontrada" }}
         </v-alert>
@@ -122,7 +118,7 @@ export default {
   },
   data: () => ({
     AppStore: useAppStore(),
-    loading: false,
+    loadingInner: false,
     loadingDelete: false,
     error: false,
     statusMapper: statusMapper,
@@ -163,17 +159,22 @@ export default {
     },
     async getInstances() {
       try {
-        this.loading = true;
+        this.loadingInner = true;
         this.instances = await this.AppStore.reconnect();
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
-        this.loading = false;
+        this.loadingInner = false;
       }
     },
   },
   watch: {},
   computed: {
+    loading() {
+      debugger;
+      return this.loadingInner || this.AppStore.connecting;
+    },
+
     instances() {
       return this.AppStore.instances;
     },
