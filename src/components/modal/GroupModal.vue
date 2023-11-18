@@ -34,7 +34,7 @@
             </div>
           </v-card>
 
-          <div class="d-flex justify-space-between mt-4">
+          <div class="d-flex flex-wrap justify-space-between mt-4">
             <h4>
               Participantes
               <v-chip color="info" size="small">
@@ -42,17 +42,39 @@
               </v-chip>
             </h4>
 
-            <div v-if="isAdmin">
-              <v-btn
-                @click="removeParticipants"
-                :loading="deletingInstance"
-                :disabled="selected.length === 0 || btnLoading"
-                color="error"
-                text
-                size="x-small"
-              >
-                Remover
-              </v-btn>
+            <div
+              v-if="isAdmin"
+              class="flex-grow-1 d-flex justify-end align-center gap-x-1"
+            >
+              <v-tooltip text="Remover participantes" location="top">
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    v-bind="props"
+                    @click="removeParticipants"
+                    :loading="deletingInstance"
+                    :disabled="selected.length === 0 || btnLoading"
+                    color="error"
+                    text
+                    size="small"
+                  >
+                    <v-icon size="large"> mdi-account-multiple-remove </v-icon>
+                  </v-btn>
+                </template>
+              </v-tooltip>
+              <v-tooltip text="Adicionar participantes" location="top">
+                <template v-slot:activator="{ props }">
+                  <v-btn
+                    v-bind="props"
+                    @click="addParticipant"
+                    :disabled="btnLoading"
+                    color="primary"
+                    text
+                    size="small"
+                  >
+                    <v-icon size="large"> mdi-account-multiple-plus </v-icon>
+                  </v-btn>
+                </template>
+              </v-tooltip>
             </div>
           </div>
 
@@ -77,7 +99,7 @@
             item-value="id"
             :show-select="isAdmin"
             v-model="selected"
-            >
+          >
             <!-- eslint-disable-next-line vue/valid-v-slot -->
             <template v-slot:item.id="{ item }">
               {{ item.id.split("@")[0] }}
@@ -111,11 +133,21 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
+  <GroupAddParticipantModal
+    ref="addParticipant"
+    :instance="instance"
+    :group="group"
+    @success="loadFullInfo(group.id)"
+  />
 </template>
 
 <script>
 import instanceController from "@/services/instanceController";
+import GroupAddParticipantModal from "./GroupAddParticipantModal.vue";
 export default {
+  components: {
+    GroupAddParticipantModal,
+  },
   name: "SettingsModal",
   data: () => ({
     dialog: false,
@@ -132,20 +164,22 @@ export default {
       if (!timestamp) return "";
       return new Date(timestamp).toLocaleString();
     },
+    addParticipant() {
+      this.$refs.addParticipant.open();
+    },
     async removeParticipants() {
       try {
         this.deletingInstance = true;
         this.error = false;
 
         const isExit = this.selected.includes(this.instance.instance.owner);
-        
+
         if (isExit) {
           const confirm = await window.confirm(
             "Você está prestes a sair do grupo, deseja continuar?"
           );
           if (!confirm) return;
         }
-
 
         await instanceController.group.updateParticipant(
           this.instance.instance.instanceName,
