@@ -26,8 +26,21 @@ const hasWhatsapp = async (instanceName, numbers) => {
       throw error.response?.data || error.response || error;
     });
 }
+const getContacts = async (instanceName, numbers) => {
+  return await http
+    .post("/chat/findContacts/:instance", { numbers }, {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+}
 
 export default {
   getAll: getAll,
-  hasWhatsapp: hasWhatsapp
+  hasWhatsapp: hasWhatsapp,
+  getContacts: getContacts
 }

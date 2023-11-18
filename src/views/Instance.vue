@@ -45,7 +45,6 @@ export default {
     },
   },
   computed: {
-   
     instance() {
       return this.AppStore.getInstance(this.$route.params.id);
     },

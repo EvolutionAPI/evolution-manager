@@ -30,6 +30,7 @@ import Typebot from "./settings/Typebot.vue";
 
 import MyGroups from "./message/MyGroups.vue";
 import MyChats from "./message/MyChats.vue";
+import MyContacts from "./message/MyContacts.vue";
 import HasWhatsapp from "./message/HasWhatsapp.vue";
 export default {
   components: {
@@ -42,6 +43,7 @@ export default {
     MyGroups,
     MyChats,
     HasWhatsapp,
+    MyContacts,
   },
   data: () => ({
     tab: "settings",
@@ -50,13 +52,20 @@ export default {
         id: "settings",
         icon: "mdi-cog",
         title: "Configurações",
-        components: ["Options","Webhook", "Websocket", "Rabbitmq", "Chatwoot", "Typebot"],
+        components: [
+          "Options",
+          "Webhook",
+          "Websocket",
+          "Rabbitmq",
+          "Chatwoot",
+          "Typebot",
+        ],
       },
       {
         id: "message",
         icon: "mdi-message",
         title: "Mensagens",
-        components: ["HasWhatsapp","MyGroups", "MyChats"],
+        components: ["HasWhatsapp", "MyContacts", "MyGroups", "MyChats"],
       },
     ],
   }),
