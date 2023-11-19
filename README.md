@@ -62,6 +62,12 @@ yarn build
 
 This will create a `dist` folder with the compiled assets.
 
+## Evolution-Manager CLI - Documentation
+
+For detailed information on how to use the Evolution-Manager CLI, please refer to the documentation available at the following links:
+
+- [Documentation in English](https://github.com/gabrielpastori1/evolution-manager/blob/main/docs/en/cli.md)
+
 ## Self-Hosted - Evolution Manager CLI and PM2
 
 ### Straight to the Point: Quick Setup with PM2

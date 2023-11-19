@@ -52,6 +52,12 @@ yarn build
 
 Isso criará uma pasta `dist` com os ativos compilados.
 
+## Evolution-Manager CLI - Documentação
+
+Para informações detalhadas sobre como usar o Evolution-Manager CLI, consulte a documentação disponível nos seguintes links:
+
+- [Documentação em Português](https://github.com/gabrielpastori1/evolution-manager/blob/main/docs/pt_br/cli.md)
+
 ## Auto-Hospedagem - CLI e PM2 do Evolution Manager
 
 ### Direto ao Ponto: Configuração Rápida com PM2
