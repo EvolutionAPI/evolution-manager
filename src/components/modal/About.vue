@@ -15,21 +15,26 @@
             <a
               href="https://github.com/EvolutionAPI/evolution-api/"
               target="_blank"
-              >Evolution API</a
+            >
+              Evolution API </a
             >, facilita a gestão de suas APIs com uma interface intuitiva. Ele
             foi criado por desenvolvedores independentes, focando em melhorar a
             experiência do usuário e a administração das funcionalidades da API.
           </p>
-
-          <v-btn
-            href="https://github.com/gabrielpastori1/evolution-manager"
-            target="_blank"
-            class="mt-5"
-            color="grey darken-3"
-          >
-            <v-icon start>mdi-github</v-icon>
-            Repositório no GitHub
-          </v-btn>
+          <div class="d-flex gap-x-2 gap-y-1 align-center justify-center mt-5">
+            <v-btn
+              href="https://github.com/gabrielpastori1/evolution-manager"
+              target="_blank"
+              color="grey darken-3"
+            >
+              <v-icon start>mdi-github</v-icon>
+              Repositório no GitHub
+            </v-btn>
+            <v-btn @click="contribute" color="grey darken-3">
+              <v-icon start>mdi-hand-coin</v-icon>
+              Contribua com o projeto
+            </v-btn>
+          </div>
 
           <h3 class="mt-5 mb-2">Processamento de Dados</h3>
           <p>
@@ -60,9 +65,12 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
+  <contribute ref="contribute" />
 </template>
 
 <script>
+import Contribute from "./Contribute.vue";
+
 export default {
   name: "SettingsModal",
   data: () => ({
@@ -70,9 +78,13 @@ export default {
     isHttps: window.location.protocol === "https:",
   }),
   methods: {
+    contribute() {
+      this.$refs.contribute.open();
+    },
     open() {
       this.dialog = true;
     },
   },
+  components: { Contribute },
 };
 </script>
