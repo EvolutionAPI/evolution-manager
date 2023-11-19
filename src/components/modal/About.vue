@@ -21,7 +21,9 @@
             foi criado por desenvolvedores independentes, focando em melhorar a
             experiência do usuário e a administração das funcionalidades da API.
           </p>
-          <div class="d-flex gap-x-2 gap-y-1 align-center justify-center mt-5">
+          <div
+            class="d-flex gap-x-2 gap-y-1 align-center justify-center mt-5 flex-wrap"
+          >
             <v-btn
               href="https://github.com/gabrielpastori1/evolution-manager"
               target="_blank"
