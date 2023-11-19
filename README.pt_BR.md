@@ -115,9 +115,9 @@ As contribuições são uma parte essencial do projeto Evolution Manager. Seja c
 
 ### Fazendo uma Doação
 
-Se desejar apoiar o projeto financeiramente, disponibilizamos um QR code para doações via Pix. Basta escanear o QR code abaixo com seu aplicativo Pix para fazer uma contribuição. Sua generosidade ajuda na manutenção e evolução desta ferramenta de código aberto.
+Se desejar apoiar o projeto financeiramente, disponibilizamos um QR code para doações via Pix. Sua generosidade ajuda na manutenção e evolução desta ferramenta de código aberto.
 
-![QR Code para Doação Pix](https://github.com/gabrielpastori1/evolution-manager/blob/main/src/assets/pix.svg)
+<img src="https://github.com/gabrielpastori1/evolution-manager/blob/main/src/assets/pix.svg" width="100" alt="QR Code para Doação Pix">
 
 ### Contribuindo com Código ou Ideias
 
