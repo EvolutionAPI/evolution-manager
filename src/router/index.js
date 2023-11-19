@@ -1,9 +1,12 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
+// import from base from vite compiler
+const BASE_URL = import.meta.env.BASE_URL
+
 
 const routes = [
   {
-    path: '/',
+    path: BASE_URL,
     component: () => import('@/layouts/default/Default.vue'),
     children: [
       {

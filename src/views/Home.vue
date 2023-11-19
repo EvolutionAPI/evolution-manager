@@ -138,7 +138,10 @@ export default {
       this.$refs.createInstanceModal.open();
     },
     goToInstance(instance) {
-      this.$router.push(`/${instance.instanceName}`);
+      this.$router.push({
+        name: "instance",
+        params: { id: instance.instanceName },
+      });
     },
     async deleteInstance(instanceName) {
       try {
