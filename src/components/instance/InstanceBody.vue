@@ -28,6 +28,7 @@ import Rabbitmq from "./settings/Rabbitmq.vue";
 import Chatwoot from "./settings/Chatwoot.vue";
 import Typebot from "./settings/Typebot.vue";
 
+import OpenSendMessage from "./message/OpenSendMessage.vue";
 import MyGroups from "./message/MyGroups.vue";
 import MyChats from "./message/MyChats.vue";
 import MyContacts from "./message/MyContacts.vue";
@@ -40,6 +41,7 @@ export default {
     Rabbitmq,
     Chatwoot,
     Typebot,
+    OpenSendMessage,
     MyGroups,
     MyChats,
     HasWhatsapp,
@@ -65,7 +67,13 @@ export default {
         id: "message",
         icon: "mdi-message",
         title: "Mensagens",
-        components: ["HasWhatsapp", "MyContacts", "MyGroups", "MyChats"],
+        components: [
+          "OpenSendMessage",
+          "HasWhatsapp",
+          "MyContacts",
+          "MyGroups",
+          "MyChats",
+        ],
       },
     ],
   }),

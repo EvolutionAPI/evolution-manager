@@ -63,7 +63,12 @@
               <v-icon v-else size="40">mdi-account-circle</v-icon>
             </v-avatar>
             <b>{{ item.pushName }}</b>
-            <v-chip v-if="item.id === instance.instance.owner" size="x-small" label color="success">
+            <v-chip
+              v-if="item.id === instance.instance.owner"
+              size="x-small"
+              label
+              color="success"
+            >
               Instância
             </v-chip>
           </div>

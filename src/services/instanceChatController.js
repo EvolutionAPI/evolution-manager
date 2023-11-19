@@ -39,8 +39,23 @@ const getContacts = async (instanceName, numbers) => {
     });
 }
 
+const sendMessage = async (instanceName, options) => {
+  return await http
+    .post("/message/sendText/:instance", options, {
+      params: {
+        instance: instanceName
+      }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error;
+    });
+
+}
+
 export default {
   getAll: getAll,
   hasWhatsapp: hasWhatsapp,
-  getContacts: getContacts
+  getContacts: getContacts,
+  sendMessage: sendMessage
 }
