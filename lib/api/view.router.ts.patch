@@ -8,8 +8,9 @@ import { RouterBroker } from '../abstract/abstract.router';
 export class ViewsRouter extends RouterBroker {
   constructor() {
     super();
-
-    const index = fs.readFileSync(path.join(__dirname, '../../../', 'Extras/evolution-manager', 'index.html'));
+    const baseDir = __dirname.includes('dist') ? '../../../../' : '../../../';
+    const indexPath = path.join(__dirname, baseDir, 'Extras/evolution-manager', 'index.html');
+    const index = fs.readFileSync(indexPath);
 
     this.router.get('/*', (req, res) => {
       try {
@@ -17,7 +18,7 @@ export class ViewsRouter extends RouterBroker {
 
         // verify if url is a file in dist folder
         if (pathname === '/') throw {};
-        const filePath = path.join(__dirname, '../../../', 'Extras/evolution-manager', pathname);
+        const filePath = path.join(__dirname, baseDir, 'Extras/evolution-manager', pathname);
 
         if (fs.existsSync(filePath)) {
           const contentType = mime.lookup(filePath) || 'text/plain';
