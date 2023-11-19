@@ -5,7 +5,9 @@
       <v-card-text>
         <v-form v-model="valid">
           <v-autocomplete
-            v-model="message.number"
+            v-model="numbers"
+            multiple
+            chips
             label="Para"
             :loading="loadingContacts"
             :items="contacts"
@@ -19,24 +21,24 @@
               ></v-list-item>
               <v-list-item v-else title="Sem contatos"></v-list-item>
             </template>
-            <template v-slot:selection="{ item }">
-              <div class="d-flex gap-1 align-center">
-                <v-avatar size="30">
+            <template v-slot:chip="{ item }">
+              <v-chip class="d-flex gap-1 align-center">
+                <v-avatar size="20">
                   <v-img
-                    height="30"
-                    width="30"
+                    height="20"
+                    width="20"
                     v-if="item?.raw?.photo"
                     :src="item?.raw?.photo"
                   />
-                  <v-icon size="30" v-else>
+                  <v-icon size="20" v-else>
                     mdi-{{ item?.raw?.isGroup ? "account-group" : "account" }}
                   </v-icon>
                 </v-avatar>
-                
-                <span>
+
+                <span class="ml-2">
                   {{ item.raw.title }}
                 </span>
-              </div>
+              </v-chip>
             </template>
             <template v-slot:item="{ props, item }">
               <v-list-item v-bind="props" :title="null">
@@ -109,7 +111,8 @@
         </v-form>
 
         <v-alert type="success" v-if="success">
-          {{ success.message }} <b>{{ success.messageId }}</b>
+          <p>{{ success.message }}</p>
+          <b>{{ success.messageId }}</b>
         </v-alert>
         <v-alert type="error" v-if="error">
           {{ Array.isArray(error) ? error.join(", ") : error }}
@@ -161,6 +164,7 @@ export default {
     loadingContacts: false,
     error: false,
     contacts: [],
+    numbers: [],
     search: "",
     success: false,
     AppStore: useAppStore(),
@@ -173,16 +177,27 @@ export default {
         this.success = false;
         this.error = false;
 
-        const response = await instanceController.chat.sendMessage(
-          this.instance.instance.instanceName,
-          this.message
-        );
+        var messagesId = [];
+        for (const number of this.numbers) {
+          const r = await instanceController.chat.sendMessage(
+            this.instance.instance.instanceName,
+            {
+              ...this.message,
+              number,
+            }
+          );
+
+          if (r.key?.id) messagesId.push(r.key?.id);
+        }
 
         this.success = {
-          messageId: response.key.id,
-          message: "Mensagem enviada com sucesso",
+          messageId: messagesId.join(", "),
+          message: `Mensage${
+            this.numbers.length != 1 ? "ns" : "m"
+          } enviada com sucesso`,
         };
         this.message = defaultMessage();
+        this.numbers = [];
         setTimeout(() => {
           this.success = false;
         }, 10000);
