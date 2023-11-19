@@ -27,12 +27,12 @@
             <v-btn
               href="https://github.com/gabrielpastori1/evolution-manager"
               target="_blank"
-              color="grey darken-3"
+              color="grey-darken-3"
             >
               <v-icon start>mdi-github</v-icon>
               Repositório no GitHub
             </v-btn>
-            <v-btn @click="contribute" color="grey darken-3">
+            <v-btn @click="contribute" color="light-blue">
               <v-icon start>mdi-hand-coin</v-icon>
               Contribua com o projeto
             </v-btn>

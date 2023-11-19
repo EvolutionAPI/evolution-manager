@@ -31,35 +31,42 @@
         </v-alert>
       </v-card-text>
       <v-card-actions>
-        <v-btn size="small" text @click="showAbout"> Sobre esse Manager </v-btn>
-
-        <v-spacer></v-spacer>
-        <v-btn
-          v-if="!!AppStore.connection.host"
-          icon
-          size="small"
-          @click="logout"
-          :disabled="loading"
-        >
-          <v-icon>mdi-logout</v-icon>
-        </v-btn>
-        <v-btn
-          v-if="AppStore.validConnection"
-          text
-          @click="dialog = false"
-          :disabled="loading"
-        >
-          Cancel
-        </v-btn>
-        <v-btn
-          color="success"
-          variant="tonal"
-          @click="save()"
-          :disabled="!valid"
-          :loading="loading"
-        >
-          Conectar
-        </v-btn>
+        <div class="d-flex flex-wrap justify-space-between w-100 align-center">
+          <v-btn size="small" text @click="showAbout">
+            Sobre esse Manager
+          </v-btn>
+          <div class="d-flex justify-end flex-grow-1 gap-1">
+            <v-btn
+              v-if="!!AppStore.connection.host"
+              icon
+              class="ml-0"
+              size="small"
+              @click="logout"
+              :disabled="loading"
+            >
+              <v-icon>mdi-logout</v-icon>
+            </v-btn>
+            <v-btn
+              v-if="AppStore.validConnection"
+              class="ml-0"
+              text
+              @click="dialog = false"
+              :disabled="loading"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              color="success"
+              class="ml-0"
+              variant="tonal"
+              @click="save()"
+              :disabled="!valid"
+              :loading="loading"
+            >
+              Conectar
+            </v-btn>
+          </div>
+        </div>
       </v-card-actions>
     </v-card>
 
