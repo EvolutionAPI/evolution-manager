@@ -123,6 +123,9 @@
         :disabled="loading"
         hide-details
       ></v-switch>
+      <v-btn variant="text" @click="chatwootConfig">
+        Como configurar o chatwoot?
+      </v-btn>
       <v-spacer></v-spacer>
       <v-btn
         :disabled="
@@ -138,9 +141,11 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+  <chatwoot-config :instance="instance" ref="chatwootConfig" />
 </template>
 
 <script>
+import ChatwootConfig from "@/components/modal/ChatwootConfig.vue";
 import instanceController from "@/services/instanceController";
 
 export default {
@@ -175,11 +180,13 @@ export default {
       conversation_pending: false,
     },
   }),
-
   methods: {
     toggleExpanded() {
       if (this.loading) return;
       this.expanded = !this.expanded;
+    },
+    chatwootConfig() {
+      this.$refs.chatwootConfig.open();
     },
     async saveChatwoot() {
       try {
@@ -199,7 +206,6 @@ export default {
         this.loading = false;
       }
     },
-
     async loadChatwoot() {
       try {
         this.loading = true;
@@ -207,7 +213,6 @@ export default {
         const chatwootData = await instanceController.chatwoot.get(
           this.instance.instance.instanceName
         );
-
         this.chatwootData = Object.assign({}, chatwootData || {});
         this.defaultChatwootData = Object.assign({}, chatwootData || {});
       } catch (e) {
@@ -217,12 +222,12 @@ export default {
       }
     },
   },
-
   watch: {
     expanded(expanded) {
       if (expanded) this.loadChatwoot();
     },
   },
+  components: { ChatwootConfig },
 };
 </script>
 
