@@ -3,7 +3,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 // import from base from vite compiler
 const BASE_URL = import.meta.env.BASE_URL
 
-
 const routes = [
   {
     path: BASE_URL,
@@ -21,6 +20,10 @@ const routes = [
       }
 
     ],
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: BASE_URL,
   },
 ]
 

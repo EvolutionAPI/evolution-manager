@@ -1,22 +1,26 @@
 <template>
   <v-footer absolute app class="pt-10">
     <div class="d-flex flex-grow-1 flex-wrap gap-y-1 align-end">
-      <div class="flex-shrink-0">
-        <p style="font-size: 12px;">
-          Criado por
-          <a href="https://github.com/gabrielpastori1" target="_blank">
-            Gabriel Pastori
-          </a>
-        </p>
+      <div class="flex-shrink-0 d-flex gap-2 align-center">
         <v-btn
-          @click="contribute"
+        @click="about"
+        variant="tonal"
+          size="small"
+          color="blue"
+          >
+          <v-icon start> mdi-information </v-icon>
+          Sobre
+        </v-btn>
+        <v-btn
+        @click="contribute"
           variant="tonal"
           size="small"
-          color="light-blue-lighten-2"
+          color="light-blue-lighten-1"
         >
           <v-icon start>mdi-hand-coin</v-icon>
           Contribua com o projeto
         </v-btn>
+        <p style="font-size: 12px" class="text-disabled">v{{ version }}</p>
       </div>
       <v-spacer />
       <div class="d-flex gap-x-1">
@@ -37,14 +41,18 @@
     </div>
   </v-footer>
   <Contribute ref="contribute" />
+  <About ref="about" />
 </template>
 
 <script>
+import About from "@/components/modal/About.vue";
 import Contribute from "@/components/modal/Contribute.vue";
+import { version } from "../../../package.json";
 
 export default {
   name: "AppFooter",
   data: () => ({
+    version,
     links: [
       {
         title: "Discord",
@@ -60,17 +68,22 @@ export default {
         url: "https://github.com/EvolutionAPI/evolution-api",
       },
       {
+        title: "Doc",
         icon: "mdi-book-open-page-variant",
         url: "https://doc.evolution-api.com/help-center",
       },
     ],
   }),
   methods: {
+    
+    about() {
+      this.$refs.about.open();
+    },
     contribute() {
       this.$refs.contribute.open();
     },
   },
-  components: { Contribute },
+  components: { Contribute, About },
 };
 </script>
 

@@ -16,7 +16,7 @@
               href="https://github.com/EvolutionAPI/evolution-api/"
               target="_blank"
             >
-              Evolution API </a
+              Evolution API</a
             >, facilita a gestão de suas APIs com uma interface intuitiva. Ele
             foi criado por desenvolvedores independentes, focando em melhorar a
             experiência do usuário e a administração das funcionalidades da API.
@@ -58,11 +58,13 @@
             Manager em relação à Evolution API significa que alterações na API
             podem afetar a funcionalidade do Manager.
           </p>
+
+          <span class="mt-5 mb-2 text-disabled">Versão: {{ version }}</span>
         </div>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false" :disabled="loading"> Fechar </v-btn>
+        <v-btn text @click="dialog = false" block :disabled="loading"> Fechar </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
@@ -72,11 +74,12 @@
 
 <script>
 import Contribute from "./Contribute.vue";
-
+import { version } from "../../../package.json";
 export default {
   name: "SettingsModal",
   data: () => ({
     dialog: false,
+    version,
     isHttps: window.location.protocol === "https:",
   }),
   methods: {
