@@ -55,13 +55,17 @@
         <p><b>Passo 5:</b> Pronto! Agora você pode receber mensagens.</p>
         <v-img src="@/assets/chatwoot/chatwoot_api_3.png" />
 
-<!-- Add link to chatwoot doc -->
+        <!-- Add link to chatwoot doc -->
         <!-- https://www.chatwoot.com/docs/product/channels/api/create-channel -->
-        <v-btn size="small" variant="text" block href="https://www.chatwoot.com/docs/product/channels/api/create-channel" target="_blank">
+        <v-btn
+          size="small"
+          variant="text"
+          block
+          href="https://www.chatwoot.com/docs/product/channels/api/create-channel"
+          target="_blank"
+        >
           Ver documentação completa
         </v-btn>
-        
-
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>

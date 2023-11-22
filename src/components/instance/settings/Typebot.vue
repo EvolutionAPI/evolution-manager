@@ -183,6 +183,17 @@
 
 <script>
 import instanceController from "@/services/instanceController";
+const defaultObj = () => ({
+  enabled: false,
+  expire: 0,
+  delay_message: 0,
+  listening_from_me: false,
+  sessions: [],
+  typebot: "",
+  url: "",
+  keyword_finish: "",
+  unknown_message: "",
+});
 
 export default {
   name: "InstanceTypebot",
@@ -237,9 +248,10 @@ export default {
             url: this.typebotData.url.trim().replace(/\/$/, ""),
             delay_message: parseInt(this.typebotData.delay_message),
             expire: parseInt(this.typebotData.expire),
+            listening_from_me: !!this.typebotData.listening_from_me,
           }
         );
-        this.defaultTypebotData = Object.assign({}, this.typebotData);
+        this.defaultTypebotData = Object.assign(defaultObj(), this.typebotData);
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
@@ -255,8 +267,8 @@ export default {
           this.instance.instance.instanceName
         );
 
-        this.typebotData = Object.assign({}, typebotData);
-        this.defaultTypebotData = Object.assign({}, typebotData);
+        this.typebotData = Object.assign(defaultObj(), typebotData);
+        this.defaultTypebotData = Object.assign(defaultObj(), typebotData);
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {

@@ -148,6 +148,17 @@
 import ChatwootConfig from "@/components/modal/ChatwootConfig.vue";
 import instanceController from "@/services/instanceController";
 
+
+const defaultObj = () => ({
+  enabled: false,
+  url: "",
+  account_id: "",
+  token: "",
+  sign_msg: true,
+  reopen_conversation: true,
+  conversation_pending: false,
+});
+
 export default {
   name: "InstanceChatwoot",
   props: {
@@ -213,8 +224,8 @@ export default {
         const chatwootData = await instanceController.chatwoot.get(
           this.instance.instance.instanceName
         );
-        this.chatwootData = Object.assign({}, chatwootData || {});
-        this.defaultChatwootData = Object.assign({}, chatwootData || {});
+        this.chatwootData = Object.assign(defaultObj(), chatwootData || {});
+        this.defaultChatwootData = Object.assign(defaultObj(), chatwootData || {});
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
