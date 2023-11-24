@@ -1,0 +1,6 @@
+version: '3'
+services:
+  evolution-manager:
+    image: "gabrielpastori1/evolution-manager:latest"
+    ports:
+      - "9615:9615"

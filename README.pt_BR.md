@@ -18,45 +18,19 @@ O Evolution Manager é uma ferramenta de gerenciamento open-source para a Evolut
 
 - O projeto é desenvolvido usando Vue.js v3 e Vuetify.
 
-## Configuração para Desenvolvimento
-
-1. **Pré-requisitos**: Certifique-se de ter o `yarn` instalado no seu sistema.
-2. **Clonar o Repositório**:
-
-   ```bash
-   git clone https://github.com/gabrielpastori1/evolution-manager.git
-   cd evolution-manager
-   ```
-
-3. **Instalar Dependências**:
-
-   ```bash
-   yarn install
-   ```
-
-4. **Executar o Servidor de Desenvolvimento**:
-
-   ```bash
-   yarn dev
-   ```
-
-   Isso iniciará um servidor de desenvolvimento local. Você pode acessar o aplicativo em `localhost:8080`.
-
-## Construção do Projeto
-
-Para construir o projeto para produção, execute:
-
-```bash
-yarn build
-```
-
-Isso criará uma pasta `dist` com os ativos compilados.
-
 ## Evolution-Manager CLI - Documentação
 
 Para informações detalhadas sobre como usar o Evolution-Manager CLI, consulte a documentação disponível nos seguintes links:
 
-- [Documentação em Português](https://github.com/gabrielpastori1/evolution-manager/blob/main/docs/pt_br/cli.md)
+🔗 Documentação completa: [Documentação em Português](https://github.com/gabrielpastori1/evolution-manager/blob/main/docs/pt_br/cli.md)
+
+## Imagem Docker - Documentação
+
+Para obter informações detalhadas sobre como usar a imagem Docker, incluindo configurações e exemplos, acesse a nossa documentação completa. Você encontrará instruções passo a passo, bem como dicas úteis para maximizar o uso da imagem Docker do Evolution Manager.
+
+🔗 Documentação completa: [Documentação em Português](https://github.com/gabrielpastori1/evolution-manager/tree/main/docs/pt_br/docker.md)
+
+---
 
 ## Auto-Hospedagem - CLI e PM2 do Evolution Manager
 
@@ -114,6 +88,40 @@ Esses dois passos instalarão o CLI do Evolution Manager globalmente em seu sist
    - Em seguida, você pode iniciar, parar, reiniciar ou excluir o serviço usando os respectivos comandos `pm2` no CLI.
 
 Estas instruções fornecem um método simplificado para gerenciar o Evolution Manager em vários sistemas, utilizando o PM2 para um eficiente início de serviço
+
+## Configuração para Desenvolvimento
+
+1. **Pré-requisitos**: Certifique-se de ter o `yarn` instalado no seu sistema.
+2. **Clonar o Repositório**:
+
+   ```bash
+   git clone https://github.com/gabrielpastori1/evolution-manager.git
+   cd evolution-manager
+   ```
+
+3. **Instalar Dependências**:
+
+   ```bash
+   yarn install
+   ```
+
+4. **Executar o Servidor de Desenvolvimento**:
+
+   ```bash
+   yarn dev
+   ```
+
+   Isso iniciará um servidor de desenvolvimento local. Você pode acessar o aplicativo em `localhost:8080`.
+
+## Construção do Projeto
+
+Para construir o projeto para produção, execute:
+
+```bash
+yarn build
+```
+
+Isso criará uma pasta `dist` com os ativos compilados.
 
 ## Contribuindo
 

@@ -28,45 +28,17 @@ Se você é um desenvolvedor ou usuário brasileiro interessado no Evolution Man
 
 - The project is built using Vue.js v3 and Vuetify.
 
-## Development Setup
-
-1. **Prerequisites**: Ensure you have `yarn` installed on your system.
-2. **Clone the Repository**:
-
-   ```bash
-   git clone https://github.com/gabrielpastori1/evolution-manager.git
-   cd evolution-manager
-   ```
-
-3. **Install Dependencies**:
-
-   ```bash
-   yarn install
-   ```
-
-4. **Run Development Server**:
-
-   ```bash
-   yarn dev
-   ```
-
-   This will start a local development server. You can access the app at `localhost:8080`.
-
-## Building the Project
-
-To build the project for production, run:
-
-```bash
-yarn build
-```
-
-This will create a `dist` folder with the compiled assets.
-
 ## Evolution-Manager CLI - Documentation
 
 For detailed information on how to use the Evolution-Manager CLI, please refer to the documentation available at the following links:
 
-- [Documentation in English](https://github.com/gabrielpastori1/evolution-manager/blob/main/docs/en/cli.md)
+🔗 Full Documentation:  [Documentation in English](https://github.com/gabrielpastori1/evolution-manager/blob/main/docs/en/cli.md)
+
+## Docker Image - Documentation
+
+For detailed information on using the Docker image, including configurations and examples, please refer to our comprehensive documentation. You will find step-by-step instructions, as well as helpful tips to make the most of the Evolution Manager's Docker image.
+
+🔗 Full Documentation: [Documentation in English](https://github.com/gabrielpastori1/evolution-manager/tree/main/docs/en/docker.md)
 
 ## Self-Hosted - Evolution Manager CLI and PM2
 
@@ -124,6 +96,40 @@ These two steps will install the Evolution Manager CLI globally on your system a
    - Then, you can start, stop, restart, or delete the service using the respective `pm2` commands in the CLI.
 
 These instructions provide a streamlined method for managing Evolution Manager across various systems, utilizing PM2 for efficient service start-up, maintenance, and control.
+
+## Development Setup
+
+1. **Prerequisites**: Ensure you have `yarn` installed on your system.
+2. **Clone the Repository**:
+
+   ```bash
+   git clone https://github.com/gabrielpastori1/evolution-manager.git
+   cd evolution-manager
+   ```
+
+3. **Install Dependencies**:
+
+   ```bash
+   yarn install
+   ```
+
+4. **Run Development Server**:
+
+   ```bash
+   yarn dev
+   ```
+
+   This will start a local development server. You can access the app at `localhost:8080`.
+
+## Building the Project
+
+To build the project for production, run:
+
+```bash
+yarn build
+```
+
+This will create a `dist` folder with the compiled assets.
 
 ## Contributing
 
