@@ -24,9 +24,7 @@
       <v-icon>mdi-cog</v-icon>
     </v-btn>
     <v-btn @click="toggleTheme" icon>
-      <v-icon>mdi-{{
-        dark ? "white-balance-sunny" : "weather-night"
-      }}</v-icon>
+      <v-icon>mdi-{{ dark ? "white-balance-sunny" : "weather-night" }}</v-icon>
     </v-btn>
   </v-app-bar>
   <SettingsModal ref="settings" />
@@ -48,9 +46,9 @@ export default {
   },
   methods: {
     toggleTheme() {
-      this.theme.global.name = this.theme.global.current.dark
-        ? "light"
-        : "dark";
+      const theme = this.theme.global.current.dark ? "light" : "dark";
+      this.theme.global.name = theme;
+      localStorage.setItem("theme", theme);
     },
     openSettings() {
       this.$refs.settings.open();
