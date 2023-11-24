@@ -89,12 +89,12 @@
               class="mb-3"
               density="compact"
             >
-            <template v-slot:label>
-              <span>Assinar mensagens</span>
-              <HelpTooltip>
-                Adiciona o nome do atendente na primeira linha da mensagem
-              </HelpTooltip>
-            </template>
+              <template v-slot:label>
+                <span>Assinar mensagens</span>
+                <HelpTooltip>
+                  Adiciona o nome do atendente na primeira linha da mensagem
+                </HelpTooltip>
+              </template>
             </v-checkbox>
           </div>
           <div>
@@ -105,7 +105,15 @@
               hide-details
               class="mb-3"
               density="compact"
-            />
+            >
+              <template v-slot:label>
+                <span>Assinar mensagens</span>
+                <HelpTooltip>
+                  Reabre a conversa do cliente quando ele inicia uma nova
+                  conversa em vez de criar uma nova conversa
+                </HelpTooltip>
+              </template>
+            </v-checkbox>
           </div>
 
           <div>
@@ -116,7 +124,14 @@
               hide-details
               class="mb-3"
               density="compact"
-            />
+            >
+              <template v-slot:label>
+                <span>Iniciar conversas como pendente</span>
+                <HelpTooltip>
+                  Inicia a conversa como pendente ao invés de aberta
+                </HelpTooltip>
+              </template>
+            </v-checkbox>
           </div>
         </div>
       </v-form>
@@ -153,7 +168,6 @@
 <script>
 import ChatwootConfig from "@/components/modal/ChatwootConfig.vue";
 import instanceController from "@/services/instanceController";
-
 
 const defaultObj = () => ({
   enabled: false,
@@ -231,7 +245,10 @@ export default {
           this.instance.instance.instanceName
         );
         this.chatwootData = Object.assign(defaultObj(), chatwootData || {});
-        this.defaultChatwootData = Object.assign(defaultObj(), chatwootData || {});
+        this.defaultChatwootData = Object.assign(
+          defaultObj(),
+          chatwootData || {}
+        );
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
