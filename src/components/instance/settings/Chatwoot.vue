@@ -107,7 +107,7 @@
               density="compact"
             >
               <template v-slot:label>
-                <span>Assinar mensagens</span>
+                <span>Reabrir conversa</span>
                 <HelpTooltip>
                   Reabre a conversa do cliente quando ele inicia uma nova
                   conversa em vez de criar uma nova conversa
