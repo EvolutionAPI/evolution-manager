@@ -32,8 +32,7 @@
         clearable
         variant="outlined"
         density="compact"
-        hide-details="auto"
-        class="mb-3"
+        class=" mt-3"
         hint="DDI + DDD + Número"
       />
 
@@ -54,6 +53,7 @@
         :disabled="loading || !phone"
         :loading="loading"
         @click="verifyPhone"
+        variant="tonal"
       >
         Consultar
       </v-btn>

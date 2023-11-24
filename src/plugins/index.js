@@ -9,9 +9,13 @@ import vuetify from './vuetify'
 import pinia from '../store'
 import router from '../router'
 
-export function registerPlugins (app) {
+import HelpTooltip from '@/components/global/HelpTooltip.vue'
+
+export function registerPlugins(app) {
   app
     .use(vuetify)
     .use(router)
     .use(pinia)
+    .component('HelpTooltip', HelpTooltip)
+
 }

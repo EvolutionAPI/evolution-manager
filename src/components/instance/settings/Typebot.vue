@@ -48,12 +48,13 @@
           <div class="flex-grow-1">
             <v-text-field
               v-model="typebotData.typebot"
-              label="Typebot"
+              label="Nome do fluxo do Typebot"
               :disabled="loading"
               outlined
               dense
               hide-details="auto"
               class="mb-3"
+              hint="O nome do fluxo do Typebot que será utilizado"
               :rules="[
                 (account_id) => {
                   if (!account_id) return 'Typebot é obrigatório';
@@ -72,6 +73,7 @@
               dense
               hide-details="auto"
               class="mb-3"
+              hint="Palavra-chave para finalizar o fluxo"
               :rules="[
                 (token) => {
                   if (!token)
@@ -94,6 +96,7 @@
               outlined
               dense
               hide-details="auto"
+              hint="Tempo para encerrar a sessão caso não haja interação"
               class="mb-3"
               :rules="[
                 (v) => {
@@ -109,9 +112,9 @@
               label="Tempo de atraso da mensagem (em milisegundos)"
               type="number"
               min="0"
-              :hint="`${typebotData.delay_message}ms = ${(
-                typebotData.delay_message / 1000
-              )
+              :hint="`Tempo de simulação de digitação - ${
+                typebotData.delay_message
+              }ms = ${(typebotData.delay_message / 1000)
                 .toFixed(1)
                 .replace('.0', '')}s`"
               :disabled="loading"
@@ -146,13 +149,20 @@
           ]"
         />
 
-        <div>
+        <div class="d-flex">
           <v-checkbox
+            class="flex-shrink-1"
             v-model="typebotData.listening_from_me"
             label="Ouvir mensagens enviadas por mim"
             :disabled="loading"
-            hide-details
-          ></v-checkbox>
+          >
+            <template v-slot:label>
+              <span>Ouvir mensagens enviadas por mim</span>
+              <HelpTooltip>
+                Envia as mensagens enviadas por você para o fluxo do Typebot
+              </HelpTooltip>
+            </template>
+          </v-checkbox>
         </div>
       </v-form>
     </v-card-text>

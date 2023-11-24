@@ -84,12 +84,18 @@
           <div>
             <v-checkbox
               v-model="chatwootData.sign_msg"
-              label="Assinar mensagens"
               :disabled="loading"
               hide-details
               class="mb-3"
               density="compact"
-            />
+            >
+            <template v-slot:label>
+              <span>Assinar mensagens</span>
+              <HelpTooltip>
+                Adiciona o nome do atendente na primeira linha da mensagem
+              </HelpTooltip>
+            </template>
+            </v-checkbox>
           </div>
           <div>
             <v-checkbox

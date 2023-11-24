@@ -1,5 +1,5 @@
 <template>
-  <v-tabs v-model="tab" background-color="transparent" color="primary">
+  <v-tabs v-model="tab" background-color="transparent" color="primary" grow>
     <v-tab v-for="tab in tabs" :key="tab.id" :value="tab.id">
       <v-icon start>{{ tab.icon }}</v-icon>
       {{ tab.title }}

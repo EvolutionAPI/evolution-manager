@@ -1,14 +1,16 @@
 <template>
-  <v-alert
-    icon="mdi-qrcode-scan"
-    v-if="instance.instance?.status != 'open'"
-    type="warning"
-  >
-    <div class="d-flex justify-space-between align-center flex-wrap">
-      <span>Telefone não conectado</span>
-      <v-btn @click="startConnect" size="small"> Conectar </v-btn>
-    </div>
-  </v-alert>
+  <v-card v-if="instance.instance?.status != 'open'" @click="startConnect" elevation="0">
+    <v-alert
+      icon="mdi-qrcode-scan"
+      color="deep-orange-darken-2"
+      class="text-white"
+    >
+      <div class="d-flex justify-space-between align-center flex-wrap">
+        <b>Telefone não conectado</b>
+        <v-btn @click="startConnect" size="small"> Conectar </v-btn>
+      </div>
+    </v-alert>
+  </v-card>
   <v-dialog v-model="dialog" max-width="350px">
     <v-card :loading="loading && qrCode">
       <v-card-text>
