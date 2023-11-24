@@ -119,8 +119,8 @@
         </v-alert>
       </v-card-text>
       <v-card-actions>
+        <v-btn text @click="dialog = false" :disabled="loading">Fechar</v-btn>
         <v-spacer></v-spacer>
-        <v-btn text to="/" :disabled="loading">Cancel</v-btn>
         <v-btn
           color="success"
           variant="tonal"

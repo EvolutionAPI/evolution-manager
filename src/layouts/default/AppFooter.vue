@@ -1,5 +1,5 @@
 <template>
-  <v-footer absolute app class="pt-10">
+  <v-footer absolute app class="mt-10">
     <div class="d-flex flex-grow-1 flex-wrap gap-y-1 align-end">
       <div class="flex-shrink-0 d-flex gap-2 align-center">
         <v-btn

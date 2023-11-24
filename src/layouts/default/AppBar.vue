@@ -1,7 +1,7 @@
 <template>
   <v-app-bar flat>
     <v-app-bar-title class="flex-shrink-0">
-      <v-btn variant="text" @click="$router.push({name: 'instances'})">
+      <v-btn variant="text" @click="$router.push({ name: 'instances' })">
         <v-img src="@/assets/logo.png" height="24" width="24" class="mr-2" />
         Evolution Manager
       </v-btn>
@@ -9,7 +9,11 @@
     <v-icon v-if="AppStore.connecting" color="info">
       mdi-loading mdi-spin
     </v-icon>
-    <v-chip v-else-if="AppStore.validConnection" color="success" style="max-width: 40vw">
+    <v-chip
+      v-else-if="AppStore.validConnection"
+      color="success"
+      style="max-width: 40vw"
+    >
       <v-icon color="success" start> mdi-check-circle </v-icon>
       {{
         AppStore.connection.host.replace(/https?:\/\//, "").replace(/\/$/, "")
@@ -19,6 +23,11 @@
     <v-btn @click="openSettings" icon>
       <v-icon>mdi-cog</v-icon>
     </v-btn>
+    <v-btn @click="toggleTheme" icon>
+      <v-icon>mdi-{{
+        dark ? "white-balance-sunny" : "weather-night"
+      }}</v-icon>
+    </v-btn>
   </v-app-bar>
   <SettingsModal ref="settings" />
 </template>
@@ -26,18 +35,30 @@
 <script>
 import SettingsModal from "@/components/modal/Settings.vue";
 import { useAppStore } from "@/store/app";
+import { useTheme } from "vuetify";
 
 export default {
   name: "AppBar",
   data: () => ({
     AppStore: useAppStore(),
+    theme: useTheme(),
   }),
   components: {
     SettingsModal,
   },
   methods: {
+    toggleTheme() {
+      this.theme.global.name = this.theme.global.current.dark
+        ? "light"
+        : "dark";
+    },
     openSettings() {
       this.$refs.settings.open();
+    },
+  },
+  computed: {
+    dark() {
+      return this.theme.global.current.dark;
     },
   },
   async mounted() {
