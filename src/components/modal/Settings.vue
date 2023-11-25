@@ -32,9 +32,7 @@
       </v-card-text>
       <v-card-actions>
         <div class="d-flex flex-wrap justify-space-between w-100 align-center">
-          <v-btn size="small" text @click="showAbout">
-            Sobre esse Manager
-          </v-btn>
+          <v-btn size="small" text @click="showAbout"> Sobre </v-btn>
           <div class="d-flex justify-end flex-grow-1 gap-1">
             <v-btn
               v-if="!!AppStore.connection.host"
@@ -46,7 +44,7 @@
             >
               <v-icon>mdi-logout</v-icon>
             </v-btn>
-            <v-btn
+            <!-- <v-btn
               v-if="AppStore.validConnection"
               class="ml-0"
               text
@@ -54,6 +52,17 @@
               :disabled="loading"
             >
               Cancel
+            </v-btn> -->
+            <v-btn
+              v-if="AppStore.validConnection"
+              class="ml-0"
+              text
+              @click="share"
+              :disabled="loading"
+              icon
+              size="small"
+            >
+              <v-icon>mdi-share-variant</v-icon>
             </v-btn>
             <v-btn
               color="success"
@@ -125,13 +134,15 @@
     </v-card>
   </v-dialog>
   <about-modal ref="about" />
+  <share-connection ref="share" />
 </template>
 
 <script>
 import { useAppStore } from "@/store/app";
 import AboutModal from "./About.vue";
+import ShareConnection from "./ShareConnection.vue";
 export default {
-  components: { AboutModal },
+  components: { AboutModal, ShareConnection },
   name: "SettingsModal",
   data: () => ({
     dialog: false,
@@ -147,6 +158,11 @@ export default {
     isHttps: window.location.protocol === "https:",
   }),
   methods: {
+    share() {
+      const connection = Object.assign({}, this.AppStore.connection);
+      this.$refs.share.open(connection);
+        
+    },
     logout() {
       this.AppStore.logout();
       this.connection = {

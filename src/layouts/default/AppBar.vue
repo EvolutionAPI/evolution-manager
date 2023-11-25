@@ -53,6 +53,23 @@ export default {
     openSettings() {
       this.$refs.settings.open();
     },
+    async loadConnectionFromUrl() {
+      try {
+        const { connection } = this.$route.query;
+        if (!connection) return null;
+        this.$router.replace({ query: {} });
+
+        const json = atob(connection);
+        const data = JSON.parse(json);
+        if (!data.host || !data.globalApiKey) return null;
+
+        await this.AppStore.setConnection(data);
+        return data;
+      } catch (e) {
+        console.error(e);
+        return null;
+      }
+    },
   },
   computed: {
     dark() {
@@ -60,7 +77,8 @@ export default {
     },
   },
   async mounted() {
-    await this.AppStore.loadConnection();
+    const urlConnection = await this.loadConnectionFromUrl();
+    if (!urlConnection) await this.AppStore.loadConnection();
     if (!this.AppStore.validConnection) this.openSettings();
   },
 };
