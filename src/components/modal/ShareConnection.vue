@@ -3,11 +3,10 @@
     <v-card>
       <v-card-text>
         <div class="d-flex flex-column align-center">
-          <h4>Compatilhar conexão</h4>
+          <h4>Compartilhar conexão</h4>
           <v-alert type="warning" class="mt-4">
-            Ao compartilhar sua conexão, você estará compartilhando todas as
-            suas configurações de conexão, incluindo a URL e a chave de API
-            global.
+            Ao compartilhar sua conexão, você estará compartilhando todos os
+            dados da conexão, incluindo a URL e a chave de API global.
           </v-alert>
           <!-- host and global key -->
           <v-card class="w-100 ma-2 pa-4" variant="outlined">
@@ -26,9 +25,9 @@
                 :disabled="copied"
                 block
               >
-                <v-icon start
-                  >mdi-{{ copied ? "check" : "content-copy" }}</v-icon
-                >
+                <v-icon start>
+                  mdi-{{ copied ? "check" : "content-copy" }}
+                </v-icon>
                 Copiar link
               </v-btn>
             </div>
