@@ -1,4 +1,4 @@
-# Evolution Manager - README
+# Evolution Manager
 
 ## Introduction
 
