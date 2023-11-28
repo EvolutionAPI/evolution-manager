@@ -27,7 +27,6 @@ export const useDocStore = defineStore('doc', {
     },
     async loadDoc(path) {
       try {
-        debugger;
         const { language } = this;
         const doc = this.docs[path]
         const content = await doc[language]();

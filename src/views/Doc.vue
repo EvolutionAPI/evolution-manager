@@ -18,12 +18,15 @@
 import { VMarkdownView } from "vue3-markdown";
 import "vue3-markdown/dist/style.css";
 import { useDocStore } from "@/store/doc";
+import { useTheme } from "vuetify";
+
 export default {
   components: {
     VMarkdownView,
   },
   data: () => ({
     drawer: false,
+    theme: useTheme(),
     lang_list: [
       { title: "Português", value: "pt_br" },
       { title: "English", value: "en" },
@@ -38,7 +41,6 @@ export default {
       try {
         this.loading = true;
         this.error = false;
-        debugger;
         const { content } = await this.DocStore.loadDoc(doc || "index");
         this.content = content;
       } catch (e) {
@@ -68,8 +70,14 @@ export default {
     },
   },
   mounted() {
-    debugger;
     this.loadDoc(this.$route.params.doc);
   },
 };
 </script>
+
+<style>
+.markdown-body[data-theme=dark] {
+  background-color: #121212 !important;
+  color: #fff !important;
+}
+</style>

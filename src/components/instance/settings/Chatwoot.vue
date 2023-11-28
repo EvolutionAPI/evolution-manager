@@ -136,7 +136,7 @@
         </div>
       </v-form>
     </v-card-text>
-    <v-card-actions v-if="expanded">
+    <v-card-actions v-if="expanded" class="d-flex flex-wrap gap-x-1">
       <v-switch
         v-model="chatwootData.enabled"
         label="Habilitado"
@@ -144,7 +144,7 @@
         :disabled="loading"
         hide-details
       ></v-switch>
-      <v-btn variant="text" @click="chatwootConfig">
+      <v-btn variant="text" @click="chatwootConfig" size="small">
         Como configurar o chatwoot?
       </v-btn>
       <v-spacer></v-spacer>
