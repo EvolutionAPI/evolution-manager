@@ -85,7 +85,8 @@ export const useAppStore = defineStore('app', {
       this.instancesList = []
       this.instancesKeys = {}
       this.connectionsList = []
-      window.localStorage.clear();
+      this.saveLocalStorage()
+
     },
 
     async reconnect() {

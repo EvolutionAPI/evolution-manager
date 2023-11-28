@@ -22,6 +22,23 @@ const routes = [
     ],
   },
   {
+    path: BASE_URL + 'doc',
+    component: () => import('@/layouts/doc/Index.vue'),
+    children: [
+      {
+        path: ':doc',
+        name: 'doc',
+        component: () => import('@/views/Doc.vue'),
+
+      },
+      {
+        path: '',
+        name: 'doc.index',
+        component: () => import('@/views/Doc.vue'),
+      },
+    ]
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: BASE_URL,
   },

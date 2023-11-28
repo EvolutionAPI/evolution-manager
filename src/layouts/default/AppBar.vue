@@ -12,7 +12,7 @@
     <v-chip
       v-else-if="AppStore.validConnection"
       color="success"
-      style="max-width: 40vw"
+      style="max-width: 35vw"
     >
       <v-icon color="success" start> mdi-check-circle </v-icon>
       {{

@@ -17,7 +17,6 @@ export default defineConfig(({ command, mode }) => {
       vue({
         template: { transformAssetUrls }
       }),
-      // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
       vuetify({
         autoImport: true,
         styles: {
@@ -38,7 +37,8 @@ export default defineConfig(({ command, mode }) => {
 
     resolve: {
       alias: {
-        '@': fileURLToPath(new URL('./src', import.meta.url))
+        '@': fileURLToPath(new URL('./src', import.meta.url)),
+        '@docs': fileURLToPath(new URL('./docs', import.meta.url))
       },
       extensions: [
         '.js',

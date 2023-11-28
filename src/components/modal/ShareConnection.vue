@@ -32,7 +32,6 @@
               </v-btn>
             </div>
           </v-card>
-          <!-- {{ connection }} -->
         </div>
       </v-card-text>
       <v-card-actions>
