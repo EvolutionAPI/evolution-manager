@@ -1,6 +1,6 @@
 {
   "name": "evolution-manager",
-  "version": "0.3.10",
+  "version": "0.3.11",
   "main": "dist",
   "engines": {
     "node": ">=16.0.0"
