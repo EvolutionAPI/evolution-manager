@@ -90,6 +90,7 @@
 <script>
 import { useAppStore } from "@/store/app";
 import statusMapper from "@/helpers/mappers/status";
+import copyToClipboard from "@/helpers/copyToClipboard";
 import instanceController from "@/services/instanceController";
 
 export default {
@@ -105,7 +106,9 @@ export default {
   methods: {
     copyApikey() {
       if (this.copied) return;
-      navigator.clipboard.writeText(this.instance.instance.apikey);
+
+      copyToClipboard(this.instance.instance.apikey);
+
       this.copied = true;
       setTimeout(() => {
         this.copied = false;

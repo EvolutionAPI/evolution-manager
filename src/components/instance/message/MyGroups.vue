@@ -96,7 +96,7 @@
 <script>
 import instanceController from "@/services/instanceController";
 import GroupModal from "../../modal/GroupModal.vue";
-
+import copyToClipboard from "@/helpers/copyToClipboard";
 
 export default {
   name: "MyGroups",
@@ -127,12 +127,7 @@ export default {
     copy(group) {
       if (this.copied.includes(group.id)) return;
 
-      const el = document.createElement("textarea");
-      el.value = group.id;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
+      copyToClipboard(group.id);
 
       this.copied.push(group.id);
       setTimeout(() => {

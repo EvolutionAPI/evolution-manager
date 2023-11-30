@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import copyToClipboard from "@/helpers/copyToClipboard";
 export default {
   name: "SettingsModal",
   data: () => ({
@@ -54,15 +55,13 @@ export default {
   methods: {
     copy() {
       if (this.copied) return;
-      if (!navigator.clipboard)
-        return alert("Seu navegador não suporta a função de copiar texto.");
-
       const url = new URL(window.location.href);
       const connection = JSON.stringify(this.connection);
       const base64 = btoa(connection);
       url.searchParams.set("connection", base64);
 
-      navigator.clipboard.writeText(url.href);
+      copyToClipboard(url.href);
+      
       this.copied = true;
       setTimeout(() => {
         this.copied = false;

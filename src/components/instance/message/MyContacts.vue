@@ -98,7 +98,7 @@
 
 <script>
 import instanceController from "@/services/instanceController";
-
+import copyToClipboard from "@/helpers/copyToClipboard";
 export default {
   name: "MyChats",
   props: {
@@ -129,12 +129,7 @@ export default {
     copy(group) {
       if (this.copied.includes(group.id)) return;
 
-      const el = document.createElement("textarea");
-      el.value = group.id;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
+      copyToClipboard(group.id);
 
       this.copied.push(group.id);
       setTimeout(() => {

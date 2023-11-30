@@ -78,7 +78,7 @@
 
 <script>
 import { useAppStore } from "@/store/app";
-
+import copyToClipboard from "@/helpers/copyToClipboard";
 export default {
   name: "SettingsModal",
   data: () => ({
@@ -94,7 +94,8 @@ export default {
       this.dialog = true;
     },
     copyValue(key) {
-      navigator.clipboard.writeText(this[key]);
+      copyToClipboard(this[key]);
+
       this.copy[key] = true;
       setTimeout(() => {
         this.copy[key] = false;

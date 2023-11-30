@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import copyToClipboard from "@/helpers/copyToClipboard";
+
 export default {
   name: "SettingsModal",
   data: () => ({
@@ -39,9 +41,9 @@ export default {
   methods: {
     copy() {
       if (this.copied) return;
-      if (!navigator.clipboard)
-        return alert("Seu navegador não suporta a função de copiar texto.");
-      navigator.clipboard.writeText(this.key);
+
+      copyToClipboard(this.key);
+      
       this.copied = true;
       setTimeout(() => {
         this.copied = false;
