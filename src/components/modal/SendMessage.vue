@@ -178,11 +178,15 @@ export default {
         this.error = false;
 
         var messagesId = [];
+        const messageConfig = this.message;
+
+        messageConfig.options.delay = parseInt(messageConfig.options.delay);
+
         for (const number of this.numbers) {
           const r = await instanceController.chat.sendMessage(
             this.instance.instance.instanceName,
             {
-              ...this.message,
+              ...messageConfig,
               number,
             }
           );
