@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style>
-.markdown-body[data-theme=dark] {
+.markdown-body[data-theme="dark"] {
   background-color: #121212 !important;
   color: #fff !important;
 }

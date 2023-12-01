@@ -15,7 +15,7 @@
     </v-btn>
   </v-app-bar>
 
-  <v-navigation-drawer :width="200" v-model="drawer">
+  <v-navigation-drawer :width="300" v-model="drawer">
     <v-select
       :value="lang"
       :items="lang_list"
@@ -33,10 +33,10 @@
     <v-divider></v-divider>
     <v-list-item
       link
-      :title="doc"
-      v-for="doc in docs"
-      :key="doc"
-      :to="{ name: 'doc', params: { doc } }"
+      :title="doc.title || doc.filename || doc.path"
+      v-for="(doc, i) in docs"
+      :key="i"
+      :to="{ name: 'doc', params: { doc: doc.filename || doc.path } }"
     />
   </v-navigation-drawer>
 </template>
@@ -67,12 +67,11 @@ export default {
       return this.DocStore.lang;
     },
     docs() {
-      return Object.keys(this.DocStore.docs).filter((doc) => doc !== "index");
+      return Object.values(this.DocStore.docs).map((doc) => doc[this.lang]).filter((doc) => doc);
     },
     dark() {
       return this.theme.global.current.dark;
     },
-    files() {},
   },
   mounted() {
     this.DocStore.loadDocs();

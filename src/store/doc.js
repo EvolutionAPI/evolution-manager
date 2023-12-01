@@ -20,7 +20,7 @@ export const useDocStore = defineStore('doc', {
       try {
         const { languages, docs } = getFileTree();
         this.languages = languages;
-        this.docs = docs;
+        this.docs = docs; 
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +29,7 @@ export const useDocStore = defineStore('doc', {
       try {
         const { language } = this;
         const doc = this.docs[path]
-        const content = await doc[language]();
+        const content = doc[language].content
         return {
           content,
           language,
@@ -44,7 +44,7 @@ export const useDocStore = defineStore('doc', {
 
 // Function to get the file tree from @doc
 function getFileTree() {
-  const tree = import.meta.glob('@docs/**/*.{md,mdx}', { as: 'raw'})
+  const tree = import.meta.glob('@docs/**/*.{md,mdx}', { as: 'raw', eager: true })
   const docsFiles = {}
   const languages = new Set()
 
@@ -54,11 +54,35 @@ function getFileTree() {
 
     const filename = rest.join('/').replace(/\.mdx?$/, '')
     docsFiles[filename] = docsFiles[filename] || {}
-    docsFiles[filename][lang] = imprt
+
+    const vars = extractVars(imprt);
+
+      docsFiles[filename][lang] = {
+        path,
+        filename,
+        content: imprt,
+        ...vars,
+      }
   })
 
   return {
     languages: Array.from(languages),
     docs: docsFiles,
   }
+}
+
+
+function extractVars(content) {
+  const regex = /\[([a-zA-Z]+)\]: \\\\ "(.*)"/g;
+  const vars = {};
+  let m;
+
+  while ((m = regex.exec(content)) !== null) {
+    if (m.index === regex.lastIndex) {
+      regex.lastIndex++;
+    }
+
+    vars[m[1]] = m[2];
+  }
+  return vars;
 }
