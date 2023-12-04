@@ -61,15 +61,15 @@ export default {
       url.searchParams.set("connection", base64);
 
       copyToClipboard(url.href);
-      
+
       this.copied = true;
       setTimeout(() => {
         this.copied = false;
       }, 2000);
     },
-    open(connection) {
+    open({ host, globalApiKey }) {
       this.dialog = true;
-      this.connection = connection;
+      this.connection = { host, globalApiKey };
     },
   },
 };
