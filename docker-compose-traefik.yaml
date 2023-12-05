@@ -1,0 +1,19 @@
+# Use this compose with traefik proxy manager
+version: '3'
+services:
+  evolution-manager:
+    image: "gabrielpastori1/evolution-manager:latest"
+    ports:
+      - "9615:9615"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.evolution-manager.service=evolution-manager
+      - traefik.http.services.evolution-manager.loadbalancer.server.port=9615
+      - traefik.http.routers.evolution-manager.rule=Host(`manager.yourdomain.com`) #Replace this with the subdomain that you wishes, dont forget to point the domain to your VPS ip address
+      - traefik.http.routers.evolution-manager.entrypoints=https # Some people name the entrypoint as "websecure" look at your original traefik compose file to find the correct entrypoint name
+      - traefik.http.routers.evolution-manager.tls.certresolver=letsencrypt # Some people name the certResolver as "le" look at your original traefik compose file to find the correct certResolver name
+    network:
+      - traefik_public_example_network
+networks:
+  traefik_public_example_network:
+    external: true
