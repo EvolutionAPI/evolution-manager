@@ -8,7 +8,7 @@
 
   <v-window v-model="tab">
     <v-window-item v-for="tab in tabs" :key="tab.id" :value="tab.id">
-      <div class="d-flex flex-column gap-8">
+      <div class="d-flex flex-column gap-6">
         <component
           v-for="component in tab.components"
           :key="component"
@@ -33,6 +33,10 @@ import MyGroups from "./message/MyGroups.vue";
 import MyChats from "./message/MyChats.vue";
 import MyContacts from "./message/MyContacts.vue";
 import HasWhatsapp from "./message/HasWhatsapp.vue";
+
+import ConnectionAlert from "./profile/ConnectionAlert.vue";
+import BasicInfo from "./profile/BasicInfo.vue";
+import Privacy from "./profile/Privacy.vue";
 export default {
   components: {
     Options,
@@ -46,6 +50,9 @@ export default {
     MyChats,
     HasWhatsapp,
     MyContacts,
+    ConnectionAlert,
+    BasicInfo,
+    Privacy,
   },
   data: () => ({
     tab: "settings",
@@ -74,6 +81,12 @@ export default {
           "MyGroups",
           "MyChats",
         ],
+      },
+      {
+        id: "profile",
+        icon: "mdi-account",
+        title: "Perfil",
+        components: ["ConnectionAlert", "BasicInfo", "Privacy"],
       },
     ],
   }),

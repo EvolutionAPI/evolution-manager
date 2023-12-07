@@ -74,7 +74,7 @@ const deleteInstance = async (instanceName) => {
 import settings from "./instanceSettingsController.js";
 import group from "./instanceGroupController.js";
 import chat from "./instanceChatController.js";
-
+import profile from "./instanceProfileController.js";
 export default {
   fetchAll,
   create,
@@ -84,6 +84,6 @@ export default {
   delete: deleteInstance,
   ...settings,
   group,
-  chat
-
+  chat,
+  profile,
 };
