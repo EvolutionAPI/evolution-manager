@@ -191,6 +191,7 @@ export default {
     },
     async loadPrivacy() {
       try {
+        if(!this.isOpen) return;
         this.loading = true;
         this.error = false;
         const privacyData = await instanceController.profile.getPrivacy(
