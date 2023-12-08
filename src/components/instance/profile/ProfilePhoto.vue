@@ -135,7 +135,6 @@ export default {
         if (!this.isOpen) return;
 
         const file = event.target.files[0];
-        debugger;
         const base64 = await this.fileToBase64(file);
 
         await instanceController.profile.updatePicture(
