@@ -7,20 +7,15 @@
     <v-avatar size="100" rounded="xl">
       <v-icon
         v-if="
-          instance.instance.status != 'open' &&
+          (instance.instance.status != 'open' ||
+            instance.instance.profilePictureUrl == null) &&
           statusMapper[instance.instance.status].icon
         "
         size="70"
       >
         {{ statusMapper[instance.instance.status].icon }}
       </v-icon>
-      <v-img
-        v-else
-        :src="
-          instance.instance.profilePictureUrl ||
-          'https://cdn.vuetifyjs.com/images/lists/1.jpg'
-        "
-      />
+      <v-img v-else :src="instance.instance.profilePictureUrl" />
     </v-avatar>
     <div class="d-flex flex-column">
       <span class="text-overline" style="line-height: 1em">

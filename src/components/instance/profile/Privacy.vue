@@ -101,7 +101,6 @@
       </v-btn>
     </v-card-actions>
   </v-card>
-  <chatwoot-config :instance="instance" ref="chatwootConfig" />
 </template>
 
 <script>

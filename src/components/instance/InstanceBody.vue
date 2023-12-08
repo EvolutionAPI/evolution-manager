@@ -37,6 +37,7 @@ import HasWhatsapp from "./message/HasWhatsapp.vue";
 import ConnectionAlert from "./profile/ConnectionAlert.vue";
 import BasicInfo from "./profile/BasicInfo.vue";
 import Privacy from "./profile/Privacy.vue";
+import ProfilePhoto from "./profile/ProfilePhoto.vue";
 export default {
   components: {
     Options,
@@ -53,6 +54,7 @@ export default {
     ConnectionAlert,
     BasicInfo,
     Privacy,
+    ProfilePhoto,
   },
   data: () => ({
     tab: "settings",
@@ -86,7 +88,12 @@ export default {
         id: "profile",
         icon: "mdi-account",
         title: "Perfil",
-        components: ["ConnectionAlert", "BasicInfo", "Privacy"],
+        components: [
+          "ConnectionAlert",
+          "BasicInfo",
+          // "ProfilePhoto",
+          "Privacy",
+        ],
       },
     ],
   }),
