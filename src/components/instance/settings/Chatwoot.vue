@@ -244,10 +244,13 @@ export default {
         const chatwootData = await instanceController.chatwoot.get(
           this.instance.instance.instanceName
         );
-        this.chatwootData = Object.assign(defaultObj(), chatwootData || {});
+
+        const validData = chatwootData._doc || chatwootData;
+        
+        this.chatwootData = Object.assign(defaultObj(), validData || {});
         this.defaultChatwootData = Object.assign(
           defaultObj(),
-          chatwootData || {}
+          validData || {}
         );
       } catch (e) {
         this.error = e.message?.message || e.message || e;
