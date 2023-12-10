@@ -31,7 +31,7 @@
           @click="copyApikey"
         >
           <v-icon start size="small">mdi-key</v-icon>
-          {{ instance.instance.apikey.slice(0, 10) }}...
+          {{ (instance.instance?.apikey || "").slice(0, 10) }}...
           <v-icon end size="small">
             {{ copied ? "mdi-check" : "mdi-content-copy" }}
           </v-icon>
