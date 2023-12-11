@@ -91,7 +91,7 @@ export default {
         components: [
           "ConnectionAlert",
           "BasicInfo",
-          // "ProfilePhoto",
+          "ProfilePhoto",
           "Privacy",
         ],
       },

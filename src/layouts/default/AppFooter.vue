@@ -70,7 +70,7 @@ export default {
       {
         title: "Doc",
         icon: "mdi-book-open-page-variant",
-        url: "https://doc.evolution-api.com/help-center",
+        url: "https://doc.evolution-api.com",
       },
     ],
   }),
