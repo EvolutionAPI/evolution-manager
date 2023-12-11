@@ -141,6 +141,8 @@
 import { useAppStore } from "@/store/app";
 import AboutModal from "./About.vue";
 import ShareConnection from "./ShareConnection.vue";
+const BASE_URL = import.meta.env.BASE_URL;
+
 export default {
   components: { AboutModal, ShareConnection },
   name: "SettingsModal",
@@ -149,7 +151,7 @@ export default {
     valid: false,
     revelPassword: false,
     connection: {
-      host: "",
+      host: BASE_URL ? window.location.origin : "",
       globalApiKey: "",
     },
     loading: false,
@@ -161,7 +163,6 @@ export default {
     share() {
       const connection = Object.assign({}, this.AppStore.connection);
       this.$refs.share.open(connection);
-        
     },
     logout() {
       this.AppStore.logout();
@@ -192,6 +193,8 @@ export default {
     open() {
       this.dialog = true;
       this.connection = Object.assign({}, this.AppStore.connection);
+      if (!this.connection.host && BASE_URL.startsWith("/manager"))
+        this.connection.host = window.location.origin;
     },
   },
   watch: {

@@ -1,7 +1,7 @@
 {
   "name": "evolution-manager",
   "description": "Evolution Manager is an open-source interface for managing the Evolution API, simplifying the creation and administration of API instances with advanced features and diverse integrations.",
-  "version": "0.3.12",
+  "version": "0.4.0",
   "main": "dist",
   "engines": {
     "node": ">=16.0.0"
@@ -10,7 +10,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint . --fix --ignore-path .gitignore",
+    "prepare": "node ./lib/postinstall.js"
   },
   "directories": {
     "bin": "./bin"

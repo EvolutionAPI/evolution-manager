@@ -77,9 +77,14 @@ export default {
     },
   },
   async mounted() {
-    const urlConnection = await this.loadConnectionFromUrl();
-    if (!urlConnection) await this.AppStore.loadConnection();
-    if (!this.AppStore.validConnection) this.openSettings();
+    try {
+      const urlConnection = await this.loadConnectionFromUrl();
+      if (!urlConnection) await this.AppStore.loadConnection();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      if (!this.AppStore.validConnection) this.openSettings();
+    }
   },
 };
 </script>
