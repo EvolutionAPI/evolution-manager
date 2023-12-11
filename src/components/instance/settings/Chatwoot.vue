@@ -133,6 +133,23 @@
               </template>
             </v-checkbox>
           </div>
+          <div v-if="chatwootData.auto_create !== undefined">
+            <v-checkbox
+              v-model="chatwootData.auto_create"
+              label="Conversa pendente"
+              :disabled="loading"
+              hide-details
+              class="mb-3"
+              density="compact"
+            >
+              <template v-slot:label>
+                <span>Criar Caixa de Entrada</span>
+                <HelpTooltip>
+                  Cria automaticamente a caixa de entrada no Chatwoot
+                </HelpTooltip>
+              </template>
+            </v-checkbox>
+          </div>
         </div>
       </v-form>
     </v-card-text>
@@ -177,6 +194,7 @@ const defaultObj = () => ({
   sign_msg: true,
   reopen_conversation: true,
   conversation_pending: false,
+  auto_create: undefined,
 });
 
 export default {

@@ -26,8 +26,7 @@
         {{ error }}
       </v-alert>
 
-      <div class="d-flex gap-x-4">
-        {{ instance.instance.profilePictureUrl }}
+      <div class="d-flex flex-wrap justify-center gap-x-4">
         <v-avatar size="150">
           <v-img
             v-if="instance.instance.profilePictureUrl"
@@ -46,13 +45,18 @@
           width="150"
           @click="selectPhoto"
         >
-          <v-icon size="50">mdi-upload</v-icon>
+          <v-progress-circular
+            indeterminate
+            v-if="loading == 'uploading'"
+            size="50"
+          />
+          <v-icon size="50" v-else>mdi-upload</v-icon>
           Selecionar foto
         </v-card>
         <v-card
           v-if="instance.instance.profilePictureUrl"
           variant="outlined"
-          class="h-full d-flex justify-center align-center rounded-pill"
+          class="h-full d-flex flex-column justify-center align-center rounded-pill"
           width="150"
           @click="removePicture"
           :disabled="loading"
@@ -121,7 +125,7 @@ export default {
           this.instance.instance.instanceName
         );
 
-        await this.AppStore.reconnect();
+        this.AppStore.setPhoto(this.instance.instance.instanceName, null);
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
@@ -135,18 +139,19 @@ export default {
         if (!this.isOpen) return;
 
         const file = event.target.files[0];
+
         const base64 = await this.fileToBase64(file);
 
         await instanceController.profile.updatePicture(
           this.instance.instance.instanceName,
-          base64
+          base64.split(",")[1]
         );
-
-        await this.AppStore.reconnect();
+        this.AppStore.setPhoto(this.instance.instance.instanceName, base64);
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {
         this.loading = false;
+        event.target.value = "";
       }
     },
     fileToBase64(file) {

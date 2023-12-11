@@ -123,6 +123,13 @@ export const useAppStore = defineStore('app', {
       this.instancesList[index].instance.status = status
     },
 
+    setPhoto(instanceName, photo) {
+      const index = this.instancesList.findIndex(
+        (instance) => instance.instance.instanceName === instanceName
+      )
+      if (index !== -1) this.instancesList[index].instance.profilePictureUrl = photo
+    },
+
     addInstanceKey({ instance, key }) {
       this.instancesKeys[instance] = key
     },
