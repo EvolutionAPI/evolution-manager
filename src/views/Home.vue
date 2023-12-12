@@ -32,7 +32,7 @@
         </v-alert>
       </v-col>
       <v-col v-else cols="12">
-        <div class="d-flex gap-2 flex-wrap">
+        <div class="d-flex gap-2 flex-wrap mb-2">
           <v-text-field
             v-model="search"
             label="Pesquisar"
@@ -216,8 +216,10 @@ export default {
         const search = this.search.trim().toLowerCase();
 
         return (
-          instance.instance.instanceName.toLowerCase().includes(search) ||
-          instance.instance.owner.toLowerCase().includes(search)
+          (instance.instance.instanceName || "")
+            .toLowerCase()
+            .includes(search) ||
+          (instance.instance.owner || "").toLowerCase().includes(search)
         );
       });
     },
