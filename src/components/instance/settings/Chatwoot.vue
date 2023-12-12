@@ -133,12 +133,18 @@
               </template>
             </v-checkbox>
           </div>
-          <div v-if="chatwootData.auto_create !== undefined">
+
+          <div>
             <v-checkbox
               v-model="chatwootData.auto_create"
               label="Conversa pendente"
-              :disabled="loading"
-              hide-details
+              :disabled="loading || !AppStore.versionSatisfies('>=1.6.0')"
+              :error-messages="[
+                !AppStore.versionSatisfies('>=1.6.0')
+                  ? 'Disponível a partir da versão 1.6.0'
+                  : undefined,
+              ]"
+              hide-details="auto"
               class="mb-3"
               density="compact"
             >
@@ -185,7 +191,7 @@
 <script>
 import ChatwootConfig from "@/components/modal/ChatwootConfig.vue";
 import instanceController from "@/services/instanceController";
-
+import { useAppStore } from "@/store/app";
 const defaultObj = () => ({
   enabled: false,
   url: "",
@@ -210,6 +216,7 @@ export default {
     loading: false,
     error: false,
     valid: false,
+    AppStore: useAppStore(),
     chatwootData: {
       enabled: false,
       url: "",
@@ -264,12 +271,9 @@ export default {
         );
 
         const validData = chatwootData._doc || chatwootData;
-        
+
         this.chatwootData = Object.assign(defaultObj(), validData || {});
-        this.defaultChatwootData = Object.assign(
-          defaultObj(),
-          validData || {}
-        );
+        this.defaultChatwootData = Object.assign(defaultObj(), validData || {});
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {

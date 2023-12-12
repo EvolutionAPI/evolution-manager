@@ -13,7 +13,7 @@
   </v-card>
   <v-dialog v-model="dialog" max-width="350px">
     <v-card :loading="loading && qrCode">
-      <v-card-text>
+      <v-card-text class="pt-6">
         <v-img v-if="qrCode" :src="qrCode" width="300px" height="300px" />
         <v-card
           v-else
@@ -32,8 +32,8 @@
           size="small"
           block
           @click="loadQr"
-          :loading="loading"
-          :disabled="disabledRefresh"
+          :loading="loading && qrCode"
+          :disabled="disabledRefresh || !qrCode"
           variant="tonal"
           class="mt-2"
         >
@@ -107,7 +107,7 @@ export default {
       clearTimeout(this.timeout);
       this.dialog = true;
       this.error = false;
-
+      this.qrCode = null;
       await this.loadQr();
       await this.AppStore.reconnect();
     },

@@ -1,7 +1,7 @@
 // Utilities
 import axios from 'axios'
 import { defineStore } from 'pinia'
-
+import semver from 'semver'
 
 export const useAppStore = defineStore('app', {
   getters: {
@@ -14,10 +14,15 @@ export const useAppStore = defineStore('app', {
       return state.getInstance(instance).instance.apiKey ||
         state.instancesKeys[instance]
     },
+    version: (state) => state.connection.version,
+    versionSatisfies: (state) => (version) => {
+      return semver.satisfies(state.connection.version, version)
+    },
   },
   state: () => ({
     connecting: false,
     connection: {
+
       valid: false,
       host: null,
       globalApiKey: null,
@@ -33,6 +38,21 @@ export const useAppStore = defineStore('app', {
     async setConnection({ host, globalApiKey }) {
       try {
         this.connecting = true
+        const apiResponse = await axios({
+          method: 'GET',
+          baseURL: host,
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': globalApiKey
+          },
+          url: '/'
+        })
+
+        if (!apiResponse.data || !apiResponse.data.message || !apiResponse.data.message.includes('Evolution API')) {
+          throw new Error('Essa conexão não é uma instância da evolution-api')
+        }
+
+        const { version } = apiResponse.data
         const response = await axios({
           method: 'GET',
           baseURL: host,
@@ -43,10 +63,7 @@ export const useAppStore = defineStore('app', {
           url: '/instance/fetchInstances'
         })
 
-        if (!response.data || !Array.isArray(response.data)) throw new Error('Essa conexão não é uma instância da evolution-api')
-
-
-        this.saveConnection({ host, globalApiKey })
+        this.saveConnection({ host, globalApiKey, version })
         this.instancesList = response.data
       } catch (e) {
         this.connection.valid = false
@@ -59,18 +76,7 @@ export const useAppStore = defineStore('app', {
     async loadInstance(instanceName) {
       try {
         console.log('loadInstance', instanceName)
-        // const { host, globalApiKey } = this.connection;
         return this.reconnect()
-        // const response = await axios({
-        //   method: 'GET',
-        //   baseURL: host,
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     'apikey': globalApiKey
-        //   },
-        //   url: `/instance/fetchInstances?instanceName=${instanceName}`
-        // })
-
       } catch (e) {
         this.connection.valid = false
         throw e.response?.data?.response?.message || e.response || e
@@ -92,9 +98,24 @@ export const useAppStore = defineStore('app', {
     async reconnect() {
       try {
         const { host, globalApiKey } = this.connection
-        if (!host || !globalApiKey) {
-          throw new Error('Invalid connection')
+        if (!host || !globalApiKey) throw new Error('Invalid connection')
+
+        const apiResponse = await axios({
+          method: 'GET',
+          baseURL: host,
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': globalApiKey
+          },
+          url: '/'
+        })
+
+        if (!apiResponse.data || !apiResponse.data.message || !apiResponse.data.message.includes('Evolution API')) {
+          throw new Error('Essa conexão não é uma instância da evolution-api')
         }
+
+        const { version } = apiResponse.data
+
         const response = await axios({
           method: 'GET',
           baseURL: host,
@@ -105,7 +126,7 @@ export const useAppStore = defineStore('app', {
           url: '/instance/fetchInstances'
         })
 
-        this.saveConnection({ host, globalApiKey })
+        this.saveConnection({ host, globalApiKey, version })
 
         this.instancesList = response.data
       } catch (e) {
@@ -144,11 +165,12 @@ export const useAppStore = defineStore('app', {
 
       this.saveLocalStorage()
     },
-    saveConnection({ host, globalApiKey }) {
+    saveConnection({ host, globalApiKey, version }) {
       this.connection = {
         valid: true,
         host,
         globalApiKey,
+        version
       }
 
       const currentKey = this.connectionsList.findIndex(

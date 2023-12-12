@@ -13,11 +13,27 @@
       v-else-if="AppStore.validConnection"
       color="success"
       style="max-width: 35vw"
+      class="px-2"
     >
-      <v-icon color="success" start> mdi-check-circle </v-icon>
-      {{
-        AppStore.connection.host.replace(/https?:\/\//, "").replace(/\/$/, "")
-      }}
+      <div class="d-flex align-center gap-1">
+        <v-icon color="success"> mdi-check-circle </v-icon>
+        <div style="display: grid">
+          <p class="text-truncate">
+            {{
+              AppStore.connection.host
+                .replace(/https?:\/\//, "")
+                .replace(/\/$/, "")
+            }}
+          </p>
+        </div>
+        <v-chip
+          size="x-small"
+          color="grey"
+          class="flex-shrink-0"
+        >
+          <b>{{ AppStore.version }}</b>
+        </v-chip>
+      </div>
     </v-chip>
     <v-icon v-else color="error"> mdi-alert-circle </v-icon>
     <v-btn @click="openSettings" icon>
