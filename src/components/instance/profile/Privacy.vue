@@ -74,7 +74,7 @@
           density="comfortable"
           prepend-inner-icon="mdi-account-multiple-plus"
         ></v-select>
-        <v-select
+        <!-- <v-select
           v-model="privacyData.calladd"
           :items="WAPrivacyValue"
           label="Ser adicionado em chamadas"
@@ -82,7 +82,7 @@
           :rules="[(v) => !!v || 'Ser adicionado em chamadas é obrigatório']"
           density="comfortable"
           prepend-inner-icon="mdi-phone-plus"
-        ></v-select>
+        ></v-select> -->
       </v-form>
     </v-card-text>
     <v-card-actions v-if="expanded" class="d-flex flex-wrap gap-x-1">

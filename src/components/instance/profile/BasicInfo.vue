@@ -30,7 +30,7 @@
         <v-text-field
           class="flex-grow-1 flex-shrink-0"
           v-model="data.name"
-          :disabled="true || loading"
+          :disabled=" loading"
           label="Nome"
           counter
           maxlength="25"
@@ -38,8 +38,6 @@
             (v) => !!v || 'Nome é obrigatório',
             (v) => v.length <= 25 || 'Nome deve ter no máximo 25 caracteres',
           ]"
-          hint="Indisponível no momento"
-          persistent-hint
         ></v-text-field>
         <v-text-field
           class="flex-grow-1 flex-shrink-0"
@@ -143,7 +141,7 @@ export default {
         const instance = this.instance.instance;
         const { isOpen } = this;
         var data = {
-          name: isOpen ? instance.profileName || "" : "",
+          name: isOpen ? instance.profileName.replace("not loaded", "") || "" : "",
           status: isOpen ? instance.profileStatus || "" : "",
         };
 

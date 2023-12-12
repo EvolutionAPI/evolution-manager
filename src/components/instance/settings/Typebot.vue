@@ -174,7 +174,20 @@
         :disabled="loading"
         hide-details
       ></v-switch>
+
+      <v-btn
+        :disabled="loading"
+        variant="text"
+        @click="openTypebotSessions"
+        size="small"
+      >
+        ver {{ typebotData.sessions.length }} sess{{
+          typebotData.sessions.length != 1 ? "ões" : "ão"
+        }}
+      </v-btn>
+
       <v-spacer></v-spacer>
+
       <v-btn
         :disabled="
           !valid ||
@@ -189,9 +202,17 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+  <TypebotSessions
+    :instance="instance"
+    :loading="loading"
+    :data="typebotData"
+    @refresh="loadTypebot"
+    ref="typebotSessions"
+  />
 </template>
 
 <script>
+import TypebotSessions from "@/components/modal/TypebotSessions.vue";
 import instanceController from "@/services/instanceController";
 const defaultObj = () => ({
   enabled: false,
@@ -241,8 +262,10 @@ export default {
       unknown_message: "",
     },
   }),
-
   methods: {
+    openTypebotSessions() {
+      this.$refs.typebotSessions.open();
+    },
     toggleExpanded() {
       if (this.loading) return;
       this.expanded = !this.expanded;
@@ -268,7 +291,6 @@ export default {
         this.loading = false;
       }
     },
-
     async loadTypebot() {
       try {
         this.loading = true;
@@ -276,7 +298,6 @@ export default {
         const typebotData = await instanceController.typebot.get(
           this.instance.instance.instanceName
         );
-
         this.typebotData = Object.assign(defaultObj(), typebotData);
         this.defaultTypebotData = Object.assign(defaultObj(), typebotData);
       } catch (e) {
@@ -286,12 +307,12 @@ export default {
       }
     },
   },
-
   watch: {
     expanded(expanded) {
       if (expanded) this.loadTypebot();
     },
   },
+  components: { TypebotSessions },
 };
 </script>
 

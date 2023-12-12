@@ -141,7 +141,16 @@ const setTypebot = async (instanceName, data) => {
     });
 }
 
-
+const changeTypebotStatus = async (instanceName, data) => {
+  return await http
+    .post("/typebot/changeStatus/:instance", data, {
+      params: { instance: instanceName }
+    })
+    .then((r) => r.data)
+    .catch((error) => {
+      throw error.response?.data || error.response || error
+    })
+}
 
 export default {
   options: {
@@ -168,5 +177,6 @@ export default {
   typebot: {
     get: findTypebot,
     set: setTypebot,
+    changeStatus: changeTypebotStatus,
   }
 }
