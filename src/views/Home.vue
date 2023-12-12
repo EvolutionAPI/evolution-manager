@@ -25,77 +25,111 @@
     </div>
 
     <v-row dense>
-      <v-col cols="12" v-if="instances.length === 0 || loading">
+      <v-col cols="12" v-if="loading">
         <v-progress-linear v-if="loading" indeterminate color="info" />
         <v-alert type="info" class="mb-4" v-else :loading="loading" outlined>
-          {{ loading ? "Carregando..." : "Nenhuma instância encontrada" }}
+          Carregando...
         </v-alert>
       </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        lg="4"
-        v-for="{ instance } in instances"
-        :key="instance.instanceName"
-      >
-        <v-card
-          @click="goToInstance(instance)"
-          class="pa-2 rounded-lg"
-          variant="outlined"
-          :disabled="loading"
+      <v-col v-else cols="12">
+        <div class="d-flex gap-2 flex-wrap">
+          <v-text-field
+            v-model="search"
+            label="Pesquisar"
+            density="comfortable"
+            variant="outlined"
+            hide-details
+          />
+          <v-btn-toggle
+            v-model="statusFilter"
+            variant="outlined"
+            divided
+            mandatory
+          >
+            <v-btn
+              :value="false"
+              :disabled="loading"
+              :loading="loading"
+              variant="outlined"
+              size="x-small"
+            >
+              Todos
+            </v-btn>
+            <v-btn
+              v-for="[key, item] in Object.entries(statusMapper)"
+              :key="item.text"
+              :value="key"
+              :color="item.color"
+              :disabled="loading"
+              :loading="loading"
+              variant="outlined"
+              size="x-small"
+            >
+              {{ item.text }}
+            </v-btn>
+          </v-btn-toggle>
+        </div>
+      </v-col>
+      <template v-if="filteredInstances.length !== 0">
+        <v-col
+          cols="12"
+          sm="6"
+          lg="4"
+          v-for="{ instance } in filteredInstances"
+          :key="instance.instanceName"
         >
-          <div class="d-flex align-center gap-2">
-            <v-avatar size="50">
-              <v-img
-                v-if="instance.profilePictureUrl"
-                :src="instance.profilePictureUrl"
-              />
-              <v-icon v-else>{{ statusMapper[instance.status].icon }}</v-icon>
-            </v-avatar>
-            <div class="flex-shrink-1">
-              <v-chip
-                :color="statusMapper[instance.status].color"
-                size="x-small"
-                label
-              >
-                <v-icon
-                  v-if="statusMapper[instance.status].icon"
-                  start
+          <v-card
+            @click="goToInstance(instance)"
+            class="pa-2 rounded-lg"
+            variant="outlined"
+            :disabled="loading"
+          >
+            <div class="d-flex align-center gap-2">
+              <v-avatar size="50">
+                <v-img
+                  v-if="instance.profilePictureUrl"
+                  :src="instance.profilePictureUrl"
+                />
+                <v-icon v-else>{{ statusMapper[instance.status].icon }}</v-icon>
+              </v-avatar>
+              <div class="flex-shrink-1">
+                <v-chip
+                  :color="statusMapper[instance.status].color"
+                  size="x-small"
+                  label
+                >
+                  <v-icon
+                    v-if="statusMapper[instance.status].icon"
+                    start
+                    size="x-small"
+                  >
+                    {{ statusMapper[instance.status].icon }}
+                  </v-icon>
+                  {{ statusMapper[instance.status].text }}
+                </v-chip>
+                <h5>{{ instance.instanceName }}</h5>
+              </div>
+              <div class="ml-auto flex-shrink-0">
+                <v-btn
+                  :disabled="loading || !!loadingDelete"
+                  :loading="loadingDelete === instance.instanceName"
+                  @click.stop="deleteInstance(instance.instanceName)"
+                  icon
+                  variant="tonal"
+                  color="error"
                   size="x-small"
                 >
-                  {{ statusMapper[instance.status].icon }}
-                </v-icon>
-                {{ statusMapper[instance.status].text }}
-              </v-chip>
-              <h5>{{ instance.instanceName }}</h5>
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </div>
             </div>
-            <div class="ml-auto flex-shrink-0">
-              <!-- <v-btn
-                :disabled="loading"
-                :to="`/${instance.instanceName}`"
-                icon
-                size="x-small"
-                class="mr-1"
-                variant="tonal"
-                color="info"
-              >
-                <v-icon>mdi-cog</v-icon>
-              </v-btn> -->
-              <v-btn
-                :disabled="loading || !!loadingDelete"
-                :loading="loadingDelete === instance.instanceName"
-                @click.stop="deleteInstance(instance.instanceName)"
-                icon
-                variant="tonal"
-                color="error"
-                size="x-small"
-              >
-                <v-icon>mdi-delete</v-icon>
-              </v-btn>
-            </div>
-          </div>
-        </v-card>
+          </v-card>
+        </v-col>
+      </template>
+      <v-col v-else cols="12">
+        <v-alert type="info" class="mb-4" outlined>
+          Nenhuma instância encontrada
+        </v-alert>
       </v-col>
     </v-row>
     <v-alert v-if="error" type="error">
@@ -122,16 +156,8 @@ export default {
     loadingDelete: false,
     error: false,
     statusMapper: statusMapper,
-    headers: [
-      {
-        title: "Nome",
-        align: "start",
-        sortable: true,
-        key: "instance.instanceName",
-      },
-      { title: "Status", key: "instance.status" },
-      { title: "Ações", key: "actions", sortable: false, align: "center" },
-    ],
+    statusFilter: false,
+    search: "",
   }),
   methods: {
     addInstance() {
@@ -176,9 +202,24 @@ export default {
     loading() {
       return this.loadingInner || this.AppStore.connecting;
     },
-
     instances() {
       return this.AppStore.instances;
+    },
+    filteredInstances() {
+      const instances = this.instances.filter((instance) => {
+        if (!this.statusFilter) return true;
+        return instance.instance.status === this.statusFilter;
+      });
+
+      if (!this.search) return instances;
+      return instances.filter((instance) => {
+        const search = this.search.trim().toLowerCase();
+
+        return (
+          instance.instance.instanceName.toLowerCase().includes(search) ||
+          instance.instance.owner.toLowerCase().includes(search)
+        );
+      });
     },
   },
   mounted() {},

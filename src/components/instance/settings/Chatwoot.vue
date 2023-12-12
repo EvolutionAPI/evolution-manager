@@ -139,11 +139,12 @@
               v-model="chatwootData.auto_create"
               label="Conversa pendente"
               :disabled="loading || !AppStore.versionSatisfies('>=1.6.0')"
-              :error-messages="[
+              :hint="[
                 !AppStore.versionSatisfies('>=1.6.0')
                   ? 'Disponível a partir da versão 1.6.0'
                   : undefined,
               ]"
+              :persistent-hint="!AppStore.versionSatisfies('>=1.6.0')"
               hide-details="auto"
               class="mb-3"
               density="compact"
