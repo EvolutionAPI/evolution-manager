@@ -1,7 +1,7 @@
 {
   "name": "evolution-manager",
   "description": "Evolution Manager is an open-source interface for managing the Evolution API, simplifying the creation and administration of API instances with advanced features and diverse integrations.",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "main": "dist",
   "engines": {
     "node": ">=16.0.0"
@@ -19,10 +19,14 @@
   "dependencies": {
     "@mdi/font": "7.0.96",
     "@vitejs/plugin-vue": "^4.0.0",
+    "ansi-colors": "^4.1.3",
     "axios": "^1.6.0",
+    "cli-progress": "^3.12.0",
     "core-js": "^3.29.0",
     "eslint": "^8.37.0",
     "eslint-plugin-vue": "^9.3.0",
+    "inquirer": "^8.0.0",
+    "mongoose": "^8.0.3",
     "optimist": "^0.6.1",
     "pinia": "^2.0.0",
     "pm2": "^5.3.0",
