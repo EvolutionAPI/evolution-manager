@@ -143,7 +143,7 @@ export default {
           value: "createdAt",
         },
         {
-          title: this.$t("typebot.session.headers.updateAt"),
+          title: this.$t("typebot.session.headers.updatedAt"),
           value: "updateAt",
         },
         { title: "", value: "actions" },

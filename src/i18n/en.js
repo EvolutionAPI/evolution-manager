@@ -110,5 +110,5 @@ export default {
       paused: "Paused",
       closed: "Closed",
     }
-  }
+  },
 }
