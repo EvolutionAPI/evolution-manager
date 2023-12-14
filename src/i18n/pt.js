@@ -41,6 +41,7 @@ export default {
     profile: "Perfil",
   },
   connectPhone: {
-    title: "Telefone não conectado"
+    title: "Telefone não conectado",
+    apiGenericError: "Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente."
   }
 }

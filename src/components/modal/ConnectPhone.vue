@@ -98,9 +98,7 @@ export default {
           this.AppStore.reconnect();
           return;
         } else
-          throw new Error(
-            "Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente."
-          );
+          throw new Error(this.$t('connectPhone.apiGenericError'));
 
         this.timeout = setTimeout(this.loadQr, 40000);
         this.disabledRefresh = true;
