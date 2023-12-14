@@ -36,9 +36,9 @@
           class="mb-3"
           :rules="[
             (url) => {
-              if (!url) return 'URL é obrigatório';
+              if (!url) return this.$t('required', { field: 'URL' });
               if (!url.startsWith('http'))
-                return 'URL deve começar com http ou https';
+                return this.$t('httpHttps', { field: 'URL' });
               return true;
             },
           ]"
@@ -48,7 +48,7 @@
           <div class="flex-grow-1">
             <v-text-field
               v-model="chatwootData.account_id"
-              label="ID da conta"
+              :label="$t('chatwoot.account_id')"
               :disabled="loading"
               outlined
               dense
@@ -56,7 +56,10 @@
               class="mb-3"
               :rules="[
                 (account_id) => {
-                  if (!account_id) return 'ID da conta é obrigatório';
+                  if (!account_id)
+                    return this.$t('required', {
+                      field: this.$t('chatwoot.account_id'),
+                    });
                   return true;
                 },
               ]"
@@ -65,7 +68,7 @@
           <div class="flex-grow-1">
             <v-text-field
               v-model="chatwootData.token"
-              label="Token da conta"
+              :label="$t('chatwoot.token')"
               :disabled="loading"
               outlined
               dense
@@ -73,7 +76,10 @@
               class="mb-3"
               :rules="[
                 (token) => {
-                  if (!token) return 'Token é obrigatório';
+                  if (!token)
+                    return this.$t('required', {
+                      field: this.$t('chatwoot.token'),
+                    });
                   return true;
                 },
               ]"
@@ -90,27 +96,23 @@
               density="compact"
             >
               <template v-slot:label>
-                <span>Assinar mensagens</span>
-                <HelpTooltip>
-                  Adiciona o nome do atendente na primeira linha da mensagem
-                </HelpTooltip>
+                <span>{{ $t("chatwoot.signMsg") }}</span>
+                <HelpTooltip> {{ $t("chatwoot.signMsgHelp") }} </HelpTooltip>
               </template>
             </v-checkbox>
           </div>
           <div>
             <v-checkbox
               v-model="chatwootData.reopen_conversation"
-              label="Reabrir conversa"
               :disabled="loading"
               hide-details
               class="mb-3"
               density="compact"
             >
               <template v-slot:label>
-                <span>Reabrir conversa</span>
+                <span>{{ $t("chatwoot.reopenConversation") }}</span>
                 <HelpTooltip>
-                  Reabre a conversa do cliente quando ele inicia uma nova
-                  conversa em vez de criar uma nova conversa
+                  {{ $t("chatwoot.reopenConversationHelp") }}
                 </HelpTooltip>
               </template>
             </v-checkbox>
@@ -119,16 +121,15 @@
           <div>
             <v-checkbox
               v-model="chatwootData.conversation_pending"
-              label="Conversa pendente"
               :disabled="loading"
               hide-details
               class="mb-3"
               density="compact"
             >
               <template v-slot:label>
-                <span>Iniciar conversas como pendente</span>
+                <span>{{ $t("chatwoot.conversationPending") }}</span>
                 <HelpTooltip>
-                  Inicia a conversa como pendente ao invés de aberta
+                  {{ $t("chatwoot.conversationPendingHelp") }}
                 </HelpTooltip>
               </template>
             </v-checkbox>
@@ -137,11 +138,10 @@
           <div>
             <v-checkbox
               v-model="chatwootData.auto_create"
-              label="Conversa pendente"
               :disabled="loading || !AppStore.versionSatisfies('>=1.6.0')"
               :hint="
                 !AppStore.versionSatisfies('>=1.6.0')
-                  ? 'Disponível a partir da versão 1.6.0'
+                  ? $t('version.availableFrom', { version: '1.6.0' })
                   : undefined
               "
               :persistent-hint="!AppStore.versionSatisfies('>=1.6.0')"
@@ -150,10 +150,8 @@
               density="compact"
             >
               <template v-slot:label>
-                <span>Criar Caixa de Entrada</span>
-                <HelpTooltip>
-                  Cria automaticamente a caixa de entrada no Chatwoot
-                </HelpTooltip>
+                <span>{{ $t("chatwoot.autoCreate") }}</span>
+                <HelpTooltip>{{ $t("chatwoot.autoCreateHelp") }}</HelpTooltip>
               </template>
             </v-checkbox>
           </div>

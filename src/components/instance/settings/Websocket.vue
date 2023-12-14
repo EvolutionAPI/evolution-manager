@@ -30,7 +30,7 @@
           :items="websocketEventsType"
           v-model="websocketData.events"
           :disabled="loading"
-          label="Eventos"
+          :label="$t('events')"
           hide-details
           class="mb-3"
           multiple
@@ -43,7 +43,7 @@
     <v-card-actions v-if="expanded">
       <v-switch
         v-model="websocketData.enabled"
-        label="Habilitado"
+        :label="$t('enabled')"
         color="primary"
         :disabled="loading"
         hide-details
@@ -59,7 +59,7 @@
         @click="saveWebsocket"
         variant="tonal"
       >
-        Salvar
+        {{ $t("save") }}
       </v-btn>
     </v-card-actions>
   </v-card>

@@ -36,9 +36,9 @@
           class="mb-3"
           :rules="[
             (url) => {
-              if (!url) return 'URL é obrigatório';
+              if (!url) return this.$t('required', { field: 'URL' });
               if (!url.startsWith('http'))
-                return 'URL deve começar com http ou https';
+                return this.$t('httpHttps', { field: 'URL' });
               return true;
             },
           ]"
@@ -48,7 +48,7 @@
           :items="webhookEventsType"
           v-model="webhookData.events"
           :disabled="loading"
-          label="Eventos"
+          :label="$t('events')"
           hide-details
           class="mb-3"
           multiple
@@ -72,11 +72,17 @@
             <v-checkbox
               v-model="webhookData.webhook_by_events"
               :disabled="loading"
-              label="Webhook por eventos"
               hide-details
               class="mb-3"
               density="compact"
-            />
+            >
+              <template v-slot:label>
+                <span>{{ $t("webhook.byEvents") }}</span>
+                <HelpTooltip>
+                  {{ $t("webhook.byEventsHelp") }}
+                </HelpTooltip>
+              </template>
+            </v-checkbox>
           </div>
         </div>
       </v-form>
@@ -84,7 +90,7 @@
     <v-card-actions v-if="expanded">
       <v-switch
         v-model="webhookData.enabled"
-        label="Habilitado"
+        :label="$t('enabled')"
         color="primary"
         :disabled="loading"
         hide-details
@@ -100,7 +106,7 @@
         @click="saveWebhook"
         variant="tonal"
       >
-        Salvar
+        {{ $t("save") }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -165,7 +171,7 @@ export default {
     toggleExpanded() {
       if (this.loading) return;
       this.expanded = !this.expanded;
-    },    
+    },
     async saveWebhook() {
       try {
         this.loading = true;

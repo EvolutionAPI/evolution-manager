@@ -98,9 +98,9 @@
             @click="save(conect)"
           >
             <v-list-item-content>
-              <v-list-item-title>{{
-                conect.host.replace(/https?:\/\//, "")
-              }}</v-list-item-title>
+              <v-list-item-title>
+                {{ conect.host.replace(/https?:\/\//, "") }}
+              </v-list-item-title>
 
               <!-- <v-list-item-subtitle>
                 {{ connection.globalApiKey.slice(0, 10) }}...
@@ -216,10 +216,7 @@ export default {
         (v) =>
           new RegExp(`^(${!this.isHttps ? "http|" : ""}https)://`, "i").test(
             v
-          ) ||
-          (this.isHttps
-            ? "URL inválida, ela deve começar com https"
-            : "URL inválida, ela deve começar com http ou https"),
+          ) || this.$t(this.isHttps ? "https" : "httpHttps", { field: "URL" }),
       ];
     },
   },

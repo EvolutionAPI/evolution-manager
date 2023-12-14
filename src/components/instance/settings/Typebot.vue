@@ -36,9 +36,9 @@
           class="mb-3"
           :rules="[
             (url) => {
-              if (!url) return 'URL é obrigatório';
+              if (!url) return $t('required', { field: 'URL' });
               if (!url.startsWith('http'))
-                return 'URL deve começar com http ou https';
+                return $t('httpHttps', { field: 'URL' });
               return true;
             },
           ]"
@@ -48,16 +48,17 @@
           <div class="flex-grow-1">
             <v-text-field
               v-model="typebotData.typebot"
-              label="Nome do fluxo do Typebot"
+              :label="$t('typebot.typebot')"
               :disabled="loading"
               outlined
               dense
               hide-details="auto"
               class="mb-3"
-              hint="O nome do fluxo do Typebot que será utilizado"
+              :hint="$t('typebot.typebotHelp')"
               :rules="[
                 (account_id) => {
-                  if (!account_id) return 'Typebot é obrigatório';
+                  if (!account_id)
+                    return $t('required', { field: $t('typebot.typebot') });
                   return true;
                 },
               ]"
@@ -66,18 +67,20 @@
           <div class="flex-grow-1">
             <v-text-field
               v-model="typebotData.keyword_finish"
-              label="Palavra-chave de finalização"
+              :label="$t('typebot.keywordFinish')"
               placeholder="#SAIR"
               :disabled="loading"
               outlined
               dense
               hide-details="auto"
               class="mb-3"
-              hint="Palavra-chave para finalizar o fluxo"
+              :hint="$t('typebot.keywordFinishHelp')"
               :rules="[
                 (token) => {
                   if (!token)
-                    return 'Palavra-chave de finalização é obrigatório';
+                    return $t('required', {
+                      field: $t('typebot.keywordFinish'),
+                    });
                   return true;
                 },
               ]"
@@ -89,19 +92,19 @@
           <div class="flex-grow-1">
             <v-text-field
               v-model="typebotData.expire"
-              label="Tempo de expiração (em minutos)"
+              :label="$t('typebot.expire')"
               :disabled="loading"
               type="number"
               min="0"
               outlined
               dense
               hide-details="auto"
-              hint="Tempo para encerrar a sessão caso não haja interação"
+              :hint="$t('typebot.expireHelp')"
               class="mb-3"
               :rules="[
                 (v) => {
                   if (v === '' || v === undefined)
-                    return 'Tempo de expiração é obrigatório';
+                    return $t('required', { field: $t('typebot.expire') });
                   return true;
                 },
               ]"
@@ -110,10 +113,12 @@
           <div class="flex-grow-1">
             <v-text-field
               v-model="typebotData.delay_message"
-              label="Tempo de atraso da mensagem (em milisegundos)"
+              :label="`${$t('typebot.delayMessage')} (${$t(
+                'typebot.delayMessageUnit'
+              )})`"
               type="number"
               min="0"
-              :hint="`Tempo de simulação de digitação - ${
+              :hint="`${$t('typebot.delayMessageHelp')} - ${
                 typebotData.delay_message
               }ms = ${(typebotData.delay_message / 1000)
                 .toFixed(1)
@@ -126,7 +131,9 @@
               :rules="[
                 (token) => {
                   if (token == null || token < 0)
-                    return 'Palavra-chave de finalização é obrigatório';
+                    return $t('required', {
+                      field: $t('typebot.delayMessage'),
+                    });
                   return true;
                 },
               ]"
@@ -136,7 +143,7 @@
 
         <v-text-field
           v-model="typebotData.unknown_message"
-          label="Mensagem de desconhecido"
+          :label="$t('typebot.unknownMessage')"
           :disabled="loading"
           outlined
           dense
@@ -144,7 +151,8 @@
           class="mb-3"
           :rules="[
             (token) => {
-              if (!token) return 'Mensagem de desconhecido é obrigatório';
+              if (!token)
+                return $t('required', { field: $t('typebot.unknownMessage') });
               return true;
             },
           ]"
@@ -154,13 +162,12 @@
           <v-checkbox
             class="flex-shrink-1"
             v-model="typebotData.listening_from_me"
-            label="Ouvir mensagens enviadas por mim"
             :disabled="loading"
           >
             <template v-slot:label>
-              <span>Ouvir mensagens enviadas por mim</span>
+              <span>{{ $t("typebot.listeningFromMe") }}</span>
               <HelpTooltip>
-                Envia as mensagens enviadas por você para o fluxo do Typebot
+                {{ $t("typebot.listeningFromMeHelp") }}
               </HelpTooltip>
             </template>
           </v-checkbox>
@@ -170,7 +177,7 @@
     <v-card-actions v-if="expanded">
       <v-switch
         v-model="typebotData.enabled"
-        label="Habilitado"
+        :label="$t('enabled')"
         color="primary"
         :disabled="loading"
         hide-details
@@ -182,9 +189,7 @@
         @click="openTypebotSessions"
         size="small"
       >
-        ver {{ typebotData.sessions.length }} sess{{
-          typebotData.sessions.length != 1 ? "ões" : "ão"
-        }}
+        {{ $t("typebot.session.btn", { count: typebotData.sessions.length }) }}
       </v-btn>
 
       <v-spacer></v-spacer>
@@ -199,7 +204,7 @@
         @click="saveTypebot"
         variant="tonal"
       >
-        Salvar
+        {{ $t("save") }}
       </v-btn>
     </v-card-actions>
   </v-card>

@@ -1,8 +1,13 @@
 <template>
   <v-card variant="outlined" :loading="loading">
-    <v-card-title class="d-flex align-center" @click="toggleExpanded" style="cursor: pointer" v-ripple>
+    <v-card-title
+      class="d-flex align-center"
+      @click="toggleExpanded"
+      style="cursor: pointer"
+      v-ripple
+    >
       <v-icon start>mdi-cellphone-cog</v-icon>
-      Comportamento
+      {{ $t("options.title") }}
 
       <v-spacer></v-spacer>
       <v-btn
@@ -27,7 +32,7 @@
             class="flex-grow-0 flex-shrink-0"
             v-model="optionsData.reject_call"
             :disabled="loading"
-            label="Rejeitar chamadas"
+            :label="$t('options.rejectCall')"
             hide-details
             density="compact"
           ></v-checkbox>
@@ -35,7 +40,7 @@
             class="flex-grow-1 flex-shrink-0"
             v-model="optionsData.msg_call"
             :disabled="loading || !optionsData.reject_call"
-            label="Mensagem de rejeição"
+            :label="$t('options.msgCall')"
             hide-details
             style="min-width: 200px"
           ></v-text-field>
@@ -45,7 +50,7 @@
             class="flex-grow-0"
             v-model="optionsData.groups_ignore"
             :disabled="loading"
-            label="Ignorar grupos"
+            :label="$t('options.groupsIgnore')"
             hide-details
             density="compact"
           ></v-checkbox>
@@ -54,7 +59,7 @@
             class="flex-grow-0"
             v-model="optionsData.always_online"
             :disabled="loading"
-            label="Sempre online"
+            :label="$t('options.alwaysOnline')"
             hide-details
             density="compact"
           ></v-checkbox>
@@ -63,7 +68,7 @@
             class="flex-grow-0"
             v-model="optionsData.read_messages"
             :disabled="loading"
-            label="Marcar mensagens como lidas"
+            :label="$t('options.readMessages')"
             hide-details
             density="compact"
           ></v-checkbox>
@@ -72,7 +77,7 @@
             class="flex-grow-0"
             v-model="optionsData.read_status"
             :disabled="loading"
-            label="Marcar status como visto"
+            :label="$t('options.readStatus')"
             hide-details
             density="compact"
           ></v-checkbox>
@@ -91,7 +96,7 @@
         @click="saveOptions"
         variant="tonal"
       >
-        Salvar
+        {{ $t("save") }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -101,14 +106,13 @@
 import instanceController from "@/services/instanceController";
 
 const defaultOptions = () => ({
-      reject_call: false,
-      msg_call: "",
-      groups_ignore: false,
-      always_online: false,
-      read_messages: false,
-      read_status: false,
-    })
-
+  reject_call: false,
+  msg_call: "",
+  groups_ignore: false,
+  always_online: false,
+  read_messages: false,
+  read_status: false,
+});
 
 export default {
   name: "InstanceOptions",
@@ -154,7 +158,10 @@ export default {
           this.instance.instance.instanceName,
           this.optionsData
         );
-        this.defaultOptionsData = Object.assign(defaultOptions(), this.optionsData);
+        this.defaultOptionsData = Object.assign(
+          defaultOptions(),
+          this.optionsData
+        );
       } catch (e) {
         this.error = e.message?.message || e.message || e;
       } finally {

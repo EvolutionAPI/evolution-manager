@@ -1,6 +1,11 @@
 <template>
   <v-card variant="outlined" :loading="loading">
-    <v-card-title class="d-flex align-center" @click="toggleExpanded" style="cursor: pointer" v-ripple>
+    <v-card-title
+      class="d-flex align-center"
+      @click="toggleExpanded"
+      style="cursor: pointer"
+      v-ripple
+    >
       <v-icon start>mdi-rabbit</v-icon>
       RabbitMQ
 
@@ -22,8 +27,7 @@
       </v-alert>
 
       <v-alert type="info" class="mb-3">
-        O RabbitMQ é utilizado pela API para o enfileiramento das notificações.
-        Ele NÃO é utilizado para o envio de mensagens.
+        {{ $t("rabbitmq.info") }}
       </v-alert>
 
       <v-form v-model="valid">
@@ -31,7 +35,7 @@
           :items="rabbitmqEventsType"
           v-model="rabbitmqData.events"
           :disabled="loading"
-          label="Eventos"
+          :label="$t('events')"
           hide-details
           class="mb-3"
           multiple
@@ -44,7 +48,7 @@
     <v-card-actions v-if="expanded">
       <v-switch
         v-model="rabbitmqData.enabled"
-        label="Habilitado"
+        :label="$t('enabled')"
         color="primary"
         :disabled="loading"
         hide-details
@@ -60,8 +64,8 @@
         @click="saveRabbitmq"
         variant="tonal"
       >
-        Salvar
-      </v-btn>
+        {{ $t("save") }}
+    </v-btn>
     </v-card-actions>
   </v-card>
 </template>

@@ -3,7 +3,7 @@
   <v-dialog v-model="dialog" max-width="850px" scrollable>
     <v-card>
       <v-card-title class="d-flex align-center">
-        Sessões do Typebot
+        {{ $t("typebot.session.title") }}
         <v-spacer />
         <h3>{{ sessions.length }}</h3>
         <v-btn
@@ -21,7 +21,7 @@
           :headers="headers"
           :items="sessions"
           :no-data-text="
-            loading ? 'Carregando...' : 'Nenhuma sessão encontrada'
+            loading ? `${$t('loading')}...` : $t('typebot.session.noData')
           "
           :rows-per-page-items="[10, 25, 50, 100]"
         >
@@ -33,7 +33,7 @@
           <template v-slot:item.status="{ item }">
             <v-chip :color="item.status.color" label size="small">
               <v-icon start>{{ item.status.icon }}</v-icon>
-              {{ item.status.text }}
+              {{ $t(`typebot.status.${item.status.id}`) }}
             </v-chip>
           </template>
           <template v-slot:item.variables="{ item }">
@@ -114,7 +114,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn text @click="dialog = false" :disabled="loading || loadingInner">
-          Fechar
+          {{ $t("close") }}
         </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
@@ -127,19 +127,30 @@ import typebotStatus from "@/helpers/mappers/typebotStatus";
 import instanceController from "@/services/instanceController";
 export default {
   name: "SettingsModal",
-  data: () => ({
-    dialog: false,
-    typebotStatus,
-    headers: [
-      { title: "Número", value: "remoteJid" },
-      { title: "Status", value: "status" },
-      { title: "Variáveis", value: "variables" },
-      { title: "Iniciada em", value: "createdAt" },
-      { title: "Última mensagem", value: "updateAt" },
-      { title: "", value: "actions" },
-    ],
-    loadingInner: false,
-  }),
+  data() {
+    return {
+      dialog: false,
+      typebotStatus,
+      headers: [
+        { title: "Whatsapp", value: "remoteJid" },
+        { title: "Status", value: "status" },
+        {
+          title: this.$t("typebot.session.headers.variables"),
+          value: "variables",
+        },
+        {
+          title: this.$t("typebot.session.headers.createdAt"),
+          value: "createdAt",
+        },
+        {
+          title: this.$t("typebot.session.headers.updateAt"),
+          value: "updateAt",
+        },
+        { title: "", value: "actions" },
+      ],
+      loadingInner: false,
+    };
+  },
   methods: {
     open() {
       this.dialog = true;
