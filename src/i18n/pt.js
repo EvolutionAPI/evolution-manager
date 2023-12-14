@@ -1,15 +1,21 @@
-
+// src/i18n/pt.js
 import { pt } from 'vuetify/locale'
-
 
 export default {
   $vuetify: { ...pt },
   all: "Todo | Todos",
   close: "Fechar",
+  cancel: "Cancelar",
+  restart: "Reiniciar",
+  restarted: "Reiniciada",
+  refresh: "Atualizar",
+  disconnect: "Desconectar",
+  sure: "Tem certeza?",
   instance: "Instância | Instâncias",
   search: "Pesquisar",
   loading: "Carregando",
   noInstances: "Nenhuma instância encontrada",
+  unknown: "Desconhecido",
   status: {
     close: "Desconectado",
     connecting: "Conectando",
@@ -28,8 +34,13 @@ export default {
     title: "Configurar conexão",
     action: "Conectar",
     saved: "Conexão salva | Conexões salvas",
+  },
+  instanceTabs: {
+    settings: "Configurações",
+    message: "Mensagens",
+    profile: "Perfil",
+  },
+  connectPhone: {
+    title: "Telefone não conectado"
   }
-
-
-
 }

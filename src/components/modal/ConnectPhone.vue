@@ -1,17 +1,23 @@
 <template>
-  <v-card v-if="instance.instance?.status != 'open'" @click="startConnect" elevation="0">
+  <v-card
+    v-if="instance.instance?.status != 'open'"
+    @click="startConnect"
+    elevation="0"
+  >
     <v-alert
       icon="mdi-qrcode-scan"
       color="deep-orange-darken-2"
       class="text-white"
     >
       <div class="d-flex justify-space-between align-center flex-wrap">
-        <b>Telefone não conectado</b>
-        <v-btn @click="startConnect" size="small"> Conectar </v-btn>
+        <b>{{ $t("connectPhone.title") }}</b>
+        <v-btn @click="startConnect" size="small">
+          {{ $t("connection.action") }}
+        </v-btn>
       </div>
     </v-alert>
   </v-card>
-  <v-dialog v-model="dialog" max-width="350px">
+  <v-dialog v-model="dialog" max-width="350px" :persistent="loading">
     <v-card :loading="loading && qrCode">
       <v-card-text class="pt-6">
         <v-img v-if="qrCode" :src="qrCode" width="300px" height="300px" />
@@ -38,7 +44,7 @@
           class="mt-2"
         >
           <v-icon start size="small">mdi-refresh</v-icon>
-          Atualizar
+          {{ $t("refresh") }}
         </v-btn>
 
         <v-alert type="error" v-if="error" class="mt-2">
@@ -47,7 +53,9 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false" :disabled="loading"> Cancel </v-btn>
+        <v-btn text @click="dialog = false" :disabled="loading">
+          {{ $t("cancel") }}
+        </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>

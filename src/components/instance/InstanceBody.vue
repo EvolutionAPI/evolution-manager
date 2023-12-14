@@ -2,7 +2,7 @@
   <v-tabs v-model="tab" background-color="transparent" color="primary" grow>
     <v-tab v-for="tab in tabs" :key="tab.id" :value="tab.id">
       <v-icon start>{{ tab.icon }}</v-icon>
-      {{ tab.title }}
+      {{ $t(`instanceTabs.${tab.id}`) }}
     </v-tab>
   </v-tabs>
 
@@ -62,7 +62,6 @@ export default {
       {
         id: "settings",
         icon: "mdi-cog",
-        title: "Configurações",
         components: [
           "Options",
           "Webhook",
@@ -75,7 +74,6 @@ export default {
       {
         id: "message",
         icon: "mdi-message",
-        title: "Mensagens",
         components: [
           "OpenSendMessage",
           "HasWhatsapp",
@@ -87,7 +85,6 @@ export default {
       {
         id: "profile",
         icon: "mdi-account",
-        title: "Perfil",
         components: [
           "ConnectionAlert",
           "BasicInfo",

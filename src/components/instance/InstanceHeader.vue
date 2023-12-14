@@ -63,7 +63,7 @@
         size="small"
       >
         <v-icon start>mdi-restart</v-icon>
-        {{ restart.success ? "Reiniciada!" : "Reiniciar" }}
+        {{ restart.success ? `${$t("restarted")}` : `${$t("restart")}` }}
       </v-btn>
       <v-btn
         @click="disconnectInstance"
@@ -76,7 +76,7 @@
         size="small"
       >
         <v-icon start>mdi-cellphone-nfc-off</v-icon>
-        {{ disconnect.confirm ? "Tem Certeza?" : "Desconectar" }}
+        {{ disconnect.confirm ? `${$t("sure")}` : `${$t("disconnect")}` }}
       </v-btn>
     </div>
   </v-card>
@@ -157,10 +157,8 @@ export default {
   computed: {
     owner() {
       if (!this.instance?.instance?.owner)
-        return (
-          this.statusMapper[this.instance.instance.status]?.text ||
-          "Desconhecido"
-        );
+        return this.$t(`status.${this.instance.instance.status}`) || this.$t("unknown");
+
       return (this.instance?.instance?.owner || "").split("@")[0];
     },
   },
