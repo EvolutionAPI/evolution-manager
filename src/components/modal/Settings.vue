@@ -7,7 +7,7 @@
     <v-card>
       <v-card-text>
         <v-form v-model="valid">
-          <h3 class="mb-4">Configurar conexão</h3>
+          <h3 class="mb-4">{{ $t("connection.title") }}</h3>
           <v-text-field
             v-model="connection.host"
             label="URL"
@@ -32,7 +32,7 @@
       </v-card-text>
       <v-card-actions>
         <div class="d-flex flex-wrap justify-space-between w-100 align-center">
-          <v-btn size="small" text @click="showAbout"> Sobre </v-btn>
+          <v-btn size="small" text @click="showAbout"> {{ $t('about.title') }} </v-btn>
           <div class="d-flex justify-end flex-grow-1 gap-1">
             <v-btn
               v-if="!!AppStore.connection.host"
@@ -72,8 +72,8 @@
               :disabled="!valid"
               :loading="loading"
             >
-              Conectar
-            </v-btn>
+            {{ $t('connection.action')  }}
+          </v-btn>
           </div>
         </div>
       </v-card-actions>
@@ -81,7 +81,7 @@
 
     <v-card class="mt-2" v-if="connectionsList && connectionsList.length > 1">
       <v-card-text>
-        <h3 class="mb-4">Conexões salvas</h3>
+        <h3 class="mb-4">{{ $t('connection.saved') }}</h3>
         <v-list>
           <v-list-item
             v-for="conect in connectionsList"

@@ -100,7 +100,8 @@
               class="mb-3"
               :rules="[
                 (v) => {
-                  if (!v) return 'Tempo de expiração é obrigatório';
+                  if (v === '' || v === undefined)
+                    return 'Tempo de expiração é obrigatório';
                   return true;
                 },
               ]"

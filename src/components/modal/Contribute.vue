@@ -3,7 +3,7 @@
     <v-card>
       <v-card-text>
         <div class="d-flex flex-column align-center">
-          <h4>Contribua via PIX</h4>
+          <h4>{{$t('contribute.via')}} PIX</h4>
           <v-img
             src="@/assets/pix.svg"
             height="300px"
@@ -20,7 +20,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false" :disabled="loading"> Fechar </v-btn>
+        <v-btn text @click="dialog = false" :disabled="loading"> {{ $t('close') }} </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>

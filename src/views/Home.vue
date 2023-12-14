@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="d-flex mb-4 align-center">
-      <h3>Instancias</h3>
+      <h3>{{ $t("instance", 2) }}</h3>
       <v-spacer></v-spacer>
       <v-btn
         :disabled="loading"
@@ -20,7 +20,9 @@
         :disabled="loading"
       >
         <v-icon>mdi-plus</v-icon>
-        <span class="ml-2">Instancia</span>
+        <span class="ml-2">
+          {{ $t("instance") }}
+        </span>
       </v-btn>
     </div>
 
@@ -28,7 +30,7 @@
       <v-col cols="12" v-if="loading">
         <v-progress-linear v-if="loading" indeterminate color="info" />
         <v-alert type="info" class="mb-4" v-else :loading="loading" outlined>
-          Carregando...
+          {{ $t("loading") }}...
         </v-alert>
       </v-col>
       <v-col v-else cols="12">
@@ -53,7 +55,7 @@
               variant="outlined"
               size="x-small"
             >
-              Todos
+              {{$t("all")}}
             </v-btn>
             <v-btn
               v-for="[key, item] in Object.entries(statusMapper)"
@@ -65,7 +67,7 @@
               variant="outlined"
               size="x-small"
             >
-              {{ item.text }}
+            {{ $t(`status.${key}`) }}
             </v-btn>
           </v-btn-toggle>
         </div>
@@ -105,7 +107,7 @@
                   >
                     {{ statusMapper[instance.status].icon }}
                   </v-icon>
-                  {{ statusMapper[instance.status].text }}
+                  {{ $t(`status.${instance.status}`) }}
                 </v-chip>
                 <h5>{{ instance.instanceName }}</h5>
               </div>
@@ -128,7 +130,7 @@
       </template>
       <v-col v-else cols="12">
         <v-alert type="info" class="mb-4" outlined>
-          Nenhuma instância encontrada
+          {{ $t("noInstances") }}
         </v-alert>
       </v-col>
     </v-row>

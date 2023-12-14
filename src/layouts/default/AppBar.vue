@@ -26,16 +26,29 @@
             }}
           </p>
         </div>
-        <v-chip
-          size="x-small"
-          color="grey"
-          class="flex-shrink-0"
-        >
+        <v-chip size="x-small" color="grey" class="flex-shrink-0">
           <b>{{ AppStore.version }}</b>
         </v-chip>
       </div>
     </v-chip>
     <v-icon v-else color="error"> mdi-alert-circle </v-icon>
+    <v-menu>
+      <template v-slot:activator="{ props }">
+        <v-btn class="ml-1" v-bind="props" icon>
+          <v-icon>mdi-translate</v-icon>
+        </v-btn>
+      </template>
+      <v-list :value="currentLanguage">
+        <v-list-item
+          v-for="lang in availableLanguages"
+          :key="lang"
+          @click="changei18n(lang)"
+          :disabled="lang === currentLanguage"
+        >
+          <v-list-item-title>{{ lang }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
     <v-btn @click="openSettings" icon>
       <v-icon>mdi-cog</v-icon>
     </v-btn>
@@ -61,6 +74,10 @@ export default {
     SettingsModal,
   },
   methods: {
+    changei18n(locale) {
+      this.$vuetify.locale.current = locale;
+      window.localStorage.setItem("locale", locale);
+    },
     toggleTheme() {
       const theme = this.theme.global.current.dark ? "light" : "dark";
       this.theme.global.name = theme;
@@ -90,6 +107,12 @@ export default {
   computed: {
     dark() {
       return this.theme.global.current.dark;
+    },
+    availableLanguages() {
+      return this.$i18n.availableLocales;
+    },
+    currentLanguage() {
+      return this.$i18n.locale;
     },
   },
   async mounted() {

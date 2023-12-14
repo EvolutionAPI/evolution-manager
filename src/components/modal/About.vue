@@ -50,15 +50,7 @@
             necessário que o servidor da Evolution API seja acessado através de
             uma conexão segura (HTTPS).
           </v-alert>
-
-          <h3 class="mt-5 mb-2">Limitações do Projeto</h3>
-          <p>
-            Como um projeto open-source mantido por voluntários, não há
-            garantias de atualizações futuras. A independência do Evolution
-            Manager em relação à Evolution API significa que alterações na API
-            podem afetar a funcionalidade do Manager.
-          </p>
-
+          
           <span class="mt-5 mb-2 text-disabled">Versão: {{ version }}</span>
         </div>
       </v-card-text>

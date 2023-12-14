@@ -9,7 +9,7 @@
           color="blue"
           >
           <v-icon start> mdi-information </v-icon>
-          Sobre
+          {{ $t("about.title") }}
         </v-btn>
         <v-btn
         @click="contribute"
@@ -18,7 +18,7 @@
           color="light-blue-lighten-1"
         >
           <v-icon start>mdi-hand-coin</v-icon>
-          Contribua com o projeto
+          {{ $t("contribute.button") }}
         </v-btn>
         <p style="font-size: 12px" class="text-disabled">v{{ version }}</p>
       </div>

@@ -10,11 +10,35 @@ import 'vuetify/styles'
 
 // Composables
 import { createVuetify } from 'vuetify'
+import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
+import { createI18n, useI18n } from 'vue-i18n'
+
+
+// import all files from src/i18n
+const messages = Object.fromEntries(
+  Object.entries(
+    import.meta.globEager('../i18n/*.js')
+  ).map(([key, value]) => {
+    const locale = key.match(/([A-Za-z0-9-_]+)\./i)[1]
+    return [locale, value.default]
+  })
+)
+
+const locale = window.localStorage.getItem('locale') || 'pt'
+export const i18n = createI18n({
+  legacy: false, // Vuetify does not support the legacy mode of vue-i18n
+  locale,
+  fallbackLocale: 'pt',
+  messages,
+})
+
+
 
 const defaultTheme = localStorage.getItem('theme') || 'light'
-
-// https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-export default createVuetify({
+export const vuetify = createVuetify({
+  locale: {
+    adapter: createVueI18nAdapter({ i18n, useI18n }),
+  },
   theme: {
     defaultTheme,
     themes: {
@@ -27,3 +51,10 @@ export default createVuetify({
     },
   },
 })
+
+
+export default {
+  vuetify,
+  i18n
+}
+
