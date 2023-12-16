@@ -11,15 +11,7 @@
           />
           <h3 class="mt-5 mb-2">Evolution Manager</h3>
           <p>
-            O Evolution Manager, independente da
-            <a
-              href="https://github.com/EvolutionAPI/evolution-api/"
-              target="_blank"
-            >
-              Evolution API</a
-            >, facilita a gestão de suas APIs com uma interface intuitiva. Ele
-            foi criado por desenvolvedores independentes, focando em melhorar a
-            experiência do usuário e a administração das funcionalidades da API.
+            {{ $t("about.description") }}
           </p>
           <div
             class="d-flex gap-x-2 gap-y-1 align-center justify-center mt-5 flex-wrap"
@@ -30,33 +22,28 @@
               color="grey-darken-3"
             >
               <v-icon start>mdi-github</v-icon>
-              Repositório no GitHub
+              GitHub
             </v-btn>
             <v-btn @click="contribute" color="light-blue">
               <v-icon start>mdi-hand-coin</v-icon>
-              Contribua com o projeto
+              {{ $t("about.contribute") }}
             </v-btn>
           </div>
 
-          <h3 class="mt-5 mb-2">Processamento de Dados</h3>
-          <p>
-            O processamento e armazenamento de dados ocorre <b>localmente</b> no
-            seu navegador, sem uso de um backend centralizado. Isso reforça a
-            segurança e privacidade, mantendo suas informações confidenciais e
-            protegidas.
-          </p>
+          <h3 class="mt-5 mb-2">{{ $t("about.dataProcess.title") }}</h3>
+          <p v-html="$t('about.dataProcess.description')" />
           <v-alert v-if="isHttps" color="info" class="mt-2" variant="tonal">
-            Por conta de todo o processamento ser realizado no navegador, é
-            necessário que o servidor da Evolution API seja acessado através de
-            uma conexão segura (HTTPS).
+            {{ $t("about.dataProcess.https") }}
           </v-alert>
-          
-          <span class="mt-5 mb-2 text-disabled">Versão: {{ version }}</span>
+
+          <span class="mt-5 mb-0 text-disabled">Versão: {{ version }}</span>
         </div>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false" block :disabled="loading"> Fechar </v-btn>
+        <v-btn text @click="dialog = false" block :disabled="loading">
+          Fechar
+        </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>
