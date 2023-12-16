@@ -34,6 +34,13 @@ export default {
   },
   about: {
     title: "About",
+    description: "Evolution Manager makes it easy to manage your APIs with an intuitive interface. It was created by independent developers, focusing on improving the user experience and administration of API functionalities.",
+    contribute: "Contribute to the project",
+    dataProcess: {
+      title: "Data Processing",
+      description: "Data processing and storage occur <b>locally</b> in your browser, without the use of a centralized backend. This reinforces security and privacy, keeping your confidential information protected.",
+      https: "Due to all processing being done in the browser, it is necessary to access the Evolution API server through a secure connection (HTTPS)."
+    },
     version: "Version",
   },
   contribute: {
