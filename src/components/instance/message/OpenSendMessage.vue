@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-message-text</v-icon>
-      Mandar mensagem
+      {{ $t("sendMessage.title") }}
       <v-spacer></v-spacer>
       <v-btn
         size="small"

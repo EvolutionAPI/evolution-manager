@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-account-box</v-icon>
-      Foto de Perfil
+      {{ $t("profilePicture.title") }}
 
       <v-spacer></v-spacer>
       <v-btn
@@ -35,7 +35,7 @@
           />
           <div v-else class="d-flex flex-column align-center">
             <v-icon size="70"> mdi-account-question </v-icon>
-            Sem foto de perfil
+            {{ $t("profilePicture.noPhoto")  }}
           </div>
         </v-avatar>
 
@@ -51,7 +51,7 @@
             size="50"
           />
           <v-icon size="50" v-else>mdi-upload</v-icon>
-          Selecionar foto
+          {{ $t("profilePicture.upload") }}
         </v-card>
         <v-card
           v-if="instance.instance.profilePictureUrl"
@@ -67,7 +67,7 @@
             size="50"
           />
           <v-icon size="50" v-else>mdi-delete</v-icon>
-          Remover foto
+          {{ $t("profilePicture.remove") }}
         </v-card>
       </div>
       <input

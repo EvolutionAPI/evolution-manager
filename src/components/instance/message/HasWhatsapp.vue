@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-account-question</v-icon>
-      Tem Whatsapp?
+      {{ $t("phoneHasWhatsApp.title") }}
       <v-spacer></v-spacer>
       <v-btn
         size="small"
@@ -27,18 +27,20 @@
 
       <v-text-field
         v-model="phone"
-        label="Número"
+        :label="$t('phoneHasWhatsApp.phone')"
         outlined
         clearable
         variant="outlined"
         density="compact"
-        class=" mt-3"
+        class="mt-3"
         hint="DDI + DDD + Número"
       />
 
       <v-alert v-if="response" :type="response.exists ? 'success' : 'error'">
         {{
-          response.exists ? "Whatsapp encontrado" : "Whatsapp não encontrado"
+          response.exists
+            ? $t("phoneHasWhatsApp.exists")
+            : $t("phoneHasWhatsApp.notExists")
         }}
 
         <v-chip v-if="response.exists" text-color="white" class="ml-2">
@@ -55,7 +57,7 @@
         @click="verifyPhone"
         variant="tonal"
       >
-        Consultar
+        {{ $t("phoneHasWhatsApp.verify") }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -95,7 +97,7 @@ export default {
         this.response = false;
 
         const phone = this.formatPhone(this.phone);
-        if (phone.length < 10) throw new Error("Número inválido");
+        if (phone.length < 10) throw new Error(this.$t("phoneHasWhatsApp.invalid"));
 
         const response = await instanceController.chat.hasWhatsapp(
           this.instance.instance.instanceName,

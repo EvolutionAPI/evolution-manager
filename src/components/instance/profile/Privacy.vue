@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-shield-account</v-icon>
-      Privacidade
+      {{ $t("privacy.title") }}
       <v-spacer></v-spacer>
       <v-btn
         size="small"
@@ -29,48 +29,60 @@
         <v-select
           v-model="privacyData.last"
           :items="WAPrivacyValue"
-          label="Visto por último"
-          :rules="[(v) => !!v || 'Visto por último é obrigatório']"
+          :label="$t('privacy.lastSeen')"
+          :rules="[
+            (v) => !!v || $t('required', { field: $t('privacy.lastSeen') }),
+          ]"
           density="comfortable"
           prepend-inner-icon="mdi-clock-outline"
         ></v-select>
         <v-select
           v-model="privacyData.online"
           :items="WAPrivacyOnlineValue"
-          label="Online"
-          :rules="[(v) => !!v || 'Online é obrigatório']"
+          :label="$t('privacy.online')"
+          :rules="[
+            (v) => !!v || $t('required', { field: $t('privacy.online') }),
+          ]"
           density="comfortable"
           prepend-inner-icon="mdi-cellphone"
         ></v-select>
         <v-select
           v-model="privacyData.profile"
           :items="WAPrivacyValue"
-          label="Foto do Perfil"
-          :rules="[(v) => !!v || 'Foto de Perfil é obrigatório']"
+          :label="$t('privacy.profilePhoto')"
+          :rules="[
+            (v) => !!v || $t('required', { field: $t('privacy.profilePhoto') }),
+          ]"
           density="comfortable"
           prepend-inner-icon="mdi-account-box"
         ></v-select>
         <v-select
           v-model="privacyData.status"
           :items="WAPrivacyValue"
-          label="Recado (Status)"
-          :rules="[(v) => !!v || 'Recado é obrigatório']"
+          :label="$t('privacy.status')"
+          :rules="[
+            (v) => !!v || $t('required', { field: $t('privacy.status') }),
+          ]"
           density="comfortable"
           prepend-inner-icon="mdi-text-short"
         ></v-select>
         <v-select
           v-model="privacyData.readreceipts"
           :items="WAReadReceiptsValue"
-          label="Confirmação de leitura"
-          :rules="[(v) => !!v || 'Confirmação de leitura é obrigatório']"
+          :label="$t('privacy.readreceipts')"
+          :rules="[
+            (v) => !!v || $t('required', { field: $t('privacy.readreceipts') }),
+          ]"
           density="comfortable"
           prepend-inner-icon="mdi-check-all"
         ></v-select>
         <v-select
           v-model="privacyData.groupadd"
           :items="WAPrivacyValue"
-          label="Ser adicionado em grupos"
-          :rules="[(v) => !!v || 'Ser adicionado em grupos é obrigatório']"
+          :label="$t('privacy.groupadd')"
+          :rules="[
+            (v) => !!v || $t('required', { field: $t('privacy.groupadd') }),
+          ]"
           density="comfortable"
           prepend-inner-icon="mdi-account-multiple-plus"
         ></v-select>
@@ -97,7 +109,7 @@
         @click="savePrivacy"
         variant="tonal"
       >
-        Salvar
+        {{ $t("save") }}
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -125,46 +137,54 @@ export default {
       required: true,
     },
   },
-  data: () => ({
-    AppStore: useAppStore(),
-    expanded: false,
-    loading: false,
-    error: false,
-    valid: false,
-    WAPrivacyValue: [
-      { value: "all", title: "Todos" },
-      { value: "contacts", title: "Contatos" },
-      { value: "contact_blacklist", title: "Contatos exeto os da lista negra" },
-      { value: "none", title: "Ninguém" },
-    ],
-    WAPrivacyOnlineValue: [
-      { value: "all", title: "Todos" },
-      { value: "match_last_seen", title: "Igual ao visto por último" },
-    ],
-    WAReadReceiptsValue: [
-      { value: "all", title: "Todos" },
-      { value: "none", title: "Ninguém" },
-    ],
+  data() {
+    return {
+      AppStore: useAppStore(),
+      expanded: false,
+      loading: false,
+      error: false,
+      valid: false,
+      WAPrivacyValue: [
+        { value: "all", title: this.$t("privacy.options.all") },
+        { value: "contacts", title: this.$t("privacy.options.contacts") },
+        {
+          value: "contact_blacklist",
+          title: this.$t("privacy.options.contactBlacklist"),
+        },
+        { value: "none", title: this.$t("privacy.options.none") },
+      ],
+      WAPrivacyOnlineValue: [
+        { value: "all", title: this.$t("privacy.options.all") },
+        {
+          value: "match_last_seen",
+          title: this.$t("privacy.options.matchLastSeen"),
+        },
+      ],
+      WAReadReceiptsValue: [
+        { value: "all", title: this.$t("privacy.options.all") },
+        { value: "none", title: this.$t("privacy.options.none") },
+      ],
 
-    privacyData: {
-      readreceipts: "all",
-      profile: "all",
-      status: "all",
-      online: "all",
-      last: "all",
-      groupadd: "all",
-      calladd: "all",
-    },
-    defaultChatwootData: {
-      readreceipts: "all",
-      profile: "all",
-      status: "all",
-      online: "all",
-      last: "all",
-      groupadd: "all",
-      calladd: "all",
-    },
-  }),
+      privacyData: {
+        readreceipts: "all",
+        profile: "all",
+        status: "all",
+        online: "all",
+        last: "all",
+        groupadd: "all",
+        calladd: "all",
+      },
+      defaultChatwootData: {
+        readreceipts: "all",
+        profile: "all",
+        status: "all",
+        online: "all",
+        last: "all",
+        groupadd: "all",
+        calladd: "all",
+      },
+    };
+  },
   methods: {
     toggleExpanded() {
       if (this.loading) return;
@@ -190,7 +210,7 @@ export default {
     },
     async loadPrivacy() {
       try {
-        if(!this.isOpen) return;
+        if (!this.isOpen) return;
         this.loading = true;
         this.error = false;
         const privacyData = await instanceController.profile.getPrivacy(

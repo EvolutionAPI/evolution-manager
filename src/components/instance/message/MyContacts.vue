@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-account-box</v-icon>
-      Meus contatos
+      {{ $t("contacts.title") }}
       <v-spacer></v-spacer>
       <v-btn
         size="small"
@@ -27,7 +27,7 @@
 
       <v-text-field
         v-model="search"
-        label="Pesquisar"
+        :label="$t('search')"
         outlined
         clearable
         variant="outlined"
@@ -38,9 +38,9 @@
 
       <v-data-table
         :headers="[
-          { title: 'Nome', value: 'pushName', sortable: true },
+          { title: $t('name'), value: 'pushName', sortable: true },
           {
-            title: 'Número',
+            title: 'Whatsapp',
             value: 'id',
           },
         ]"

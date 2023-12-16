@@ -1,14 +1,14 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px">
     <v-card>
-      <v-card-title>Mandar mensagem</v-card-title>
+      <v-card-title>{{ $t("sendMessage.title") }}</v-card-title>
       <v-card-text>
         <v-form v-model="valid">
           <v-autocomplete
             v-model="numbers"
             multiple
             chips
-            label="Para"
+            :label="$t('sendMessage.to')"
             :loading="loadingContacts"
             :items="contacts"
             v-model:search="search"
@@ -19,7 +19,10 @@
                 @click="addAndSelect"
                 :title="search"
               ></v-list-item>
-              <v-list-item v-else title="Sem contatos"></v-list-item>
+              <v-list-item
+                v-else
+                :title="$t('sendMessage.noContacts')"
+              ></v-list-item>
             </template>
             <template v-slot:chip="{ item }">
               <v-chip class="d-flex gap-1 align-center">
@@ -65,7 +68,7 @@
 
           <v-textarea
             v-model="message.textMessage.text"
-            label="Mensagem"
+            :label="$t('sendMessage.message')"
             outlined
             dense
             :rules="[
@@ -91,19 +94,25 @@
                 'paused',
               ]"
               density="compact"
-              label="Presença"
-              :rules="[(v) => !!v || 'Presença é obrigatória']"
+              :label="$t('sendMessage.presence')"
+              :rules="[
+                (v) =>
+                  !!v || $t('required', { field: $t('sendMessage.presence') }),
+              ]"
               :disabled="loading"
               class="mb-3"
             ></v-select>
             <v-text-field
               v-model="message.options.delay"
               type="number"
-              label="Delay"
+              :label="$t('sendMessage.delay')"
               density="compact"
-              :hint="`Delay em milisegundos
+              :hint="`${$t('sendMessage.delayHint')}
             (${(message.options.delay / 1000).toFixed(1)} segundos)`"
-              :rules="[(v) => !!v || 'Delay é obrigatório']"
+              :rules="[
+                (v) =>
+                  !!v || $t('required', { field: $t('sendMessage.delay') }),
+              ]"
               :disabled="loading"
               class="mb-3"
             ></v-text-field>
@@ -119,7 +128,9 @@
         </v-alert>
       </v-card-text>
       <v-card-actions>
-        <v-btn text @click="dialog = false" :disabled="loading">Fechar</v-btn>
+        <v-btn text @click="dialog = false" :disabled="loading">{{
+          $t("close")
+        }}</v-btn>
         <v-spacer></v-spacer>
         <v-btn
           color="success"
@@ -128,7 +139,7 @@
           :disabled="!valid"
           :loading="loading"
         >
-          Enviar
+          {{ $t("sendMessage.send") }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -196,9 +207,7 @@ export default {
 
         this.success = {
           messageId: messagesId.join(", "),
-          message: `Mensage${
-            this.numbers.length != 1 ? "ns" : "m"
-          } enviada com sucesso`,
+          message: this.$t("sendMessage.success", this.numbers.length),
         };
         this.message = defaultMessage();
         this.numbers = [];
