@@ -74,6 +74,8 @@ export default {
     token: "Account Token",
     signMsg: "Sign messages",
     signMsgHelp: "Adds the agent name at the first line of the message",
+    signDelimiter: "Signature delimiter",
+    signDelimiterHelp: "Delimiter used to separate the signature from the message (\\n for line break)",
     reopenConversation: "Reopen conversation",
     reopenConversationHelp: "Reopens the customer's conversation when he starts a new conversation instead of creating a new conversation",
     conversationPending: "Start conversation as pending",
