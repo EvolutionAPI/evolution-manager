@@ -34,8 +34,9 @@
     <v-icon v-else color="error"> mdi-alert-circle </v-icon>
     <v-menu>
       <template v-slot:activator="{ props }">
-        <v-btn class="ml-1" v-bind="props" icon>
-          <v-icon>mdi-translate</v-icon>
+        <v-btn class="ml-1" v-bind="props" >
+          <v-icon start>mdi-translate</v-icon>
+          {{ currentLanguage  }}
         </v-btn>
       </template>
       <v-list :value="currentLanguage">
@@ -45,7 +46,7 @@
           @click="changei18n(lang)"
           :disabled="lang === currentLanguage"
         >
-          <v-list-item-title>{{ lang }}</v-list-item-title>
+          <v-list-item-title class="text-center">{{ lang }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
