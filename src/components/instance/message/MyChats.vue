@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-message</v-icon>
-      Minhas conversas
+      {{ $t("chats.title")  }}
       <v-spacer></v-spacer>
       <v-btn
         size="small"
@@ -27,7 +27,7 @@
 
       <v-text-field
         v-model="search"
-        label="Pesquisar"
+        :label="$t('search')"
         outlined
         clearable
         variant="outlined"
@@ -38,9 +38,9 @@
 
       <v-data-table
         :headers="[
-          { title: 'Número', value: 'id' },
+          { title: 'Whatsapp', value: 'id' },
           {
-            title: 'Ultima mensagem',
+            title: $t('chats.headers.lastMsgTimestamp'),
             value: 'lastMsgTimestamp',
             options: { format: 'DD/MM/YYYY HH:mm' },
           },

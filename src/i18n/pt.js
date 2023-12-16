@@ -18,10 +18,12 @@ export default {
   noInstances: "Nenhuma instância encontrada",
   unknown: "Desconhecido",
   required: "{field} é obrigatório",
+  maxLength: "{field} deve ter no máximo {length} caracteres",
   https: "{field} deve começar com https://",
   httpHttps: "{field} deve começar com http:// ou https://",
   enabled: "Habilitado",
   events: "Eventos",
+  name: "Nome",
   version: {
     availableFrom: "Disponível a partir da versão {version}",
   },
@@ -111,6 +113,63 @@ export default {
       opened: "Aberto",
       paused: "Pausado",
       closed: "Fechado",
+    }
+  },
+  sendMessage: {
+    title: "Enviar mensagem",
+    to: "Para",
+    noContacts: "Sem contatos",
+    message: "Mensagem",
+    presence: "Presença",
+    delay: "Atraso",
+    delayHelp: "Atraso em milisegundos",
+    send: "Enviar",
+    success: "Mensagem enviada com sucesso | Mensagens enviadas com sucesso",
+  },
+  phoneHasWhatsApp: {
+    title: "Tem WhatsApp?",
+    phone: "Número do WhatsApp",
+    verify: "Consultar",
+    exists: "WhatsApp encontrado",
+    notExists: "WhatsApp não encontrado",
+    invalid: "Número inválido",
+  },
+  contacts: {
+    title: "Meus contatos",
+  },
+  groups: {
+    title: "Meus grupos",
+    headers: { creation: "Criado em", }
+  },
+  chats: {
+    title: "Minhas conversas",
+    headers: { lastMsgTimestamp: "Última mensagem", }
+  },
+  profile: {
+    title: "Nome e Recado",
+    name: "Name",
+    status: "Recado (status)"
+  },
+  profilePicture: {
+    title: "Foto de perfil",
+    noPhoto: "Sem foto de perfil",
+    upload: "Selecionar Foto",
+    remove: "Remover Foto",
+  },
+  privacy: {
+    title: "Privacidade",
+    lastSeen: "Visto por último",
+    online: "Online",
+    profilePhoto: "Foto de perfil",
+    status: "Recado (status)",
+    readreceipts: "Confirmação de leitura",
+    groupadd: "Ser adicionado a grupos",
+    options: {
+      all: "Todos",
+      contacts: "Meus contatos",
+      contactBlacklist: "Meus contatos, exceto os da lista negra",
+      matchLastSeen: "Igual ao visto por último",
+      none: "Ninguém",
     }
   }
 }

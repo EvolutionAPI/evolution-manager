@@ -18,10 +18,12 @@ export default {
   noInstances: "No instances found",
   unknown: "Unknown",
   required: "{field} is required",
+  maxLength: "{field} must have a maximum of {length} characters",
   https: "{field} must start with https://",
   httpHttps: "{field} must start with http:// or https://",
   enabled: "Enabled",
   events: "Events",
+  name: "Name",
   version: {
     availableFrom: "Available from version {version}",
   },
@@ -113,4 +115,61 @@ export default {
       closed: "Closed",
     }
   },
+  sendMessage: {
+    title: "Send message",
+    to: "To",
+    noContacts: "No contacts",
+    message: "Message",
+    presence: "Presence",
+    delay: "Delay",
+    delayHelp: "Delay in milliseconds",
+    send: "Send",
+    success: "Message sent successfully | Messages sent successfully",
+  },
+  phoneHasWhatsApp: {
+    title: "Has WhatsApp?",
+    phone: "WhatsApp number",
+    verify: "Verify",
+    exists: "WhatsApp found",
+    notExists: "WhatsApp not found",
+    invalid: "Invalid number",
+  },
+  contacts: {
+    title: "My contacts",
+  },
+  groups: {
+    title: "My groups",
+    headers: { creation: "Created at", }
+  },
+  chats: {
+    title: "My chats",
+    headers: { lastMsgTimestamp: "Last message", }
+  },
+  profile: {
+    title: "Name and Status",
+    name: "Name",
+    status: "Status"
+  },
+  profilePicture: {
+    title: "Profile Picture",
+    noPhoto: "No profile photo",
+    upload: "Select Photo",
+    remove: "Remove Photo",
+  },
+  privacy: {
+    title: "Privacy",
+    lastSeen: "Last Seen",
+    online: "Online",
+    profilePhoto: "Profile Photo",
+    status: "Status",
+    readreceipts: "Read Receipts",
+    groupadd: "Be Added to Groups",
+    options: {
+      all: "Everyone",
+      contacts: "My Contacts",
+      contactBlacklist: "My Contacts, Except Blacklisted",
+      matchLastSeen: "Match Last Seen",
+      none: "Nobody",
+    }
+  }
 }

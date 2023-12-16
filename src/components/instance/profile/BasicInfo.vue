@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-account</v-icon>
-      Nome e Recado
+      {{ $t("profile.title") }}
 
       <v-spacer></v-spacer>
       <v-btn
@@ -31,23 +31,23 @@
           class="flex-grow-1 flex-shrink-0"
           v-model="data.name"
           :disabled=" loading"
-          label="Nome"
+          :label="$t('profile.name')"
           counter
           maxlength="25"
           :rules="[
-            (v) => !!v || 'Nome é obrigatório',
-            (v) => v.length <= 25 || 'Nome deve ter no máximo 25 caracteres',
+            (v) => !!v || $t('required', { field: $t('profile.name') }),
+            (v) => v.length <= 25 || $t('maxLength', { field: $t('profile.name'), length: 25 }),
           ]"
         ></v-text-field>
         <v-text-field
           class="flex-grow-1 flex-shrink-0"
           v-model="data.status"
           :disabled="loading"
-          label="Recado (Status)"
+          :label="$t('profile.status')"
           :rules="[
-            (v) => !!v || 'Nome é obrigatório',
+            (v) => !!v || $t('required', { field: $t('profile.status') }),
             (v) =>
-              v.length <= 139 || 'Recado deve ter no máximo 139 caracteres',
+              v.length <= 139 || $t('maxLength', { field: $t('profile.status'), length: 139 }),
           ]"
           counter
           maxlength="139"
@@ -67,7 +67,7 @@
         @click="saveOptions"
         variant="tonal"
       >
-        Salvar
+        {{ $t("save") }}
       </v-btn>
     </v-card-actions>
   </v-card>

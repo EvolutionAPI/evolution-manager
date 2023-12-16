@@ -7,7 +7,7 @@
       v-ripple
     >
       <v-icon start>mdi-account-group</v-icon>
-      Meus Grupos
+      {{ $t("groups.title") }}
       <v-spacer></v-spacer>
       <v-btn
         size="small"
@@ -27,7 +27,7 @@
 
       <v-text-field
         v-model="search"
-        label="Pesquisar"
+        :label="$t('search')"
         outlined
         clearable
         variant="outlined"
@@ -38,10 +38,10 @@
 
       <v-data-table
         :headers="[
-          { title: 'Nome', value: 'subject' },
+          { title: $t('name'), value: 'subject' },
           { title: 'ID', value: 'id', align: 'center' },
           {
-            title: 'Criado em',
+            title: $t('groups.headers.creation'),
             value: 'creation',
             align: 'center',
           },

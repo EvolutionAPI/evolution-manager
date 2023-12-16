@@ -37,7 +37,7 @@
         <div class="d-flex gap-2 flex-wrap mb-2">
           <v-text-field
             v-model="search"
-            label="Pesquisar"
+            :label="$t('search')"
             density="comfortable"
             variant="outlined"
             hide-details
