@@ -12,6 +12,7 @@ export default {
   disconnect: "Desconectar",
   sure: "Tem certeza?",
   save: "Salvar",
+  step: "Passo {step}",
   instance: "Instância | Instâncias",
   search: "Pesquisar",
   loading: "Carregando",
@@ -80,6 +81,18 @@ export default {
     conversationPendingHelp: "Inicia a conversa como pendente ao invés de aberta",
     autoCreate: "Criar Caixa de Entrada",
     autoCreateHelp: "Cria a caixa de entrada no Chatwoot caso ela não exista",
+    config: {
+      btn: "Como configurar o chatwoot?",
+      title: "Como configurar a caixa de entrada do Chatwoot?",
+      fullDoc: "Ver documentação completa",
+      steps: {
+        "1": "Acesse as configurações > Caixa de Entrada e \"Adicionar Caixa\"",
+        "2": "Selecione \"API\" como tipo de caixa",
+        "3": "Preencha nome da caixa e webhook. Os valores devem ser exatamente os seguintes:",
+        "4": "Adicione os agentes à caixa de entrada.",
+        "5": "Pronto! Agora você pode receber mensagens.",
+      }
+    }
   },
   typebot: {
     typebot: "Nome do fluxo do Typebot",

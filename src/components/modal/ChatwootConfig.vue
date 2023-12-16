@@ -1,26 +1,28 @@
 <template>
   <v-dialog v-model="dialog" max-width="700px" scrollable>
     <v-card>
-      <v-card-title>
-        Como configurar a caixa de entrada do chatwoot?
-      </v-card-title>
+      <v-card-title>{{ $t("chatwoot.config.title") }}</v-card-title>
 
       <v-card-text>
         <p>
-          <b>Passo 1:</b> Acesse as configurações > Caixa de Entrada e
-          "Adicionar Caixa"
+          <b>{{ $t("step", { step: 1 }) }}:</b>
+          {{ $t("chatwoot.config.steps.1") }}
         </p>
-        <p class="mt-2"><b>Passo 2:</b> Selecione "API" como tipo de caixa</p>
-        <v-img src="@/assets/chatwoot/chatwoot_api.png" />
+        <p class="mt-2">
+          <b>{{ $t("step", { step: 2 }) }}:</b>
+          {{ $t("chatwoot.config.steps.2") }}
+
+          <v-img src="@/assets/chatwoot/chatwoot_api.png" class="ma-4 elevation-10" />
+        </p>
 
         <p class="mt-2 mb-1">
-          <b>Passo 3:</b> Preencha nome da caixa e webhook. Os valores devem ser
-          exatamente os seguintes:
+          <b>{{ $t("step", { step: 3 }) }}:</b>
+          {{ $t("chatwoot.config.steps.3") }}
         </p>
         <div class="d-flex flex-wrap gap-2">
           <v-text-field
             v-model="instanceName"
-            label="Nome"
+            label="Name"
             readonly
             variant="solo-filled"
             hide-details
@@ -48,28 +50,31 @@
         <v-img src="@/assets/chatwoot/chatwoot_api_1.png" />
 
         <!-- Step 4: Add agents to the inbox. -->
-        <p><b>Passo 4:</b> Adicione os agentes à caixa de entrada.</p>
+        <p>
+          <b>{{ $t("step", { step: 4 }) }}</b>
+          {{ $t("chatwoot.config.steps.4") }}
+        </p>
         <v-img src="@/assets/chatwoot/chatwoot_api_2.png" />
 
         <!-- Step 5: Ready. -->
-        <p><b>Passo 5:</b> Pronto! Agora você pode receber mensagens.</p>
+        <p>
+          <b>{{ $t("step", { step: 5 }) }}</b>
+          {{ $t("chatwoot.config.steps.5") }}
+        </p>
         <v-img src="@/assets/chatwoot/chatwoot_api_3.png" />
 
-        <!-- Add link to chatwoot doc -->
-        <!-- https://www.chatwoot.com/docs/product/channels/api/create-channel -->
         <v-btn
-          size="small"
           variant="text"
           block
           href="https://www.chatwoot.com/docs/product/channels/api/create-channel"
           target="_blank"
         >
-          Ver documentação completa
+          {{ $t("chatwoot.config.fullDoc") }}
         </v-btn>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text @click="dialog = false"> fechar </v-btn>
+        <v-btn text @click="dialog = false"> {{ $t("close") }} </v-btn>
         <v-spacer></v-spacer>
       </v-card-actions>
     </v-card>

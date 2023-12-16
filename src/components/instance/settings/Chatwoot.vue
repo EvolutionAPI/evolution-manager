@@ -167,7 +167,7 @@
         hide-details
       ></v-switch>
       <v-btn variant="text" @click="chatwootConfig" size="small">
-        Como configurar o chatwoot?
+       {{ $t("chatwoot.config.btn") }}
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn

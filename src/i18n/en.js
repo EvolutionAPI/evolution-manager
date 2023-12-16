@@ -12,6 +12,7 @@ export default {
   disconnect: "Disconnect",
   sure: "Sure?",
   save: "Save",
+  step: "Passo {step}",
   instance: "Instance | Instances",
   search: "Search",
   loading: "Loading",
@@ -80,6 +81,18 @@ export default {
     conversationPendingHelp: "Starts the conversation as pending instead of open",
     autoCreate: "Create Inbox",
     autoCreateHelp: "Creates the inbox in Chatwoot if it doesn't exist",
+    config: {
+      btn: "How to configure Chatwoot?",
+      title: "How to configure Chatwoot inbox?",
+      fullDoc: "View full documentation",
+      steps: {
+        "1": "Access settings > Inbox and click on \"Add Inbox\"",
+        "2": "Select \"API\" as the inbox type",
+        "3": "Fill in the inbox name and webhook. The values should be exactly as follows:",
+        "4": "Add agents to the inbox.",
+        "5": "Done! Now you can receive messages.",
+      }
+    }
   },
   typebot: {
     typebot: "Typebot flow name",
