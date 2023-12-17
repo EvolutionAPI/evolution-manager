@@ -84,6 +84,8 @@ export default {
     token: "Token da conta",
     signMsg: "Assinar mensagens",
     signMsgHelp: "Adiciona o nome do atendente na primeira linha da mensagem",
+    signDelimiter: "Separador da assinatura da mensagem",
+    signDelimiterHelp: "Delimitador utilizado para separar a assinatura da mensagem (\\n para quebra de linha)",
     reopenConversation: "Reabrir conversa",
     reopenConversationHelp: "Reabre a conversa do cliente quando ele inicia uma nova conversa em vez de criar uma nova conversa",
     conversationPending: "Iniciar conversa como pendente",

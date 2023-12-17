@@ -86,21 +86,37 @@
             />
           </div>
         </div>
+        <div class="d-flex align-center gap-4 flex-wrap">
+          <v-checkbox
+            class="flex-grow-0 flex-shrink-0"
+            v-model="chatwootData.sign_msg"
+            :disabled="loading"
+            hide-details
+            density="compact"
+          >
+            <template v-slot:label>
+              <span>{{ $t("chatwoot.signMsg") }}</span>
+              <HelpTooltip> {{ $t("chatwoot.signMsgHelp") }} </HelpTooltip>
+            </template>
+          </v-checkbox>
+          <v-text-field
+            class="flex-grow-1 flex-shrink-0"
+            v-model="chatwootData.sign_delimiter"
+            :disabled="loading || !chatwootData.sign_msg || !AppStore.versionSatisfies('>=1.6.1')"
+            :label="$t('chatwoot.signDelimiter')"
+            :hint="
+              !AppStore.versionSatisfies('>=1.6.0')
+                ? $t('version.availableFrom', { version: '1.6.1' })
+                : $t('chatwoot.signDelimiterHelp')
+            "
+            :persistent-hint="!AppStore.versionSatisfies('>=1.6.1')"
+            hide-details="auto"
+            placeholder="\n"
+            style="min-width: 200px"
+          ></v-text-field>
+        </div>
+
         <div class="d-flex gap-x-4 flex-wrap">
-          <div>
-            <v-checkbox
-              v-model="chatwootData.sign_msg"
-              :disabled="loading"
-              hide-details
-              class="mb-3"
-              density="compact"
-            >
-              <template v-slot:label>
-                <span>{{ $t("chatwoot.signMsg") }}</span>
-                <HelpTooltip> {{ $t("chatwoot.signMsgHelp") }} </HelpTooltip>
-              </template>
-            </v-checkbox>
-          </div>
           <div>
             <v-checkbox
               v-model="chatwootData.reopen_conversation"
@@ -197,6 +213,7 @@ const defaultObj = () => ({
   account_id: "",
   token: "",
   sign_msg: true,
+  sign_delimiter: "\n",
   reopen_conversation: true,
   conversation_pending: false,
   auto_create: undefined,
@@ -222,6 +239,7 @@ export default {
       account_id: "",
       token: "",
       sign_msg: true,
+      sign_delimiter: "\n",
       reopen_conversation: true,
       conversation_pending: false,
     },
@@ -231,6 +249,7 @@ export default {
       account_id: "",
       token: "",
       sign_msg: true,
+      sign_delimiter: "\n",
       reopen_conversation: true,
       conversation_pending: false,
     },
