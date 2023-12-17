@@ -117,6 +117,7 @@ export default {
     delayMessageHelp: "Typing simulation time",
     unknownMessage: "Unknown message format",
     unknownMessageHelp: "Message sent when the message format is not recognized",
+    unknownMessagePlaceholder: "Leave blank to not send message",
     listeningFromMe: "Listen to messages sent by me",
     listeningFromMeHelp: "Sends the messages sent by you to the Typebot flow",
     session: {

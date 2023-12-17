@@ -144,18 +144,12 @@
         <v-text-field
           v-model="typebotData.unknown_message"
           :label="$t('typebot.unknownMessage')"
+          :placeholder="$t('typebot.unknownMessagePlaceholder')"
           :disabled="loading"
           outlined
           dense
           hide-details="auto"
           class="mb-3"
-          :rules="[
-            (token) => {
-              if (!token)
-                return $t('required', { field: $t('typebot.unknownMessage') });
-              return true;
-            },
-          ]"
         />
 
         <div class="d-flex">
