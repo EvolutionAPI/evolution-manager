@@ -17,7 +17,7 @@ import { createI18n, useI18n } from 'vue-i18n'
 // import all files from src/i18n
 const messages = Object.fromEntries(
   Object.entries(
-    import.meta.globEager('../i18n/*.js')
+    import.meta.glob('../i18n/*.js', { eager: true })
   ).map(([key, value]) => {
     const locale = key.match(/([A-Za-z0-9-_]+)\./i)[1]
     return [locale, value.default]
