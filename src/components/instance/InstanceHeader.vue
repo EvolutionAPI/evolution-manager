@@ -31,7 +31,24 @@
           @click="copyApikey"
         >
           <v-icon start size="small">mdi-key</v-icon>
-          {{ (instance.instance?.apikey || "").slice(0, 10) }}...
+          {{
+            (instance.instance?.apikey || "").slice(
+              0,
+              apikeyReveled ? undefined : 7
+            )
+          }}{{ apikeyReveled ? "" : "..." }}
+          <v-btn
+            icon
+            @click.stop="toggleReveled"
+            density="comfortable"
+            class="ml-1"
+            variant="text"
+            size="x-small"
+          >
+            <v-icon size="small">
+              {{ apikeyReveled ? "mdi-eye-off" : "mdi-eye" }}
+            </v-icon>
+          </v-btn>
           <v-icon end size="small">
             {{ copied ? "mdi-check" : "mdi-content-copy" }}
           </v-icon>
@@ -95,6 +112,7 @@ export default {
     restart: { loading: false, success: false },
     reload: false,
     copied: false,
+    apikeyReveled: false,
     statusMapper: statusMapper,
     AppStore: useAppStore(),
   }),
@@ -153,11 +171,17 @@ export default {
         this.disconnect.loading = false;
       }
     },
+    toggleReveled() {
+      this.apikeyReveled = !this.apikeyReveled;
+    },
   },
   computed: {
     owner() {
       if (!this.instance?.instance?.owner)
-        return this.$t(`status.${this.instance.instance.status}`) || this.$t("unknown");
+        return (
+          this.$t(`status.${this.instance.instance.status}`) ||
+          this.$t("unknown")
+        );
 
       return (this.instance?.instance?.owner || "").split("@")[0];
     },
