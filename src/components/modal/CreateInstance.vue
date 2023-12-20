@@ -1,19 +1,17 @@
 <template>
-  <v-dialog
-    v-model="dialog"
-    max-width="500px"
-  >
+  <v-dialog v-model="dialog" max-width="500px">
     <v-card>
       <v-card-text class="d-flex flex-column gap-4">
         <v-form v-model="valid">
-          <h3 class="mb-4">Criar instancia</h3>
+          <h3 class="mb-4">{{ $t("createInstance.title") }}</h3>
           <v-text-field
             v-model="instance.instanceName"
-            label="Nome"
+            :label="$t('createInstance.name')"
             required
             outlined
             :rules="[
-              (v) => !!v || 'Nome é obrigatório',
+              (v) =>
+                !!v || $t('required', { field: $t('createInstance.name') }),
               (v) =>
                 new RegExp('^[a-zA-Z0-9_-]*$', 'i').test(v) ||
                 'Nome inválido (apenas letras, números, _ e -)',
@@ -36,23 +34,18 @@
         </v-form>
 
         <v-alert type="info" density="comfortable">
-          O WebHook, WebSocket, RabbitMQ, Chatwoot e Typebot poderão ser
-          configurados após a criação da instância.
+          {{ $t("createInstance.configInfo") }}
         </v-alert>
 
-        <v-alert type="error" v-if="error" >
+        <v-alert type="error" v-if="error">
           {{ Array.isArray(error) ? error.join(", ") : error }}
         </v-alert>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn
-          text
-          @click="dialog = false"
-          :disabled="loading"
-        >
-          Cancel
+        <v-btn text @click="dialog = false" :disabled="loading">
+          {{ $t("cancel") }}
         </v-btn>
+        <v-spacer></v-spacer>
         <v-btn
           color="success"
           variant="tonal"
@@ -60,7 +53,7 @@
           :disabled="!valid"
           :loading="loading"
         >
-          Criar
+          {{ $t("save") }}
         </v-btn>
       </v-card-actions>
     </v-card>

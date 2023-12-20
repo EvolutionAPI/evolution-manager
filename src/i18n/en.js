@@ -44,6 +44,11 @@ export default {
     },
     version: "Version",
   },
+  createInstance: {
+    title: "Create instance",
+    name: "Instance name",
+    configInfo: "The WebHook, WebSocket, RabbitMQ, Chatwoot, and Typebot can be configured after creating the instance.",
+  },
   contribute: {
     title: "Contribute",
     via: "Contribute via",
