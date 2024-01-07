@@ -43,19 +43,7 @@
             },
           ]"
         />
-
-        <v-select
-          :items="webhookEventsType"
-          v-model="webhookData.events"
-          :disabled="loading"
-          :label="$t('events')"
-          hide-details
-          class="mb-3"
-          multiple
-          outlined
-          dense
-          chips
-        />
+        <EventsSelect v-model="webhookData.events" :disabled="loading" />
 
         <div class="d-flex gap-x-4 flex-wrap align-center">
           <div>
@@ -114,7 +102,7 @@
 
 <script>
 import instanceController from "@/services/instanceController";
-
+import EventsSelect from "@/components/global/EventsSelect.vue";
 export default {
   name: "InstanceWebhook",
   props: {
@@ -122,6 +110,9 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  components: {
+    EventsSelect,
   },
   data: () => ({
     expanded: false,
@@ -142,29 +133,7 @@ export default {
       webhook_base64: false,
       webhook_by_events: false,
     },
-    webhookEventsType: [
-      "APPLICATION_STARTUP",
-      "QRCODE_UPDATED",
-      "MESSAGES_SET",
-      "MESSAGES_UPSERT",
-      "MESSAGES_UPDATE",
-      "MESSAGES_DELETE",
-      "SEND_MESSAGE",
-      "CONTACTS_SET",
-      "CONTACTS_UPSERT",
-      "CONTACTS_UPDATE",
-      "PRESENCE_UPDATE",
-      "CHATS_SET",
-      "CHATS_UPSERT",
-      "CHATS_UPDATE",
-      "CHATS_DELETE",
-      "GROUPS_UPSERT",
-      "GROUP_UPDATE",
-      "GROUP_PARTICIPANTS_UPDATE",
-      "CONNECTION_UPDATE",
-      "CALL",
-      "NEW_JWT_TOKEN",
-    ],
+    
   }),
 
   methods: {

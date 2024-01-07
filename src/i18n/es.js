@@ -33,6 +33,10 @@ export default {
     connecting: "Conectando",
     open: "Conectado",
   },
+  toggleSelect: {
+    all: "Seleccionar todos",
+    none: "Desmarcar todos",
+  },
   about: {
     title: "Acerca de",
     description: "Evolution Manager facilita la gestión de sus API con una interfaz intuitiva. Fue creado por desarrolladores independientes, enfocándose en mejorar la experiencia del usuario y la administración de las funcionalidades API.",

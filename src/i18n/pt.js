@@ -33,6 +33,10 @@ export default {
     connecting: "Conectando",
     open: "Conectado",
   },
+  toggleSelect: {
+    all: "Selecionar todos",
+    none: "Desmarcar todos",
+  },
   about: {
     title: "Sobre",
     description: "O Evolution Manager facilita a gestão de suas APIs com uma interface intuitiva. Ele foi criado por desenvolvedores independentes, focando em melhorar a experiência do usuário e a administração das funcionalidades da API.",
@@ -66,7 +70,9 @@ export default {
   },
   connectPhone: {
     title: "Telefone não conectado",
-    apiGenericError: "Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente."
+    apiGenericError: "Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente.",
+    qr: "QR Code",
+    code: "Código",
   },
   options: {
     title: "Comportamento",

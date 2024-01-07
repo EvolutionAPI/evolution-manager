@@ -26,18 +26,7 @@
       </v-alert>
 
       <v-form v-model="valid">
-        <v-select
-          :items="websocketEventsType"
-          v-model="websocketData.events"
-          :disabled="loading"
-          :label="$t('events')"
-          hide-details
-          class="mb-3"
-          multiple
-          outlined
-          dense
-          chips
-        />
+        <EventsSelect v-model="websocketData.events" :disabled="loading" />
       </v-form>
     </v-card-text>
     <v-card-actions v-if="expanded">
@@ -67,9 +56,12 @@
 
 <script>
 import instanceController from "@/services/instanceController";
-
+import EventsSelect from "@/components/global/EventsSelect.vue";
 export default {
   name: "InstanceWebsocket",
+  components: {
+    EventsSelect,
+  },
   props: {
     instance: {
       type: Object,

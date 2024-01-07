@@ -31,18 +31,7 @@
       </v-alert>
 
       <v-form v-model="valid">
-        <v-select
-          :items="rabbitmqEventsType"
-          v-model="rabbitmqData.events"
-          :disabled="loading"
-          :label="$t('events')"
-          hide-details
-          class="mb-3"
-          multiple
-          outlined
-          dense
-          chips
-        />
+        <EventsSelect v-model="rabbitmqData.events" :disabled="loading" />
       </v-form>
     </v-card-text>
     <v-card-actions v-if="expanded">
@@ -65,16 +54,19 @@
         variant="tonal"
       >
         {{ $t("save") }}
-    </v-btn>
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
 
 <script>
 import instanceController from "@/services/instanceController";
-
+import EventsSelect from "@/components/global/EventsSelect.vue";
 export default {
   name: "InstanceRabbitmq",
+  components: {
+    EventsSelect,
+  },
   props: {
     instance: {
       type: Object,
