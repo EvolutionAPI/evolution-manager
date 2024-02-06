@@ -81,6 +81,14 @@
             hide-details
             density="compact"
           ></v-checkbox>
+          <v-checkbox
+            class="flex-grow-0"
+            v-model="optionsData.sync_full_history"
+            :disabled="loading"
+            :label="$t('options.syncfullhistory')"
+            hide-details
+            density="compact"
+          ></v-checkbox>
         </div>
       </v-form>
     </v-card-text>
@@ -112,6 +120,7 @@ const defaultOptions = () => ({
   always_online: false,
   read_messages: false,
   read_status: false,
+  sync_full_history: false,
 });
 
 export default {
@@ -134,6 +143,7 @@ export default {
       always_online: false,
       read_messages: false,
       read_status: false,
+      sync_full_history: false,
     },
     defaultOptionsData: {
       reject_call: false,
@@ -142,6 +152,7 @@ export default {
       always_online: false,
       read_messages: false,
       read_status: false,
+      sync_full_history: false,
     },
   }),
 

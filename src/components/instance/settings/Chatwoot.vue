@@ -85,7 +85,18 @@
               ]"
             />
           </div>
-        </div>
+            <div class="flex-grow-1">
+              <v-text-field
+                v-model.number="chatwootData.days_limit_import_messages"
+                :label="$t('chatwoot.dayslimitimportmessages')"
+                :disabled="loading"
+                outlined
+                dense
+                hide-details="auto"
+                class="mb-3"
+              />
+            </div>
+          </div>
         <div class="d-flex align-center gap-4 flex-wrap">
           <v-checkbox
             class="flex-grow-0 flex-shrink-0"
@@ -146,6 +157,39 @@
                 <span>{{ $t("chatwoot.conversationPending") }}</span>
                 <HelpTooltip>
                   {{ $t("chatwoot.conversationPendingHelp") }}
+                </HelpTooltip>
+              </template>
+            </v-checkbox>
+          </div>
+          <div>
+            <v-checkbox
+              v-model="chatwootData.import_contacts"
+              :disabled="loading"
+              hide-details
+              class="mb-3"
+              density="compact"
+            >
+              <template v-slot:label>
+                <span>{{ $t("chatwoot.importcontacts") }}</span>
+                <HelpTooltip>
+                  {{ $t("chatwoot.importcontactsHelp") }}
+                </HelpTooltip>
+              </template>
+            </v-checkbox>
+          </div>
+
+          <div>
+            <v-checkbox
+              v-model="chatwootData.import_messages"
+              :disabled="loading"
+              hide-details
+              class="mb-3"
+              density="compact"
+            >
+              <template v-slot:label>
+                <span>{{ $t("chatwoot.importmessages") }}</span>
+                <HelpTooltip>
+                  {{ $t("chatwoot.importmessagesHelp") }}
                 </HelpTooltip>
               </template>
             </v-checkbox>
@@ -217,6 +261,9 @@ const defaultObj = () => ({
   reopen_conversation: true,
   conversation_pending: false,
   auto_create: undefined,
+  import_contacts: false,
+  import_messages: false,
+  days_limit_import_messages: 0,
 });
 
 export default {
@@ -242,6 +289,9 @@ export default {
       sign_delimiter: "\n",
       reopen_conversation: true,
       conversation_pending: false,
+      import_contacts: false,
+      import_messages: false,
+      days_limit_import_messages: 0,
     },
     defaultChatwootData: {
       enabled: false,
@@ -252,6 +302,9 @@ export default {
       sign_delimiter: "\n",
       reopen_conversation: true,
       conversation_pending: false,
+      import_contacts: false,
+      import_messages: false,
+      days_limit_import_messages: 0,
     },
   }),
   methods: {

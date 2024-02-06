@@ -82,6 +82,7 @@ export default {
     alwaysOnline: "Sempre online",
     readMessages: "Marcar mensagens como lidas",
     readStatus: "Marcar status como visto",
+    syncfullhistory: "Sincronizar el historial completo",
   },
   webhook: {
     byEvents: "Webhook por eventos",
@@ -93,6 +94,7 @@ export default {
   chatwoot: {
     account_id: "ID da conta",
     token: "Token da conta",
+    dayslimitimportmessages: "Limite de dias para importar mensagens",
     signMsg: "Assinar mensagens",
     signMsgHelp: "Adiciona o nome do atendente na primeira linha da mensagem",
     signDelimiter: "Separador da assinatura da mensagem",
@@ -103,6 +105,10 @@ export default {
     conversationPendingHelp: "Inicia a conversa como pendente ao invés de aberta",
     autoCreate: "Criar Caixa de Entrada",
     autoCreateHelp: "Cria a caixa de entrada no Chatwoot caso ela não exista",
+    importcontacts: "Importar contatos",
+    importcontactsHelp: "Importar contatos para o Chatwoot",
+    importmessages: "Importar mensagens",
+    importmessagesHelp: "Importar mensagens do histórico de mensagens para o Chatwoot",
     config: {
       btn: "Como configurar o chatwoot?",
       title: "Como configurar a caixa de entrada do Chatwoot?",
