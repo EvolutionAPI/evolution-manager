@@ -17,6 +17,26 @@
                 'Nome inválido (apenas letras, números, _ e -)',
             ]"
           />
+          <v-select
+            v-model="instance.integration"
+            :items="['WHATSAPP-BAILEYS', 'WHATSAPP-BUSINESS']"
+            :label="$t('createInstance.integration')"
+            required
+            outlined
+          />
+          <v-text-field
+            v-model="instance.number"
+            :label="$t('createInstance.number')"
+            outlined
+            v-if="instance.integration === 'WHATSAPP-BUSINESS'"
+            :rules="[
+              (v) =>
+                !!v || $t('required', { field: $t('createInstance.number') }),
+              (v) =>
+                new RegExp('^[a-zA-Z0-9_-]*$', 'i').test(v) ||
+                'Nome inválido (apenas letras, números, _ e -)',
+            ]"
+          />
           <v-text-field
             v-model="instance.token"
             label="API Key"
@@ -72,6 +92,7 @@ export default {
     instance: {
       instanceName: "",
       token: "",
+      integration: "",
     },
     loading: false,
     error: false,
@@ -106,6 +127,7 @@ export default {
       this.error = false;
       this.instance.instanceName = "";
       this.generateApiKey();
+      this.instance.integration = "";
     },
   },
 

@@ -52,6 +52,8 @@ export default {
     title: "Crear instancia",
     name: "Nombre de la instancia",
     configInfo: "El WebHook, WebSocket, RabbitMQ, Chatwoot y Typebot se pueden configurar después de crear la instancia.",
+    integration: "Integración",
+    number: "Identificador de número de teléfono",
   },
   contribute: {
     title: "Contribuir",
@@ -70,7 +72,9 @@ export default {
   },
   connectPhone: {
     title: "Teléfono no conectado",
-    apiGenericError: "No se pudo cargar el código QR. Si el error persiste, reinicie la API y vuelva a intentarlo.."
+    apiGenericError: "No se pudo cargar el código QR. Si el error persiste, reinicie la API y vuelva a intentarlo..",
+    qr: "QR Code",
+    code: "Código",
   },
   options: {
     title: "Comportamiento",

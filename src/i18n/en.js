@@ -52,6 +52,8 @@ export default {
     title: "Create instance",
     name: "Instance name",
     configInfo: "The WebHook, WebSocket, RabbitMQ, Chatwoot, and Typebot can be configured after creating the instance.",
+    integration: "Integration",
+    number: "Telephone number identifier",
   },
   contribute: {
     title: "Contribute",
@@ -70,7 +72,9 @@ export default {
   },
   connectPhone: {
     title: "Phone not connected",
-    apiGenericError: "Could not load QR Code, if the error persists, restart the API and try again."
+    apiGenericError: "Could not load QR Code, if the error persists, restart the API and try again.",
+    qr: "QR Code",
+    code: "Código",
   },
   options: {
     title: "Behavior",

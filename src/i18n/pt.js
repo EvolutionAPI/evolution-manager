@@ -19,7 +19,7 @@ export default {
   noInstances: "Nenhuma instância encontrada",
   unknown: "Desconhecido",
   required: "{field} é obrigatório",
-  maxLength: "{field} deve ter no máximo {length} caracteres",
+  maxLength: "{field} deve ter no máximo {length} caracteres", 
   https: "{field} deve começar com https://",
   httpHttps: "{field} deve começar com http:// ou https://",
   enabled: "Habilitado",
@@ -52,6 +52,8 @@ export default {
     title: "Criar instância",
     name: "Nome da instância",
     configInfo: "O WebHook, WebSocket, RabbitMQ, Chatwoot e Typebot poderão ser configurados após a criação da instância.",
+    integration: "Integração",
+    number: "Identificador de número de telefone",
   },
   contribute: {
     title: "Contribuir",
