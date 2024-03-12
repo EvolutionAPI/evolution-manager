@@ -52,6 +52,7 @@ export default {
     lang_list: [
       { title: "Português", value: "pt_br" },
       { title: "English", value: "en" },
+      { title: "Español", value: "es" },
     ],
     DocStore: useDocStore(),
   }),

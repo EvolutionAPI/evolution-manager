@@ -127,6 +127,9 @@ const defaultObj = () => ({
   sign_msg: true,
   reopen_conversation: true,
   conversation_pending: false,
+  import_contacts: false,
+  import_messages: false,
+  days_limit_import_messages: 0, // Set as a number
 });
 
 export default {

@@ -52,6 +52,8 @@ export default {
     title: "Crear instancia",
     name: "Nombre de la instancia",
     configInfo: "El WebHook, WebSocket, RabbitMQ, Chatwoot y Typebot se pueden configurar después de crear la instancia.",
+    integration: "Integración",
+    number: "Identificador de número de teléfono",
   },
   contribute: {
     title: "Contribuir",
@@ -70,7 +72,9 @@ export default {
   },
   connectPhone: {
     title: "Teléfono no conectado",
-    apiGenericError: "No se pudo cargar el código QR. Si el error persiste, reinicie la API y vuelva a intentarlo.."
+    apiGenericError: "No se pudo cargar el código QR. Si el error persiste, reinicie la API y vuelva a intentarlo..",
+    qr: "QR Code",
+    code: "Código",
   },
   options: {
     title: "Comportamiento",
@@ -80,6 +84,7 @@ export default {
     alwaysOnline: "Siempre en línea",
     readMessages: "Marcar mensajes como leídos",
     readStatus: "Marcar estado de lectura",
+    syncfullhistory: "Sincronizar el historial completo",
   },
   webhook: {
     byEvents: "Webhook por eventos",
@@ -91,6 +96,7 @@ export default {
   chatwoot: {
     account_id: "ID de Cuenta",
     token: "Token de Cuenta",
+    dayslimitimportmessages: "Límite de días para importar mensajes",
     signMsg: "Firmar en mensajes",
     signMsgHelp: "Agrega el nombre del agente en la primera línea del mensaje.",
     signDelimiter: "Delimitador de firma",
@@ -101,6 +107,10 @@ export default {
     conversationPendingHelp: "Inicia la conversación como pendiente en lugar de abierta",
     autoCreate: "Crear bandeja de entrada",
     autoCreateHelp: "Crea la bandeja de entrada en Chatwoot si no existe",
+    importcontacts: "Importar contactos",
+    importcontactsHelp: "Importa contactos a Chatwoot",
+    importmessages: "Importar mensajes",
+    importmessagesHelp: "Importa mensajes historioco de mensajes a Chatwoot",
     config: {
       btn: "Cómo configurar Chatwoot?",
       title: "Cómo configurar la bandeja de entrada de Chatwoot?",

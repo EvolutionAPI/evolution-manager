@@ -52,6 +52,8 @@ export default {
     title: "Create instance",
     name: "Instance name",
     configInfo: "The WebHook, WebSocket, RabbitMQ, Chatwoot, and Typebot can be configured after creating the instance.",
+    integration: "Integration",
+    number: "Telephone number identifier",
   },
   contribute: {
     title: "Contribute",
@@ -70,7 +72,9 @@ export default {
   },
   connectPhone: {
     title: "Phone not connected",
-    apiGenericError: "Could not load QR Code, if the error persists, restart the API and try again."
+    apiGenericError: "Could not load QR Code, if the error persists, restart the API and try again.",
+    qr: "QR Code",
+    code: "Código",
   },
   options: {
     title: "Behavior",
@@ -80,6 +84,7 @@ export default {
     alwaysOnline: "Always online",
     readMessages: "Mark messages as read",
     readStatus: "Mark status as seen",
+    syncfullhistory: "sync full history",
   },
   webhook: {
     byEvents: "Webhook by events",
@@ -91,6 +96,7 @@ export default {
   chatwoot: {
     account_id: "Account ID",
     token: "Account Token",
+    dayslimitimportmessages: "Days limit to import messages",
     signMsg: "Sign messages",
     signMsgHelp: "Adds the agent name at the first line of the message",
     signDelimiter: "Signature delimiter",
@@ -101,6 +107,10 @@ export default {
     conversationPendingHelp: "Starts the conversation as pending instead of open",
     autoCreate: "Create Inbox",
     autoCreateHelp: "Creates the inbox in Chatwoot if it doesn't exist",
+    importcontacts: "Import contacts",
+    importcontactsHelp: "Import contacts to Chatwoot",
+    importmessages: "Import messages",
+    importmessagesHelp: "Import message history messages to Chatwoot",
     config: {
       btn: "How to configure Chatwoot?",
       title: "How to configure Chatwoot inbox?",
