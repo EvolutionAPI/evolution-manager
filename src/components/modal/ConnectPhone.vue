@@ -20,7 +20,8 @@
   <v-dialog v-model="dialog" max-width="350px" :persistent="loading">
     <v-card :loading="loading && qrCode">
       <v-card-text class="pt-6">
-        <v-btn-toggle v-model="connectType" class="d-flex mb-4" color="primary">
+        <!-- Not finished -->
+        <!-- <v-btn-toggle v-model="connectType" class="d-flex mb-4" color="primary">
           <v-btn text value="qr" class="flex-grow-1">
             <v-icon start>mdi-qrcode-scan</v-icon>
             {{ $t("connectPhone.qr") }}
@@ -29,7 +30,7 @@
             <v-icon start>mdi-key</v-icon>
             {{ $t("connectPhone.code") }}
           </v-btn>
-        </v-btn-toggle>
+        </v-btn-toggle> -->
         <template v-if="connectType == 'qr'">
           <v-img v-if="qrCode" :src="qrCode" width="300px" height="300px" />
           <v-card

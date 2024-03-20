@@ -18,8 +18,9 @@
             ]"
           />
           <v-select
+            v-if="AppStore.versionSatisfies('>=1.7.0')"
             v-model="instance.integration"
-            :items="['WHATSAPP-BAILEYS', 'WHATSAPP-BUSINESS']"
+            :items="integrationItens"
             :label="$t('createInstance.integration')"
             required
             outlined
@@ -89,6 +90,10 @@ export default {
   data: () => ({
     dialog: false,
     valid: false,
+    integrationItens: [
+      { title: "Cloud API (Meta)", value: "WHATSAPP-BUSINESS" },
+      { title: "Baileys", value: "WHATSAPP-BAILEYS" },
+    ],
     instance: {
       instanceName: "",
       token: "",

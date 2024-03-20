@@ -85,18 +85,18 @@
               ]"
             />
           </div>
-            <div class="flex-grow-1">
-              <v-text-field
-                v-model.number="chatwootData.days_limit_import_messages"
-                :label="$t('chatwoot.dayslimitimportmessages')"
-                :disabled="loading"
-                outlined
-                dense
-                hide-details="auto"
-                class="mb-3"
-              />
-            </div>
+          <div class="flex-grow-1">
+            <v-text-field
+              v-model.number="chatwootData.days_limit_import_messages"
+              :label="$t('chatwoot.dayslimitimportmessages')"
+              :disabled="loading"
+              outlined
+              dense
+              hide-details="auto"
+              class="mb-3"
+            />
           </div>
+        </div>
         <div class="d-flex align-center gap-4 flex-wrap">
           <v-checkbox
             class="flex-grow-0 flex-shrink-0"
@@ -113,7 +113,11 @@
           <v-text-field
             class="flex-grow-1 flex-shrink-0"
             v-model="chatwootData.sign_delimiter"
-            :disabled="loading || !chatwootData.sign_msg || !AppStore.versionSatisfies('>=1.6.1')"
+            :disabled="
+              loading ||
+              !chatwootData.sign_msg ||
+              !AppStore.versionSatisfies('>=1.6.1')
+            "
             :label="$t('chatwoot.signDelimiter')"
             :hint="
               !AppStore.versionSatisfies('>=1.6.0')
@@ -164,10 +168,16 @@
           <div>
             <v-checkbox
               v-model="chatwootData.import_contacts"
-              :disabled="loading"
-              hide-details
+              hide-details="auto"
               class="mb-3"
               density="compact"
+              :disabled="loading || !AppStore.versionSatisfies('>=1.7.0')"
+              :hint="
+                !AppStore.versionSatisfies('>=1.7.0')
+                  ? $t('version.availableFrom', { version: '1.7.0' })
+                  : undefined
+              "
+              :persistent-hint="!AppStore.versionSatisfies('>=1.7.0')"
             >
               <template v-slot:label>
                 <span>{{ $t("chatwoot.importcontacts") }}</span>
@@ -181,10 +191,16 @@
           <div>
             <v-checkbox
               v-model="chatwootData.import_messages"
-              :disabled="loading"
-              hide-details
+              hide-details="auto"
               class="mb-3"
               density="compact"
+              :disabled="loading || !AppStore.versionSatisfies('>=1.7.0')"
+              :hint="
+                !AppStore.versionSatisfies('>=1.7.0')
+                  ? $t('version.availableFrom', { version: '1.7.0' })
+                  : undefined
+              "
+              :persistent-hint="!AppStore.versionSatisfies('>=1.7.0')"
             >
               <template v-slot:label>
                 <span>{{ $t("chatwoot.importmessages") }}</span>
@@ -227,7 +243,7 @@
         hide-details
       ></v-switch>
       <v-btn variant="text" @click="chatwootConfig" size="small">
-       {{ $t("chatwoot.config.btn") }}
+        {{ $t("chatwoot.config.btn") }}
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn

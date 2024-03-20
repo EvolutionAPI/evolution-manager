@@ -1,5 +1,5 @@
 // src/i18n/pt.js
-import { pt } from 'vuetify/locale'
+import { pt } from "vuetify/locale";
 
 export default {
   $vuetify: { ...pt },
@@ -19,7 +19,7 @@ export default {
   noInstances: "Nenhuma instância encontrada",
   unknown: "Desconhecido",
   required: "{field} é obrigatório",
-  maxLength: "{field} deve ter no máximo {length} caracteres", 
+  maxLength: "{field} deve ter no máximo {length} caracteres",
   https: "{field} deve começar com https://",
   httpHttps: "{field} deve começar com http:// ou https://",
   enabled: "Habilitado",
@@ -39,19 +39,23 @@ export default {
   },
   about: {
     title: "Sobre",
-    description: "O Evolution Manager facilita a gestão de suas APIs com uma interface intuitiva. Ele foi criado por desenvolvedores independentes, focando em melhorar a experiência do usuário e a administração das funcionalidades da API.",
+    description:
+      "O Evolution Manager facilita a gestão de suas APIs com uma interface intuitiva. Ele foi criado por desenvolvedores independentes, focando em melhorar a experiência do usuário e a administração das funcionalidades da API.",
     contribute: "Contribua com o projeto",
     dataProcess: {
       title: "Processamento de dados",
-      description: "O processamento e armazenamento de dados ocorre <b>localmente</b> no seu navegador, sem uso de um backend centralizado. Isso reforça a segurança e privacidade, mantendo suas informações confidenciais e protegidas.",
-      https: "Por conta de todo o processamento ser realizado no navegador, é necessário que o servidor da Evolution API seja acessado através de uma conexão segura (HTTPS)."
+      description:
+        "O processamento e armazenamento de dados ocorre <b>localmente</b> no seu navegador, sem uso de um backend centralizado. Isso reforça a segurança e privacidade, mantendo suas informações confidenciais e protegidas.",
+      https:
+        "Por conta de todo o processamento ser realizado no navegador, é necessário que o servidor da Evolution API seja acessado através de uma conexão segura (HTTPS).",
     },
     version: "Versão",
   },
   createInstance: {
     title: "Criar instância",
     name: "Nome da instância",
-    configInfo: "O WebHook, WebSocket, RabbitMQ, Chatwoot e Typebot poderão ser configurados após a criação da instância.",
+    configInfo:
+      "O WebHook, WebSocket, RabbitMQ, Chatwoot e Typebot poderão ser configurados após a criação da instância.",
     integration: "Integração",
     number: "Identificador de número de telefone",
   },
@@ -72,7 +76,8 @@ export default {
   },
   connectPhone: {
     title: "Telefone não conectado",
-    apiGenericError: "Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente.",
+    apiGenericError:
+      "Não foi possível carregar o QR Code, se o erro persistir, reinicie a API e tente novamente.",
     qr: "QR Code",
     code: "Código",
   },
@@ -84,14 +89,15 @@ export default {
     alwaysOnline: "Sempre online",
     readMessages: "Marcar mensagens como lidas",
     readStatus: "Marcar status como visto",
-    syncfullhistory: "Sincronizar el historial completo",
+    syncfullhistory: "Sinconizar histórico completo",
   },
   webhook: {
     byEvents: "Webhook por eventos",
-    byEventsHelp: "Adiciona o nome do evento no final da URL (ex: /webhook/event_name )",
+    byEventsHelp:
+      "Adiciona o nome do evento no final da URL (ex: /webhook/event_name )",
   },
   rabbitmq: {
-    info: "O RabbitMQ é utilizado pela API para o enfileiramento das notificações. Ele NÃO é utilizado para o envio de mensagens."
+    info: "O RabbitMQ é utilizado pela API para o enfileiramento das notificações. Ele NÃO é utilizado para o envio de mensagens.",
   },
   chatwoot: {
     account_id: "ID da conta",
@@ -100,29 +106,33 @@ export default {
     signMsg: "Assinar mensagens",
     signMsgHelp: "Adiciona o nome do atendente na primeira linha da mensagem",
     signDelimiter: "Separador da assinatura da mensagem",
-    signDelimiterHelp: "Delimitador utilizado para separar a assinatura da mensagem (\\n para quebra de linha)",
+    signDelimiterHelp:
+      "Delimitador utilizado para separar a assinatura da mensagem (\\n para quebra de linha)",
     reopenConversation: "Reabrir conversa",
-    reopenConversationHelp: "Reabre a conversa do cliente quando ele inicia uma nova conversa em vez de criar uma nova conversa",
+    reopenConversationHelp:
+      "Reabre a conversa do cliente quando ele inicia uma nova conversa em vez de criar uma nova conversa",
     conversationPending: "Iniciar conversa como pendente",
-    conversationPendingHelp: "Inicia a conversa como pendente ao invés de aberta",
+    conversationPendingHelp:
+      "Inicia a conversa como pendente ao invés de aberta",
     autoCreate: "Criar Caixa de Entrada",
     autoCreateHelp: "Cria a caixa de entrada no Chatwoot caso ela não exista",
     importcontacts: "Importar contatos",
     importcontactsHelp: "Importar contatos para o Chatwoot",
     importmessages: "Importar mensagens",
-    importmessagesHelp: "Importar mensagens do histórico de mensagens para o Chatwoot",
+    importmessagesHelp:
+      "Importar mensagens do histórico de mensagens para o Chatwoot",
     config: {
       btn: "Como configurar o chatwoot?",
       title: "Como configurar a caixa de entrada do Chatwoot?",
       fullDoc: "Ver documentação completa",
       steps: {
-        "1": "Acesse as configurações > Caixa de Entrada e \"Adicionar Caixa\"",
-        "2": "Selecione \"API\" como tipo de caixa",
-        "3": "Preencha nome da caixa e webhook. Os valores devem ser exatamente os seguintes:",
-        "4": "Adicione os agentes à caixa de entrada.",
-        "5": "Pronto! Agora você pode receber mensagens.",
-      }
-    }
+        1: 'Acesse as configurações > Caixa de Entrada e "Adicionar Caixa"',
+        2: 'Selecione "API" como tipo de caixa',
+        3: "Preencha nome da caixa e webhook. Os valores devem ser exatamente os seguintes:",
+        4: "Adicione os agentes à caixa de entrada.",
+        5: "Pronto! Agora você pode receber mensagens.",
+      },
+    },
   },
   typebot: {
     typebot: "Nome do fluxo do Typebot",
@@ -135,10 +145,12 @@ export default {
     delayMessageUnit: "em milisegundos",
     delayMessageHelp: "Tempo de simulação de digitação",
     unknownMessage: "Mensagem formato desconhecido",
-    unknownMessageHelp: "Mensagem enviada quando o formato da mensagem não é reconhecido",
+    unknownMessageHelp:
+      "Mensagem enviada quando o formato da mensagem não é reconhecido",
     unknownMessagePlaceholder: "Deixe em branco para não enviar mensagem",
     listeningFromMe: "Ouvir mensagens enviadas por mim",
-    listeningFromMeHelp: "Envia as mensagens enviadas por você para o fluxo do Typebot",
+    listeningFromMeHelp:
+      "Envia as mensagens enviadas por você para o fluxo do Typebot",
     session: {
       title: "Sessões do Typebot",
       btn: "Ver 0 sessões | Ver uma sessão | Ver {count} sessões",
@@ -147,13 +159,13 @@ export default {
         variables: "Variáveis",
         createdAt: "Iniciada em",
         updatedAt: "Última mensagem",
-      }
+      },
     },
     status: {
       opened: "Aberto",
       paused: "Pausado",
       closed: "Fechado",
-    }
+    },
   },
   sendMessage: {
     title: "Enviar mensagem",
@@ -179,16 +191,16 @@ export default {
   },
   groups: {
     title: "Meus grupos",
-    headers: { creation: "Criado em", }
+    headers: { creation: "Criado em" },
   },
   chats: {
     title: "Minhas conversas",
-    headers: { lastMsgTimestamp: "Última mensagem", }
+    headers: { lastMsgTimestamp: "Última mensagem" },
   },
   profile: {
     title: "Nome e Recado",
     name: "Name",
-    status: "Recado (status)"
+    status: "Recado (status)",
   },
   profilePicture: {
     title: "Foto de perfil",
@@ -210,6 +222,6 @@ export default {
       contactBlacklist: "Meus contatos, exceto os da lista negra",
       matchLastSeen: "Igual ao visto por último",
       none: "Ninguém",
-    }
-  }
-}
+    },
+  },
+};
