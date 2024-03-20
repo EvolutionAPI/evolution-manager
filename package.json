@@ -1,7 +1,7 @@
 {
   "name": "evolution-manager",
   "description": "Evolution Manager is an open-source interface for managing the Evolution API, simplifying the creation and administration of API instances with advanced features and diverse integrations.",
-  "version": "0.4.12",
+  "version": "0.4.13",
   "main": "dist",
   "engines": {
     "node": ">=16.0.0"
