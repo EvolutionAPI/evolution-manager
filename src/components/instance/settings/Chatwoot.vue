@@ -234,13 +234,13 @@
           <div>
             <v-checkbox
               v-model="chatwootData.merge_brazil_contacts"
-              :disabled="loading || !AppStore.versionSatisfies('>=1.7.4')"
+              :disabled="loading || !AppStore.versionSatisfies('>=1.7.5')"
               :hint="
-                !AppStore.versionSatisfies('>=1.7.4')
-                  ? $t('version.availableFrom', { version: '1.7.4' })
+                !AppStore.versionSatisfies('>=1.7.5')
+                  ? $t('version.availableFrom', { version: '1.7.5' })
                   : undefined
               "
-              :persistent-hint="!AppStore.versionSatisfies('>=1.7.4')"
+              :persistent-hint="!AppStore.versionSatisfies('>=1.7.5')"
               hide-details="auto"
               class="mb-3"
               density="compact"
