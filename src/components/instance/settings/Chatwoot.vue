@@ -108,7 +108,7 @@
             :label="$t('chatwoot.nameInbox')"
             :hint="
               !AppStore.versionSatisfies('>=1.7.4')
-                ? $t('version.availableFrom', { version: '>=1.7.4' })
+                ? $t('version.availableFrom', { version: '1.7.4' })
                 : $t('chatwoot.nameInboxHelp')
             "
             :persistent-hint="!AppStore.versionSatisfies('>=1.7.4')"
