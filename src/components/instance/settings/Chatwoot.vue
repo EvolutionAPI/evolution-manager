@@ -231,6 +231,26 @@
               </template>
             </v-checkbox>
           </div>
+          <div>
+            <v-checkbox
+              v-model="chatwootData.merge_brazil_contacts"
+              :disabled="loading || !AppStore.versionSatisfies('>=1.7.4')"
+              :hint="
+                !AppStore.versionSatisfies('>=1.7.4')
+                  ? $t('version.availableFrom', { version: '1.7.4' })
+                  : undefined
+              "
+              :persistent-hint="!AppStore.versionSatisfies('>=1.7.4')"
+              hide-details="auto"
+              class="mb-3"
+              density="compact"
+            >
+              <template v-slot:label>
+                <span>{{ $t("chatwoot.mergeBrasilianContacts") }}</span>
+                <HelpTooltip>{{ $t("chatwoot.mergeBrasilianContactsHelp") }}</HelpTooltip>
+              </template>
+            </v-checkbox>
+          </div>
         </div>
       </v-form>
     </v-card-text>
@@ -276,6 +296,7 @@ const defaultObj = () => ({
   sign_delimiter: "\n",
   reopen_conversation: true,
   conversation_pending: false,
+  merge_brazil_contacts: false,
   auto_create: undefined,
   import_contacts: false,
   import_messages: false,
@@ -305,6 +326,7 @@ export default {
       sign_delimiter: "\n",
       reopen_conversation: true,
       conversation_pending: false,
+      merge_brazil_contacts: false,
       import_contacts: false,
       import_messages: false,
       days_limit_import_messages: 0,
@@ -318,6 +340,7 @@ export default {
       sign_delimiter: "\n",
       reopen_conversation: true,
       conversation_pending: false,
+      merge_brazil_contacts: false,
       import_contacts: false,
       import_messages: false,
       days_limit_import_messages: 0,

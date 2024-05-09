@@ -74,7 +74,7 @@ export default {
     title: "Phone not connected",
     apiGenericError: "Could not load QR Code, if the error persists, restart the API and try again.",
     qr: "QR Code",
-    code: "Código",
+    code: "Cï¿½digo",
   },
   options: {
     title: "Behavior",
@@ -107,6 +107,8 @@ export default {
     conversationPendingHelp: "Starts the conversation as pending instead of open",
     autoCreate: "Create Inbox",
     autoCreateHelp: "Creates the inbox in Chatwoot if it doesn't exist",
+    mergeBrasilianContacts: "Merge Brazilian contacts",
+    mergeBrasilianContactsHelp: "If there are two contacts with the same number, one with the ninth digit and the other without it, they will be merged; valid only for Brazilian numbers.",
     importcontacts: "Import contacts",
     importcontactsHelp: "Import contacts to Chatwoot",
     importmessages: "Import messages",

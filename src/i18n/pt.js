@@ -116,6 +116,8 @@ export default {
       "Inicia a conversa como pendente ao invés de aberta",
     autoCreate: "Criar Caixa de Entrada",
     autoCreateHelp: "Cria a caixa de entrada no Chatwoot caso ela não exista",
+    mergeBrasilianContacts: "Mesclar contatos brasileiros",
+    mergeBrasilianContactsHelp: "Se houver dois contatos com o mesmo número, sendo um com nono dígito e outro sem, eles serão mesclados; válido apenas para números brasileiros.",
     importcontacts: "Importar contatos",
     importcontactsHelp: "Importar contatos para o Chatwoot",
     importmessages: "Importar mensagens",

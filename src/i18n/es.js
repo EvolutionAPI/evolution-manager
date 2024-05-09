@@ -107,6 +107,8 @@ export default {
     conversationPendingHelp: "Inicia la conversación como pendiente en lugar de abierta",
     autoCreate: "Crear bandeja de entrada",
     autoCreateHelp: "Crea la bandeja de entrada en Chatwoot si no existe",
+    mergeBrasilianContacts: "Unir contactos brasileños",
+    mergeBrasilianContactsHelp: "Si hay dos contactos con el mismo número, uno con el dígito nueve y otro sin él, se fusionarán; válido únicamente para números brasileños.",
     importcontacts: "Importar contactos",
     importcontactsHelp: "Importa contactos a Chatwoot",
     importmessages: "Importar mensajes",
