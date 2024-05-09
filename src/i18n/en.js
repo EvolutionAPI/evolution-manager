@@ -97,6 +97,8 @@ export default {
     account_id: "Account ID",
     token: "Account Token",
     dayslimitimportmessages: "Days limit to import messages",
+    nameInbox: "Inbox name",
+    nameInboxHelp: "Inbox name to be used in Chatwoot. If not provided, it will default to the session name.",
     signMsg: "Sign messages",
     signMsgHelp: "Adds the agent name at the first line of the message",
     signDelimiter: "Signature delimiter",

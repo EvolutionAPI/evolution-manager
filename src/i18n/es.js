@@ -97,6 +97,8 @@ export default {
     account_id: "ID de Cuenta",
     token: "Token de Cuenta",
     dayslimitimportmessages: "Límite de días para importar mensajes",
+    nameInbox: "Nombre de la bandeja de entrada",
+    nameInboxHelp: "Nombre de la bandeja de entrada que se utilizará en Chatwoot. Si no se proporciona, será el nombre de la sesión por defecto.",
     signMsg: "Firmar en mensajes",
     signMsgHelp: "Agrega el nombre del agente en la primera línea del mensaje.",
     signDelimiter: "Delimitador de firma",

@@ -98,6 +98,25 @@
           </div>
         </div>
         <div class="d-flex align-center gap-4 flex-wrap">
+          <v-text-field
+            class="flex-grow-1 flex-shrink-0 mb-3"
+            v-model="chatwootData.name_inbox"
+            :disabled="
+              loading ||
+              !AppStore.versionSatisfies('>=1.7.4')
+            "
+            :label="$t('chatwoot.nameInbox')"
+            :hint="
+              !AppStore.versionSatisfies('>=1.7.4')
+                ? $t('version.availableFrom', { version: '>=1.7.4' })
+                : $t('chatwoot.nameInboxHelp')
+            "
+            :persistent-hint="!AppStore.versionSatisfies('>=1.7.4')"
+            hide-details="auto"
+            style="min-width: 200px"
+          ></v-text-field>
+        </div>
+        <div class="d-flex align-center gap-4 flex-wrap">
           <v-checkbox
             class="flex-grow-0 flex-shrink-0"
             v-model="chatwootData.sign_msg"
@@ -292,6 +311,7 @@ const defaultObj = () => ({
   url: "",
   account_id: "",
   token: "",
+  name_inbox: "",
   sign_msg: true,
   sign_delimiter: "\n",
   reopen_conversation: true,
@@ -322,6 +342,7 @@ export default {
       url: "",
       account_id: "",
       token: "",
+      name_inbox: "",
       sign_msg: true,
       sign_delimiter: "\n",
       reopen_conversation: true,
@@ -336,6 +357,7 @@ export default {
       url: "",
       account_id: "",
       token: "",
+      name_inbox: "",
       sign_msg: true,
       sign_delimiter: "\n",
       reopen_conversation: true,

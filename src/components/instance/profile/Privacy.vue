@@ -124,6 +124,7 @@ const defaultObj = () => ({
   url: "",
   account_id: "",
   token: "",
+  name_inbox: "",
   sign_msg: true,
   reopen_conversation: true,
   conversation_pending: false,
