@@ -148,7 +148,7 @@
               </template>
             </v-checkbox>
           </div>
-        <div class="d-flex gap-x-4 flex-wrap">
+        
           <div>
             <v-checkbox
               v-model="chatwootData.merge_brazil_contacts"
