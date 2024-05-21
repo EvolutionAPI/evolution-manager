@@ -126,6 +126,7 @@ const defaultObj = () => ({
   token: "",
   sign_msg: true,
   reopen_conversation: true,
+  merge_brazil_contacts: true,
   conversation_pending: false,
   import_contacts: false,
   import_messages: false,

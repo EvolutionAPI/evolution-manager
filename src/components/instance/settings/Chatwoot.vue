@@ -148,6 +148,23 @@
               </template>
             </v-checkbox>
           </div>
+          <div class="d-flex gap-x-4 flex-wrap">
+          <div>
+            <v-checkbox
+              v-model="chatwootData.merge_brazil_contacts"
+              :disabled="loading"
+              hide-details
+              class="mb-3"
+              density="compact"
+            >
+              <template v-slot:label>
+                <span>{{ $t("chatwoot.mergeBrazilContacts") }}</span>
+                <HelpTooltip>
+                  {{ $t("chatwoot.mergeBrazilContactsHelp") }}
+                </HelpTooltip>
+              </template>
+            </v-checkbox>
+          </div>
 
           <div>
             <v-checkbox
@@ -275,6 +292,7 @@ const defaultObj = () => ({
   sign_msg: true,
   sign_delimiter: "\n",
   reopen_conversation: true,
+  merge_brazil_contacts: true,
   conversation_pending: false,
   auto_create: undefined,
   import_contacts: false,
@@ -304,6 +322,7 @@ export default {
       sign_msg: true,
       sign_delimiter: "\n",
       reopen_conversation: true,
+      merge_brazil_contacts: true,
       conversation_pending: false,
       import_contacts: false,
       import_messages: false,
@@ -317,6 +336,7 @@ export default {
       sign_msg: true,
       sign_delimiter: "\n",
       reopen_conversation: true,
+      merge_brazil_contacts: true,
       conversation_pending: false,
       import_contacts: false,
       import_messages: false,

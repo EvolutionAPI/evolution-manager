@@ -74,7 +74,7 @@ export default {
     title: "Phone not connected",
     apiGenericError: "Could not load QR Code, if the error persists, restart the API and try again.",
     qr: "QR Code",
-    code: "Código",
+    code: "Cï¿½digo",
   },
   options: {
     title: "Behavior",
@@ -103,6 +103,8 @@ export default {
     signDelimiterHelp: "Delimiter used to separate the signature from the message (\\n for line break)",
     reopenConversation: "Reopen conversation",
     reopenConversationHelp: "Reopens the customer's conversation when he starts a new conversation instead of creating a new conversation",
+    mergeBrazilContacts: "Merge contacts from Brazil",
+    mergeBrazilContactsHelp: "Unifies phone contacts with the same number without or with the 9",
     conversationPending: "Start conversation as pending",
     conversationPendingHelp: "Starts the conversation as pending instead of open",
     autoCreate: "Create Inbox",

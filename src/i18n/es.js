@@ -103,6 +103,8 @@ export default {
     signDelimiterHelp: "Delimitador utilizado para separar la firma del mensaje (\\n para salto de línea)",
     reopenConversation: "Reabrir conversación",
     reopenConversationHelp: "Vuelve a abrir la conversación del cliente cuando inicia una nueva conversación en lugar de crear una nueva conversación.",
+    mergeBrazilContacts: "Fusionar contactos de Brasil",
+    mergeBrazilContactsHelp: "Unifica contactos telefónicos con el mismo número sin o con el 9",
     conversationPending: "Iniciar conversación en estado pendiente",
     conversationPendingHelp: "Inicia la conversación como pendiente en lugar de abierta",
     autoCreate: "Crear bandeja de entrada",

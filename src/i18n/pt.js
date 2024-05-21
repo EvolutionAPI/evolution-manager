@@ -111,6 +111,8 @@ export default {
     reopenConversation: "Reabrir conversa",
     reopenConversationHelp:
       "Reabre a conversa do cliente quando ele inicia uma nova conversa em vez de criar uma nova conversa",
+    mergeBrazilContacts: "Mesclar contatos Do Brasil",
+    mergeBrazilContactsHelp: "Unifica os contatos de telefones do mesmo numero que que esteja sem ou com o 9",
     conversationPending: "Iniciar conversa como pendente",
     conversationPendingHelp:
       "Inicia a conversa como pendente ao invés de aberta",
