@@ -108,6 +108,7 @@ export default {
     signDelimiter: "Separador da assinatura da mensagem",
     signDelimiterHelp:
       "Delimitador utilizado para separar a assinatura da mensagem (\\n para quebra de linha)",
+    nameInbox: "Nome da Caixa no Chatwoot",
     reopenConversation: "Reabrir conversa",
     reopenConversationHelp:
       "Reabre a conversa do cliente quando ele inicia uma nova conversa em vez de criar uma nova conversa",

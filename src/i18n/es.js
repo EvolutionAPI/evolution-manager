@@ -101,6 +101,7 @@ export default {
     signMsgHelp: "Agrega el nombre del agente en la primera línea del mensaje.",
     signDelimiter: "Delimitador de firma",
     signDelimiterHelp: "Delimitador utilizado para separar la firma del mensaje (\\n para salto de línea)",
+    nameInbox: "Chatwoot Inbox Name",
     reopenConversation: "Reabrir conversación",
     reopenConversationHelp: "Vuelve a abrir la conversación del cliente cuando inicia una nueva conversación en lugar de crear una nueva conversación.",
     mergeBrazilContacts: "Fusionar contactos de Brasil",

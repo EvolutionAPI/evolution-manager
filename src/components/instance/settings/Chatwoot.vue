@@ -129,6 +129,15 @@
             placeholder="\n"
             style="min-width: 200px"
           ></v-text-field>
+          <v-text-field
+              v-model.number="chatwootData.name_inbox"
+              :label="$t('chatwoot.nameInbox')"
+              :disabled="loading"
+              outlined
+              dense
+              hide-details="auto"
+              class="mb-3"
+            />
         </div>
 
         <div class="d-flex gap-x-4 flex-wrap">
@@ -291,6 +300,7 @@ const defaultObj = () => ({
   token: "",
   sign_msg: true,
   sign_delimiter: "\n",
+  name_inbox: "",
   reopen_conversation: true,
   merge_brazil_contacts: true,
   conversation_pending: false,
@@ -321,6 +331,7 @@ export default {
       token: "",
       sign_msg: true,
       sign_delimiter: "\n",
+      name_inbox: "",
       reopen_conversation: true,
       merge_brazil_contacts: true,
       conversation_pending: false,
@@ -335,6 +346,7 @@ export default {
       token: "",
       sign_msg: true,
       sign_delimiter: "\n",
+      name_inbox: "",
       reopen_conversation: true,
       merge_brazil_contacts: true,
       conversation_pending: false,
