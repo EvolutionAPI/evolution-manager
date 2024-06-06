@@ -74,7 +74,7 @@ export default {
     title: "Phone not connected",
     apiGenericError: "Could not load QR Code, if the error persists, restart the API and try again.",
     qr: "QR Code",
-    code: "Código",
+    code: "Code",
   },
   options: {
     title: "Behavior",
