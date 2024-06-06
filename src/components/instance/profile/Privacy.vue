@@ -124,9 +124,11 @@ const defaultObj = () => ({
   url: "",
   account_id: "",
   token: "",
+  name_inbox: "",
   sign_msg: true,
   reopen_conversation: true,
   conversation_pending: false,
+  merge_brazil_contacts: false,
   import_contacts: false,
   import_messages: false,
   days_limit_import_messages: 0, // Set as a number
